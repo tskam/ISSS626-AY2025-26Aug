@@ -1,0 +1,349 @@
+---
+title: "In-class Exercise 9: Geography of Accessibility"
+author: "Dr. Kam Tin Seong<br/>Assoc. Professor of Information Systems(Practice)"
+institute: "School of Computing and Information Systems,<br/>Singapore Management University"
+date: "`r Sys.Date()`"
+format: 
+  revealjs:
+    width: 1600
+    height: 900
+    show-notes: false
+    slide-number: true
+    show-slide-number: all
+date-format: "DD MMM YYYY"
+editor: visual
+execute: 
+  eval: false
+  echo: true
+  warning: false
+  freeze: true
+---
+
+## Getting Started
+
+::: {style="font-size: 1.5em"}
+```{r}
+pacman::p_load(SpatialAcc, sf, tidyverse, 
+               tmap, ggstatsplot)
+```
+:::
+
+## Count Number of Points within a Distance
+
+::::::::::::: panel-tabset
+### The task
+
+-   To count number of point features (i.e. CHAS clinics) within 1km of another point features (i.e. eldercare centre).
+
+::: callout-note
+To complete this section of the in-class exercise, you need to download both the *CHAS Clinics* and *Eldercare Services* data sets from data.gov.sg portal. The in-class exercise assumes explicitly the downloaded data sets are saved in *rawdata* sub-folder of *In-class_Ex09* folder. Remember to unzip the file if necessary.
+:::
+
+### DIY
+
+-   Download *ELDERCARE* shapefile and *CHAS* kml file from data.gov.sg
+-   Using the steps your learned in Hands-on Exercise 1, import *ELDERCARE* shapefile and *CHAS* kml file into R
+
+### The code
+
+*ELDERCARE* is in shapefile format, the code chunk below will be used:
+
+::: {style="font-size: 1.50em"}
+```{r}
+#| output: false
+eldercare <- st_read(dsn = "data/rawdata",
+                     layer = "ELDERCARE") %>%
+  st_transform(crs = 3414)
+```
+:::
+
+The code chunk below is used to import kml file.
+
+::: {style="font-size: 1.50em"}
+```{r}
+#| output: false
+CHAS <- st_read("data/rawdata/CHASClinics.kml") %>%
+  st_transform(crs = 3414)
+```
+:::
+
+### Buffering
+
+Next, `st_buffer()` of sf package is used to create a buffer of 1km around each eldercare features
+
+::: {style="font-size: 1.50em"}
+```{r}
+buffer_1km <- st_buffer(eldercare, 
+                        dist = 1000)
+```
+:::
+
+### Visualising
+
+::::::: columns
+:::: {.column width="40%"}
+The code chunk below is used to plot the newly created buffers and the CHAS clinics.
+
+::: {style="font-size: 1.50em"}
+```{r}
+#| eval: false
+tmap_mode("view")
+tm_shape(buffer_1km) +
+  tm_polygons() +
+tm_shape(CHAS) +
+  tm_dots()
+```
+:::
+::::
+
+:::: {.column width="60%"}
+::: {style="font-size: 1.50em"}
+```{r}
+#| echo: false
+tmap_mode("view")
+tm_shape(buffer_1km) +
+  tm_polygons() +
+tm_shape(CHAS) +
+  tm_dots()
+```
+:::
+::::
+:::::::
+
+### Counting points
+
+Lastly, the code chunk below is used to count the number of CHAS clinics with 1km of each eldercare centre.
+
+::: {style="font-size: 1.50em"}
+```{r}
+buffer_1km$pts_count <- lengths(
+  st_intersects(buffer_1km, CHAS))
+```
+:::
+:::::::::::::
+
+## Importing Data
+
+::::: panel-tabset
+### Geospatail data
+
+::: {style="font-size: 1.5em"}
+```{r}
+#| output: false
+mpsz <- st_read(dsn = "data/geospatial",
+                layer = "MP14_SUBZONE_NO_SEA_PL") %>%
+  st_transform(crs = 3414)
+
+hexagons <- st_read(dsn = "data/geospatial",
+                   layer = "hexagons") %>%
+  st_transform(crs = 3414)
+
+eldercare <- st_read(dsn = "data/geospatial",
+                     layer = "ELDERCARE") %>%
+  st_transform(csr = 3414)
+```
+:::
+
+### OD Matrix
+
+::: {style="font-size: 1.5em"}
+```{r}
+ODMatrix <- read_csv("data/aspatial/OD_Matrix.csv", 
+                     skip = 0)
+```
+:::
+:::::
+
+## Data cleaning and Updating Attributes
+
+:::::: panel-tabset
+### Supply
+
+::: {style="font-size: 1.5em"}
+```{r}
+eldercare <- eldercare %>%
+  select(fid, ADDRESSPOS) %>%
+  mutate(capacity = 100)
+```
+:::
+
+### Demand
+
+::: {style="font-size: 1.5em"}
+```{r}
+hexagons <- hexagons %>%
+  select(fid) %>%
+  mutate(demand = 100)
+```
+:::
+
+### OD Matrix
+
+::: {style="font-size: 1.5em"}
+```{r}
+distmat <- ODMatrix %>%
+  select(origin_id, destination_id, total_cost) %>%
+  spread(destination_id, total_cost)%>%
+  select(c(-c('origin_id')))
+```
+
+```{r}
+distmat_km <- as.matrix(distmat/1000)
+```
+:::
+::::::
+
+## Computing Handsen's Accessibility
+
+:::::: panel-tabset
+### The base code
+
+::: {style="font-size: 1.5em"}
+```{r}
+acc_Hansen <- data.frame(ac(hexagons$demand,
+                            eldercare$capacity,
+                            distmat_km, 
+                            #d0 = 50,
+                            power = 2, 
+                            family = "Hansen"))
+```
+:::
+
+### Tidy the output
+
+::: {style="font-size: 1.5em"}
+```{r}
+colnames(acc_Hansen) <- "accHansen"
+
+acc_Hansen <- as_tibble(acc_Hansen)
+
+hexagon_Hansen <- bind_cols(hexagons, acc_Hansen)
+```
+:::
+
+### Combine code chunk
+
+::: {style="font-size: 1.5em"}
+```{r}
+acc_Hansen <- data.frame(ac(hexagons$demand,
+                            eldercare$capacity,
+                            distmat_km, 
+                            #d0 = 50,
+                            power = 0.5, 
+                            family = "Hansen"))
+
+colnames(acc_Hansen) <- "accHansen"
+acc_Hansen <- as_tibble(acc_Hansen)
+hexagon_Hansen <- bind_cols(hexagons, acc_Hansen)
+```
+:::
+::::::
+
+------------------------------------------------------------------------
+
+### Visualising Accessibility
+
+:::: panel-tabset
+#### The code
+
+::: {style="font-size: 1.5em"}
+```{r}
+#| eval: false
+mapex <- st_bbox(hexagons)
+
+tmap_mode("plot")
+tm_shape(hexagon_Hansen,
+         bbox = mapex) + 
+  tm_fill(col = "accHansen",
+          n = 10,
+          style = "quantile",
+          border.col = "black",
+          border.lwd = 1) +
+tm_shape(eldercare) +
+  tm_symbols(size = 0.1) +
+  tm_layout(main.title = "Accessibility to eldercare: Hansen method",
+            main.title.position = "center",
+            main.title.size = 2,
+            legend.outside = FALSE,
+            legend.height = 0.45, 
+            legend.width = 3.0,
+            legend.format = list(digits = 6),
+            legend.position = c("right", "top"),
+            frame = TRUE) +
+  tm_compass(type="8star", size = 2) +
+  tm_scale_bar(width = 0.15) +
+  tm_grid(lwd = 0.1, alpha = 0.5)
+```
+:::
+
+#### The plot
+
+```{r}
+#| fig-width: 12
+#| fig-height: 7
+#| echo: false
+mapex <- st_bbox(hexagons)
+
+tmap_mode("plot")
+tm_shape(hexagon_Hansen,
+         bbox = mapex) + 
+  tm_fill(col = "accHansen",
+          n = 10,
+          style = "quantile",
+          border.col = "black",
+          border.lwd = 1) +
+tm_shape(eldercare) +
+  tm_symbols(size = 0.1) +
+  tm_layout(main.title = "Accessibility to eldercare: Hansen method",
+            main.title.position = "center",
+            main.title.size = 2,
+            legend.outside = FALSE,
+            legend.height = 0.45, 
+            legend.width = 3.0,
+            legend.format = list(digits = 6),
+            legend.position = c("right", "top"),
+            frame = TRUE) +
+  tm_compass(type="8star", size = 2) +
+  tm_scale_bar(width = 0.15) +
+  tm_grid(lwd = 0.1, alpha = 0.5)
+```
+::::
+
+------------------------------------------------------------------------
+
+### Statistical graphic
+
+::::: panel-tabset
+### The code
+
+::: {style="font-size: 1.5em"}
+```{r}
+hexagon_Hansen <- st_join(hexagon_Hansen, mpsz, 
+                          join = st_intersects)
+```
+:::
+
+::: {style="font-size: 1.5em"}
+```{r}
+#| eval: false
+ggbetweenstats(
+  data = hexagon_Hansen,
+  x = REGION_N,
+  y = accHansen,
+  type = "p")
+```
+:::
+
+### The plot
+
+```{r}
+#| fig-width: 12
+#| fig-height: 7
+#| echo: false
+ggbetweenstats(
+  data = hexagon_Hansen,
+  x = REGION_N,
+  y = accHansen,
+  type = "p")
+```
+:::::

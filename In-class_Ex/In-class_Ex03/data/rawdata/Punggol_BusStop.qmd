@@ -1,0 +1,38 @@
+<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
+<qgis version="3.38.2-Grenoble">
+  <identifier>GDM.BusStop</identifier>
+  <parentidentifier></parentidentifier>
+  <language>ENG</language>
+  <type>dataset</type>
+  <title>GDM.BusStop</title>
+  <abstract>REQUIRED: A brief narrative summary of the data set.
+
+REQUIRED: A summary of the intentions with which the data set was developed.</abstract>
+  <keywords vocabulary="gmd:topicCategory">
+    <keyword>REQUIRED: Common-use word or phrase used to describe the subject of the data set.</keyword>
+  </keywords>
+  <links>
+    <link description="" url="file://\\MWP74\DATA\Maestro\GDM.gdb" name="File Geodatabase Feature Class" type="Local Area Network" size="" mimeType="" format=""/>
+  </links>
+  <dates/>
+  <fees></fees>
+  <constraints type="Access">REQUIRED: Restrictions and legal prerequisites for accessing the data set.</constraints>
+  <rights>REQUIRED: Restrictions and legal prerequisites for using the data set after access is granted.</rights>
+  <encoding></encoding>
+  <crs>
+    <spatialrefsys nativeFormat="Wkt">
+      <wkt></wkt>
+      <proj4></proj4>
+      <srsid>0</srsid>
+      <srid>0</srid>
+      <authid></authid>
+      <description></description>
+      <projectionacronym></projectionacronym>
+      <ellipsoidacronym></ellipsoidacronym>
+      <geographicflag>false</geographicflag>
+    </spatialrefsys>
+  </crs>
+  <extent>
+    <spatial maxx="47078.73048800000105985" miny="26482.10069700000167359" maxz="0" crs="EPSG:4326" maxy="52983.81650300000183051" dimensions="2" minz="0" minx="4473.29219900000043708"/>
+  </extent>
+</qgis>

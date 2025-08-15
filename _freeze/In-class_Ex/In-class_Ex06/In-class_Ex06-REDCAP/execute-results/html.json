@@ -1,0 +1,19 @@
+{
+  "hash": "990327b4a018710750fec9d9df291d7a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In-class Exercise 6: Spatially Constrained Clustering: REDCAP methods\"\nauthor: \"Dr. Kam Tin Seong<br/>Assoc. Professor of Information Systems(Practice)\"\ninstitute: \"School of Computing and Information Systems,<br/>Singapore Management University\"\ndate: \"last-modified\"\nformat: \n  revealjs:\n    pdf: default\n    width: 1600\n    height: 900\n    show-notes: false\n    slide-number: true\n    show-slide-number: all\nexecute: \n  eval: false\n  echo: true\n  warning: false\n  freeze: true\neditor: visual\n---\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(sf, rgeoda, tidyverse)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nshan_ict <- read_rds(\"data/rds/shan_ict.rds\")\nshan_sf <- read_rds(\"data/rds/shan_sf.rds\")\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nqueen_w <- queen_weights(shan_sf)\nsummary(queen_w)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nrownames(shan_ict) <- NULL\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nschc_clusters <- schc(6, queen_w, shan_ict, \"complete\",\n                      cpu_threads = 1)\nschc_clusters\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nshan_clusters <- skater(6, queen_w, shan_ict,\n                        cpu_threads = 1)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nredcap_clusters <- redcap(6, queen_w, shan_ict,\n                          \"firstorder-singlelinkage\")\nredcap_clusters\n```\n:::\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

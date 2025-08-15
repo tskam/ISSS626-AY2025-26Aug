@@ -16,7 +16,7 @@ editor: visual
 
 ## Content
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   Introducing Spatial Point Patterns
     -   The basic concepts of spatial point patterns
@@ -35,7 +35,7 @@ editor: visual
     -   K-function
     -   L-function
 :::
-:::
+:::::
 
 ::: notes
 Welcome to Lesson 4: Spatial Point Pattern Analysis, a family of spatial statistics specially developed to model and to test distribution of spatial point events.
@@ -150,7 +150,7 @@ It is important note that SPPA is exploratory and confirmatory in nature. They a
 
 ## Homogeneous Spatial Point Patterns
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 A homogeneous spatial point pattern assumes that the points are distributed uniformly across the study area. The intensity (expected number of points per unit area) is constant throughout the region.
 
@@ -168,11 +168,11 @@ Model:
 
 -   Typically modeled by a Homogeneous Poisson Process, where the intensity λ (the number of points per unit area) is constant.
 :::
-:::
+:::::
 
 ## Heterogeneous Spatial Point Patterns
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 A heterogeneous spatial point pattern assumes that the intensity of points varies across the study area. The intensity function is not constant and may depend on spatial covariates, leading to non-uniform distribution.
 
@@ -187,7 +187,7 @@ Characteristics:
 
 Model: - Modeled by an Inhomogeneous Poisson Process (IPP), where the intensity function λ(x,y) varies with location. The intensity can be a function of spatial covariates or other influences.
 :::
-:::
+:::::
 
 ## Spatial Point Patterns Analysis Techniques
 
@@ -221,7 +221,7 @@ The first-order properties describe the way in which the expected value (mean or
 
 -   A method to compute the intensity of a point distribution.
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 The general formula:
 
@@ -233,7 +233,7 @@ Graphically
 
 ![](img/image4-20.jpg)
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
@@ -257,7 +257,7 @@ Graphically
 
 ### Adaptive Bandwidth
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 Adaptive schemes adjust itself according to the density of data: - Shorter bandwidths where data are dense and longer where sparse.
 
@@ -267,13 +267,13 @@ Adaptive schemes adjust itself according to the density of data: - Shorter bandw
 ::: {.column width="50%"}
 ![](img/image4-24.jpg)
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ### Fixed bandwidth
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   Might produce large estimate variances where data are sparse, while mask subtle local variations where data are dense.
 
@@ -283,44 +283,44 @@ Adaptive schemes adjust itself according to the density of data: - Shorter bandw
 ::: {.column width="50%"}
 ![](img/image4-23.jpg)
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ### Quadrat Analysis -- Step 1
 
-::: columns
+:::: columns
 ::: {.column width="70%"}
 -   Divide the study area into subregion of equal size,
     -   often squares, but don't have to be.
 
 ![](img/image4-12.jpg){width="1007"}
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
 ### Quadrat Analysis -- Step 2
 
-::: columns
+:::: columns
 ::: {.column width="70%"}
 -   Count the frequency of events in each region.
 
 ![](img/image4-13.jpg){width="1214"}
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
 ### Quadrat Analysis -- Step 3
 
-::: columns
+:::: columns
 ::: {.column width="70%"}
 -   Calculate the intensity of events in each region.
 
 ![](img/image4-14.jpg)
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
@@ -348,7 +348,7 @@ Adaptive schemes adjust itself according to the density of data: - Shorter bandw
 
 ### Complete Spatial Randomness (CSR)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   CSR/IRP satisfy two conditions: - Any event has equal probability of being in any location, a **1st order** effect.
 
@@ -360,23 +360,23 @@ Reference: [Chapter 12 Hypothesis testing of Intro to GIS and Spatial Analysis](
 ::: {.column width="50%"}
 ![](img/image4-16.jpg)
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ### Quadrat Analysis: The interpretation
 
-::: columns
+:::: columns
 ::: {.column width="70%"}
 ![](img/image4-17.jpg)
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
 ### Weaknesses of quadrat analysis
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   It is sensitive to the quadrat size.
 
@@ -391,7 +391,7 @@ Reference: [Chapter 12 Hypothesis testing of Intro to GIS and Spatial Analysis](
 ::: {.column width="50%"}
 ![](img/image4-18.jpg)
 :::
-:::
+:::::
 
 ## Distance-based: Nearest Neighbour Index
 
@@ -429,7 +429,7 @@ The expected distance is the average distance between neighbours in a hypothetic
 
 ### The test statistics
 
-::: columns
+:::: columns
 ::: {.column width="80%"}
 -   Null Hypothesis: Points are randomly distributed
 
@@ -439,23 +439,23 @@ The expected distance is the average distance between neighbours in a hypothetic
 
 -   Reject the null hypothesis if the z-score is large and p-value is smaller than the alpha value.
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
 ### Interpreting Nearest Neighbour Index
 
-::: columns
+:::: columns
 ::: {.column width="70%"}
 ![](img/image4-30.jpg)
 
 The p-value is smaller than 0.05 =\> Reject the null hypothesis that the point patterns are randomly distributed.
 :::
-:::
+::::
 
 ## G function
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 The formula
 
@@ -465,13 +465,13 @@ The formula
 ::: {.column width="50%"}
 ![](img/image4-32.jpg){width="502"}
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ### Interpretation of G-function
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 The shape of G-function tells us the way the events are spaced in a point pattern.
 
@@ -483,13 +483,13 @@ The shape of G-function tells us the way the events are spaced in a point patter
 ::: column
 ![](img/image4-33.jpg)
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ### How do we tell if G is significant?
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   The significant of any departure from CSR (either cluster or regularity) can be evaluated using simulated "confidence envelopes"
 :::
@@ -497,7 +497,7 @@ The shape of G-function tells us the way the events are spaced in a point patter
 ::: {.column width="50%"}
 ![](img/image4-34.jpg)
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
@@ -568,7 +568,7 @@ The shape of G-function tells us the way the events are spaced in a point patter
 
 ### Calculating the K function
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   Construct a circle of radius h around each point event(i).
 
@@ -582,19 +582,19 @@ The shape of G-function tells us the way the events are spaced in a point patter
 ::: {.column width="50%"}
 ![](img/image4-39.jpg)
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ### K function
 
-::: columns
+:::: columns
 ::: {.column width="90%"}
 The formula:
 
 ![](img/image4-40.jpg){width="1153"}
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
@@ -612,7 +612,7 @@ The formula:
 
 ### Interpreting the K function complete spatial randomness test
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 Under the assumption of CSR, the expected number of events within distance h of an event is:
 
@@ -630,13 +630,13 @@ Compare K(h) to 𝜋ℎ\^2
 -   Above the envelop: significant cluster pattern - Below the envelop: significant regular
 -   Inside the envelop: CSR
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ## The L function (Besag 1977)
 
-::: columns
+:::: columns
 ::: {.column width="50%"}
 In practice, K function will be normalised to obtained a benchmark of zero.
 
@@ -644,35 +644,35 @@ The formula:
 
 ![](img/image4-43.jpg){width="448"}
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
 ### Interpreting the L function complete spatial randomness test
 
-::: columns
-::: {.column width="50%"}
+::::::: columns
+:::: {.column width="50%"}
 ::: {style="font-size: 0.80em"}
 -   When an observed L value is greater than its corresponding L(theo)(i.e. red break line) value for a particular distance and above the upper confidence envelop, spatial clustering for that distance is statistically significant (e.g. distance beyond C).
 -   When an observed L value is greater than its corresponding L(theo) value for a particular distance and lower than the upper confidence envelop, spatial clustering for that distance is statistically NOT significant (e.g. distance between B and C).
 -   When an observed L value is smaller than its corresponding L(theo) value for a particular distance and beyond the lower confidence envelop, spatial dispersion for that distance is statistically significant. - When an observed L value is smaller than its corresponding L(theo) value for a particular distance and within the lower confidence envelop, spatial dispersion for that distance is statistically NOT significant (e.g. distance between A and B).
 :::
-:::
+::::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ::: {style="font-size: 0.80em"}
 -   The grey zone indicates the confident envelop (i.e. 95%).
 :::
 
 ![](img/image4-44.jpg)
-:::
-:::
+::::
+:::::::
 
 ------------------------------------------------------------------------
 
 ### The L function (Besag 1977)
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 The modified L function
 
@@ -688,7 +688,7 @@ The modified L function
 ::: {.column width="50%"}
 ![](img/image4-46.jpg)
 :::
-:::
+:::::
 
 ## References
 

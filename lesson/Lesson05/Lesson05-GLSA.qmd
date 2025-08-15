@@ -16,7 +16,7 @@ editor: visual
 
 ## Content
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   What is Spatial Autocorrelation
     -   Measures of Global Spatial Autocorrelation
@@ -37,7 +37,7 @@ editor: visual
     -   Mann-Kendall Test
     -   EHSA map
 :::
-:::
+:::::
 
 ## What is Spatial Autocorrelation
 
@@ -55,7 +55,7 @@ editor: visual
 **Everything is related to everything else,**<br/> **but near things are more related than distant things.**
 :::
 
-::: columns
+:::::: columns
 ::: {.column width="50%"}
 The foundation of the fundamental concepts of:
 
@@ -64,20 +64,20 @@ The foundation of the fundamental concepts of:
 -   spatial autocorrelation
 :::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ![](img/image7-1.jpg)
 
 ::: {style="font-size: 0.65em"}
 Reference: [A Computer Movie Simulating Urban Growth in the Detroit Region](http://www.geog.ucsb.edu/~tobler/publications/pdf_docs/A-Computer-Movie.pdf)
 :::
-:::
-:::
+::::
+::::::
 
 ------------------------------------------------------------------------
 
 ### Spatial Dependency
 
-::: columns
+::::: columns
 ::: {.column width="40%"}
 -   Spatial dependence is the spatial relationship of variable values (for themes defined over space, such as rainfall) or locations (for themes defined as objects, such as cities).
 
@@ -87,14 +87,14 @@ Reference: [A Computer Movie Simulating Urban Growth in the Detroit Region](http
 ::: {.column width="60%"}
 ![](img/image7-2.jpg){width="680"}
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ### Spatial Autocorrelation
 
-::: columns
-::: {.column width="50%"}
+:::::: columns
+:::: {.column width="50%"}
 ::: {style="font-size: 0.9em"}
 -   Spatial autocorrelation is the term used to describe the presence of systematic spatial variation in a variable.
 
@@ -104,18 +104,18 @@ Reference: [A Computer Movie Simulating Urban Growth in the Detroit Region](http
     -   at a set of fixed sites located within a region (such as prices at a set of retail outlets); or
     -   across a set of areas that subdivide a region (such as the count or proportion of households with two or more cars in a set of Census tracts that divide an urban region).
 :::
-:::
+::::
 
 ::: {.column width="50%"}
 ![](img/image7-3.jpg){width="700"}
 :::
-:::
+::::::
 
 ------------------------------------------------------------------------
 
 ### Positive Spatial Autocorrelation
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   Clustering
     -   like values tend to be in similar locations.
@@ -128,13 +128,13 @@ Reference: [A Computer Movie Simulating Urban Growth in the Detroit Region](http
 ::: {.column width="50%"}
 ![](img/image7-4.jpg)
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ### Negative Spatial Autocorrelation
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   Checkerboard patterns
     -   "opposite" of clustering
@@ -147,7 +147,7 @@ Reference: [A Computer Movie Simulating Urban Growth in the Detroit Region](http
 ::: {.column width="50%"}
 ![](img/image7-5.jpg)
 :::
-:::
+:::::
 
 ## Measures of Global Spatial Autocorrelation
 
@@ -158,7 +158,7 @@ Reference: [A Computer Movie Simulating Urban Growth in the Detroit Region](http
 
 ### Measures of Global Spatial Autocorrelation: Moran's I
 
-::: columns
+:::: columns
 ::: {.column width="70%"}
 Describe how features differ from the values in the study area as a whole.
 
@@ -169,13 +169,13 @@ Describe how features differ from the values in the study area as a whole.
     -   negative(I\<0): Dispersed, observations tend to be dissimilar;
     -   approximately zero: observations are arranged randomly over space.
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
 ### Measures of Global Spatial Autocorrelation: Geary's c
 
-::: columns
+:::: columns
 ::: {.column width="70%"}
 Describing how features differ from their immediate neighbours.
 
@@ -186,7 +186,7 @@ Describing how features differ from their immediate neighbours.
     -   Small c value (\<1) : Clustered, observations tend to be similar;
     -   c = 1: observations are arranged randomly over space.
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
@@ -204,7 +204,7 @@ Describing how features differ from their immediate neighbours.
 
 ### z-score and p-value explained
 
-::: columns
+:::::: columns
 ::: {.column width="50%"}
 -   Statistically, we select the confident interval such as 95% =\> alpha value = 0.05.
 
@@ -213,14 +213,14 @@ Describing how features differ from their immediate neighbours.
 -   Failed to reject the Null Hypothesis (H0) if p-value is greater than alpha value.
 :::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ![](img/image7-8.jpg)
 
 ::: {style="font-size: 0.75em"}
 Reference: [Confidence Interval or P-Value?](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2689604/)
 :::
-:::
-:::
+::::
+::::::
 
 ------------------------------------------------------------------------
 
@@ -248,8 +248,8 @@ The Null Hypothesis:
 
 ## Measures of Global High/Low Clustering: Getis-Ord Global G
 
-::: columns
-::: {.column width="80%"}
+::::: columns
+:::: {.column width="80%"}
 -   Getis-Ord Global G statistic is concerned with the overall concentration or lack of concentration in all pairs that are neighbours given the definition of neighbouring areas.
 -   The variable must contain only positive values to be used.
 
@@ -258,8 +258,8 @@ The Null Hypothesis:
 ::: {style="font-size: 0.75em"}
 Source: Getis, A., & Ord, K. (1992). ["The Analysis of Spatial Association by Use of Distance Statistics"](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4632.1992.tb00261.x). *Geographical Analysis*, 24, 189--206.
 :::
-:::
-:::
+::::
+:::::
 
 ------------------------------------------------------------------------
 
@@ -329,11 +329,11 @@ The summation of local Moran is
 
 ### Test statistics of Local Moran
 
-::: columns
+:::: columns
 ::: {.column width="70%"}
 ![](img/image7-14.jpg)
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
@@ -365,7 +365,7 @@ The summation of local Moran is
 
 ## Detecting hot and cold spot areas
 
-::: columns
+:::: columns
 ::: {.column width="90%"}
 -   Given a set of geospatial features (i.e. points or polygons) and an analysis field, the spatial statistics tell you where features with either high (i.e. hot spots) or low values (cold spots) cluster spatially.
 -   The spatial statistic used is called Getis-Ord Gi\* statistic (pronounced G-i-star).
@@ -373,36 +373,36 @@ The summation of local Moran is
 
 ![](img/image7-18.jpg)
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
 ### Getis-Ord Gi\*
 
-::: columns
+:::: columns
 ::: {.column width="80%"}
 For variable x to be nonpositive and the weight matrix W(d) to be nonbinary the G and G\* statistics are defined as:
 
 ![](img/image7-19.jpg){width="681"}
 :::
-:::
+::::
 
 ------------------------------------------------------------------------
 
 ### Interpretation of Getis-Ord Gi and Gi\*
 
-::: columns
+:::: columns
 ::: {.column width="50%"}
 -   A hot spot area: significant and positive if location i is associated with relatively high values of the surrounding locations.
 
 -   A cold spot area: significant and negative if location i is associated with relatively low values in surrounding locations.
 :::
-:::
+::::
 
 ## Fixed weighting scheme
 
-::: columns
-::: {.column width="50%"}
+:::::: columns
+:::: {.column width="50%"}
 ::: {style="font-size: 0.90em"}
 Things to consider if fixed distance is used: - All features should have at least one neighbour.
 
@@ -414,18 +414,18 @@ Things to consider if fixed distance is used: - All features should have at leas
 
 -   In extreme condition, fixed schemes might not be able to calibrate in local areas where data are too sparse to satisfy the calibration requirements (observations must be more than parameters).
 :::
-:::
+::::
 
 ::: {.column width="50%"}
 ![](img/image7-20.jpg)
 :::
-:::
+::::::
 
 ------------------------------------------------------------------------
 
 ## Adaptive weighting schemes
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   Adaptive schemes adjust itself according to the density of data
 
@@ -437,7 +437,7 @@ Things to consider if fixed distance is used: - All features should have at leas
 ::: {.column width="50%"}
 ![](img/image7-21.jpg)\]
 :::
-:::
+:::::
 
 ## Best practice guidelines
 
@@ -501,7 +501,7 @@ Things to consider if fixed distance is used: - All features should have at leas
 
 ### Mann-Kendall test for trend overview
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   The Mann-Kendall statistical test for trend is used to assess whether a set of data values is increasing over time or decreasing over time, and whether the trend in either direction is statistically significant.
 
@@ -513,13 +513,13 @@ Things to consider if fixed distance is used: - All features should have at leas
 ::: {.column width="50%"}
 ![](img/image7-33.png)
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
 ### The Hypothesis
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   Null hypothesis: There is no monotonic trend in the series.
 
@@ -531,7 +531,7 @@ The Mann-Kendall test does NOT assess the magnitude of change.
 
 The test can be used to find trends for as few as four samples. However, with only a few data points, the test has a high probability of not finding a trend when one would be present if more points were provided. The more data points you have the more likely the test is going to find a true trend (as opposed to one found by chance). The minimum number of recommended measurements is therefore at least 8 to 10.
 :::
-:::
+:::::
 
 ------------------------------------------------------------------------
 
@@ -549,42 +549,42 @@ Before running the test, you should ensure that:
 
 ### EHSA Patterns: Hot Spot Trends
 
-::: {style="font-size: 0.60em"}
-| Pattern Name          | Defination                                                                                                                                                                                                                                                                                                               |
-|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| No pattern detected   | Does not fall into any of the hot or cold spot patterns defined below.                                                                                                                                                                                                                                                   |
-| New Hot Spot          | A location that is a statistically significant hot spot for the final time step and has never been a statistically significant hot spot before.                                                                                                                                                                          |
-| Consecutive Hot Spot  | A location with a single uninterrupted run of at least two statistically significant hot spot bins in the final time-step intervals. The location has never been a statistically significant hot spot prior to the final hot spot run and less than 90 percent of all bins are statistically significant hot spots.      |
-| Intensifying Hot Spot | A location that has been a statistically significant hot spot for 90 percent of the time-step intervals, including the final time step. In addition, the intensity of clustering of high counts in each time step is increasing overall and that increase is statistically significant.                                  |
-| Persistent Hot Spot   | A location that has been a statistically significant hot spot for 90 percent of the time-step intervals with no discernible trend in the intensity of clustering over time.                                                                                                                                              |
-| Diminishing Hot Spot  | A location that has been a statistically significant hot spot for 90 percent of the time-step intervals, including the final time step. In addition, the intensity of clustering in each time step is decreasing overall and that decrease is statistically significant.                                                 |
-| Sporadic Hot Spot     | A statistically significant hot spot for the final time-step interval with a history of also being an on-again and off-again hot spot. Less than 90 percent of the time-step intervals have been statistically significant hot spots and none of the time-step intervals have been statistically significant cold spots. |
-| Oscillating Hot Spot  | A statistically significant hot spot for the final time-step interval that has a history of also being a statistically significant cold spot during a prior time step. Less than 90 percent of the time-step intervals have been statistically significant hot spots.                                                    |
-| Historical Hot Spot   | The most recent time period is not hot, but at least 90 percent of the time-step intervals have been statistically significant hot spots.                                                                                                                                                                                |
+::: {style="font-size: 0.58em"}
+| Pattern Name | Defination |
+|----------------|--------------------------------------------------------|
+| No pattern detected | Does not fall into any of the hot or cold spot patterns defined below. |
+| New Hot Spot | A location that is a statistically significant hot spot for the final time step and has never been a statistically significant hot spot before. |
+| Consecutive Hot Spot | A location with a single uninterrupted run of at least two statistically significant hot spot bins in the final time-step intervals. The location has never been a statistically significant hot spot prior to the final hot spot run and less than 90 percent of all bins are statistically significant hot spots. |
+| Intensifying Hot Spot | A location that has been a statistically significant hot spot for 90 percent of the time-step intervals, including the final time step. In addition, the intensity of clustering of high counts in each time step is increasing overall and that increase is statistically significant. |
+| Persistent Hot Spot | A location that has been a statistically significant hot spot for 90 percent of the time-step intervals with no discernible trend in the intensity of clustering over time. |
+| Diminishing Hot Spot | A location that has been a statistically significant hot spot for 90 percent of the time-step intervals, including the final time step. In addition, the intensity of clustering in each time step is decreasing overall and that decrease is statistically significant. |
+| Sporadic Hot Spot | A statistically significant hot spot for the final time-step interval with a history of also being an on-again and off-again hot spot. Less than 90 percent of the time-step intervals have been statistically significant hot spots and none of the time-step intervals have been statistically significant cold spots. |
+| Oscillating Hot Spot | A statistically significant hot spot for the final time-step interval that has a history of also being a statistically significant cold spot during a prior time step. Less than 90 percent of the time-step intervals have been statistically significant hot spots. |
+| Historical Hot Spot | The most recent time period is not hot, but at least 90 percent of the time-step intervals have been statistically significant hot spots. |
 :::
 
 ------------------------------------------------------------------------
 
 ### EHSA Patterns: Cold Spot Trends
 
-::: {style="font-size: 0.60em"}
-| Pattern Name           | Definition                                                                                                                                                                                                                                                                                                                 |
-|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| New Cold Spot          | A location that is a statistically significant cold spot for the final time step and has never been a statistically significant cold spot before.                                                                                                                                                                          |
-| Consecutive Cold Spot  | A location with a single uninterrupted run of at least two statistically significant cold spot bins in the final time-step intervals. The location has never been a statistically significant cold spot prior to the final cold spot run and less than 90 percent of all bins are statistically significant cold spots.    |
-| Intensifying Cold Spot | A location that has been a statistically significant cold spot for 90 percent of the time-step intervals, including the final time step. In addition, the intensity of clustering of low counts in each time step is increasing overall and that increase is statistically significant.                                    |
-| Persistent Cold Spot   | A location that has been a statistically significant cold spot for 90 percent of the time-step intervals with no discernible trend in the intensity of clustering of counts over time.                                                                                                                                     |
-| Diminishing Cold Spot  | A location that has been a statistically significant cold spot for 90 percent of the time-step intervals, including the final time step. In addition, the intensity of clustering of low counts in each time step is decreasing overall and that decrease is statistically significant.                                    |
-| Sporadic Cold Spot     | A statistically significant cold spot for the final time-step interval with a history of also being an on-again and off-again cold spot. Less than 90 percent of the time-step intervals have been statistically significant cold spots and none of the time-step intervals have been statistically significant hot spots. |
-| Oscillating Cold Spot  | A statistically significant cold spot for the final time-step interval that has a history of also being a statistically significant hot spot during a prior time step. Less than 90 percent of the time-step intervals have been statistically significant cold spots.                                                     |
-| Historical Cold Spot   | The most recent time period is not cold, but at least 90 percent of the time-step intervals have been statistically significant cold spots.                                                                                                                                                                                |
+::: {style="font-size: 0.58em"}
+| Pattern Name | Definition |
+|----------------|--------------------------------------------------------|
+| New Cold Spot | A location that is a statistically significant cold spot for the final time step and has never been a statistically significant cold spot before. |
+| Consecutive Cold Spot | A location with a single uninterrupted run of at least two statistically significant cold spot bins in the final time-step intervals. The location has never been a statistically significant cold spot prior to the final cold spot run and less than 90 percent of all bins are statistically significant cold spots. |
+| Intensifying Cold Spot | A location that has been a statistically significant cold spot for 90 percent of the time-step intervals, including the final time step. In addition, the intensity of clustering of low counts in each time step is increasing overall and that increase is statistically significant. |
+| Persistent Cold Spot | A location that has been a statistically significant cold spot for 90 percent of the time-step intervals with no discernible trend in the intensity of clustering of counts over time. |
+| Diminishing Cold Spot | A location that has been a statistically significant cold spot for 90 percent of the time-step intervals, including the final time step. In addition, the intensity of clustering of low counts in each time step is decreasing overall and that decrease is statistically significant. |
+| Sporadic Cold Spot | A statistically significant cold spot for the final time-step interval with a history of also being an on-again and off-again cold spot. Less than 90 percent of the time-step intervals have been statistically significant cold spots and none of the time-step intervals have been statistically significant hot spots. |
+| Oscillating Cold Spot | A statistically significant cold spot for the final time-step interval that has a history of also being a statistically significant hot spot during a prior time step. Less than 90 percent of the time-step intervals have been statistically significant cold spots. |
+| Historical Cold Spot | The most recent time period is not cold, but at least 90 percent of the time-step intervals have been statistically significant cold spots. |
 :::
 
 ------------------------------------------------------------------------
 
 ### A Spacetime Cubes
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 -   A spacetime object is a spacetime cube if every location has a value for every time index. Another way of saying this is that each location contains a regular time-series.
 
@@ -597,7 +597,7 @@ Before running the test, you should ensure that:
 ::: {.column width="50%"}
 ![](img/image7-32.png){width="680"}
 :::
-:::
+:::::
 
 ## In colclusion
 

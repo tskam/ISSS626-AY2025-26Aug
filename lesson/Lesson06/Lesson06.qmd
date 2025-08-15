@@ -193,10 +193,10 @@ Figure on the left below reveals that the proportion of explained pseudo-inertia
 
 ::::: columns
 ::: {.column width="50%"}
-![](img/image6a.png)
+![](img/image9a.png)
 :::
 
 ::: {.column width="50%"}
-![](img/image6b.png)
+![](img/image9b.png)
 :::
 :::::

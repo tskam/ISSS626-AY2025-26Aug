@@ -25,4 +25,3 @@ execute:
 -   [git](https://info5940.infosci.cornell.edu/setup/git/)
 -   [Transform a folder as git project synchronized on Github or Gitlab](https://rtask.thinkr.fr/transform-a-folder-as-git-project-synchronized-on-github-or-gitlab/)
 -   [Recovering from common Git predicaments](https://info5940.infosci.cornell.edu/notes/project-management/common-git-problems/)
-

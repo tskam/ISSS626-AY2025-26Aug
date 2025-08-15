@@ -1,7 +1,6 @@
 ---
 title: "All About Quarto"
-description: |
-  This page provides links to useful recourses of Quarto.
+description: This page provides links to useful recourses of Quarto.
 date: "July 21, 2024"
 date-modified: "last-modified"
 format: html

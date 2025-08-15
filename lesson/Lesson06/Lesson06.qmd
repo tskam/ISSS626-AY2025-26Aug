@@ -2,7 +2,7 @@
 title: "Lesson 6: Geographic Segmentation with Spatial Clustering"
 author: "Dr. Kam Tin Seong<br/>Assoc. Professor of Information Systems(Practice)"
 institute: "School of Computing and Information Systems,<br/>Singapore Management University"
-date: "`r Sys.Date()`"
+date: "Aug 15, 2025"
 format: 
   revealjs:
     width: 1600
@@ -146,28 +146,27 @@ In the figure above, the eight counties are grouped to two clusters: C1{A,B, C, 
 
 -   The **Full-Order-ALK** uses the average of all 15 edges as the distance between C1 and C2.
 
----
+------------------------------------------------------------------------
 
-###  Trees derived with different constrained clustering methods. 
+### Trees derived with different constrained clustering methods.
 
-::: columns
-::: {.column width="50%"}
+:::::: columns
+:::: {.column width="50%"}
 ::: {style="font-size: 0.85em"}
-- Top left: Graph showing the spatial contiguity relations among objects (nodes). Each edge connects two spatial neighbours. The numerical value associated with each node represents its attribute value. 
+-   Top left: Graph showing the spatial contiguity relations among objects (nodes). Each edge connects two spatial neighbours. The numerical value associated with each node represents its attribute value.
 
-- Top right: Tree derived with the First-Order-SLK method. The number on each edge indicates the order that the edge is added to the tree. 
+-   Top right: Tree derived with the First-Order-SLK method. The number on each edge indicates the order that the edge is added to the tree.
 
-- Bottom left: Tree derived with the Full-Order-SLK method. Note that this tree is structurally the same as the First-Order-SLK tree (top-right) but its edges are added in a different order. 
+-   Bottom left: Tree derived with the Full-Order-SLK method. Note that this tree is structurally the same as the First-Order-SLK tree (top-right) but its edges are added in a different order.
 
-- Bottomright: Tree constructed by the Full-Order-CLK method. The optimal solution for two regions is {I, B, C, E} and {F, D, A, H, G}, which can be derived with the Full-Order-CLK tree (by cutting edge CF) but cannot with the First-Order- or Full-Order-SLK tree.
+-   Bottomright: Tree constructed by the Full-Order-CLK method. The optimal solution for two regions is {I, B, C, E} and {F, D, A, H, G}, which can be derived with the Full-Order-CLK tree (by cutting edge CF) but cannot with the First-Order- or Full-Order-SLK tree.
 :::
-:::
+::::
 
 ::: {.column width="50%"}
-
 ![](img/image7.png)
 :::
-:::
+::::::
 
 ## ClustGeo Package
 

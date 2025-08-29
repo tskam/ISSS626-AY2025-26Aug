@@ -41,8 +41,8 @@ This course comprises ten integrated components as shown below:
 
 | Assignments / Assessment categories                   | Weighting |
 |-------------------------------------------------------|-----------|
-| Pre-lesson Learning and Hands-on Exercise (1.5% x 10) | 15%       |
-| Class participation and In-class Exercise (20% x 10)  | 20%       |
+| Pre-lesson Learning and Hands-on Exercise (2.5% x 10) | 25%       |
+| Class participation and In-class Exercise (1.0% x 10) | 10%       |
 | Timed Individual Assessment                           | 20%       |
 | Take-home Exercise (Not more than 3)                  | 45%       |
 
@@ -52,11 +52,11 @@ Pre-lesson videos and recommended readings exercises will be released one week b
 
 Student sharing of insights from readings of assigned materials on Piazza will form a large part of the learning in this course.
 
-### Hands-on Exercise (10%)
+### Hands-on Exercise (20%)
 
-Hands-on exercises aim to provide students to gain hands-on experience on using KNIME and GAEK to perform geospatial analysis with real world use cases. It is important for students to complete the hands-on exercises before class.
+Hands-on exercises aim to provide students to gain hands-on experience on using R and R packages to perform geospatial analysis with real world use cases. It is important for students to complete the hands-on exercises before class.
 
-### Class Participation and In-class Exercise (20%)
+### Class Participation and In-class Exercise (10%)
 
 In-class exercise and discussion will extend the methods learned from the hands-on exercise to advanced modelling. The in-class discussion will also focus on how to interpret the analysis results and to communicate the analysis results by using appropriate map and data visualisation techniques. Students may also be quizzed in class and thereby contribute to in-class exercise.
 
@@ -66,7 +66,7 @@ A timed individual assessment is designed to evaluate each student's ability to 
 
 ### Take-home Exercise (45%)
 
-There are three take-home exercises that are due throughout the term. They aim to provide students the opportunities to apply the methods learned in class by working through mini real-world cases. Each take-home exercise is an extension of the hands-on and in-class exercises. What this means is that, for example, in Lesson 2, students will learn the concept of spatial point processes and the hands-on exercise will provide students step-by-step guide on how to use KNIME and GAEK to perform spatial point patterns analysis. The in-class discussion, beside clarification of the concepts and usage of R packages syntax and argument, it will focus more on how to interpret and communicate the analysis results. Then the take-home exercise will require students to synthesise what they have learned from the readings, hands-on exercise and in-class exercise. The estimated workload will be about 6-8 hours per week.
+There are three take-home exercises that are due throughout the term. They aim to provide students the opportunities to apply the methods learned in class by working through mini real-world cases. Each take-home exercise is an extension of the hands-on and in-class exercises. What this means is that, for example, in Lesson 2, students will learn the concept of spatial point processes and the hands-on exercise will provide students step-by-step guide on how to use R and R packages to perform spatial point patterns analysis. The in-class discussion, beside clarification of the concepts and usage of R packages syntax and argument, it will focus more on how to interpret and communicate the analysis results. Then the take-home exercise will require students to synthesise what they have learned from the readings, hands-on exercise and in-class exercise. The estimated workload will be about 6-8 hours per week.
 
 Each take-home exercise will carry a same weightage of 15%. The deliverable format of the take-home exercises and marking rubric of will be provided on the handout of the take-home exercise. Feedback on take-home exercise will be provided weekly before the weekly lesson starts. This is to ensure that students will learn from mistakes made in the earlier take-home exercise and improve their work progressively in the subsequent take-home exercises.
 

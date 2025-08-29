@@ -1,0 +1,86 @@
+---
+title: "Take-home Exercise 1: Geospatial Analytics for Public Good"
+editor: visual
+---
+
+## Setting the Scene
+
+According to World Health Organisation (WHO), road traffic accidents cause the death of approximately 1.19 million people each year leave between 20 and 50 million people with non-fatal injuries. More than half of all road traffic deaths occur among vulnerable road users, such as pedestrians, cyclists and motorcyclists.
+
+Road traffic injuries are the leading cause of death for children and young adults aged 5–29. Yet two thirds of road traffic fatalities occur among people of working age (18–59 years). Nine in 10 fatalities on the roads occur in low- and middle-income countries, even though these countries have around 60% of the world's vehicles.
+
+In addition to the human suffering caused by road traffic injuries, they also incur a heavy economic burden on victims and their families, both through treatment costs for the injured and through loss of productivity of those killed or disabled. More broadly, road traffic injuries have a serious impact on national economies, costing countries 3% of their annual gross domestic product.
+
+Thailand’s roads are the deadliest in Southeast Asia and among the worst in the world, according to the World Health Organisation. About 20,000 people die in road accidents each year, or about 56 deaths a day (WHO).
+
+Between 2014 and 2021, Thailand experienced a notable increase in accident frequencies. Specifically, 19% of all accidents in Thailand occurred on the national highways, which constituted the primary public thoroughfares connecting various regions, provinces, districts, and significant locations within a comprehensive network. Within the broader context of accidents across the country, there existed a considerable 66% likelihood of encountering accident-prone zones, often termed 'black spots,' distributed as follows: 66% on straight road segments, 13% at curves, 6% at median points of cross-shaped intersections, 5% at T-shaped intersections and Y-shaped intersections, 3% at cross-shaped intersections, 2% on bridges, and 2% on steep slopes, respectively.
+
+## Objectives
+
+By and large, road traffic accidents can be attributed by two major factors, namely: behavioural and environmental factors. Behavioural factors in driving are considered to be major causes of traffic accidents either in direct or indirect manner (Lewin, 1982). These factors can be further grouped into two as, driver behavior (also called driver/driving style) and driver performance, in other words, driver/driving skills (Elander, West, & French, 1993). Environmental factors, on the other hand, includes but not limited to weather condition such as poor visibility during heavy rain or foggy and road conditions such as sharp bend road, slippery slope road, and [blind spot](https://en.wikipedia.org/wiki/Vehicle_blind_spot).
+
+Previous studies have demonstrated the significant potential of Spatial Point Patterns Analysis (SPPA) in exploring and identifying factors influencing road traffic accidents. However, these studies often focus solely on either behavioral or environmental factors, with limited consideration of temporal factors such as season, day of the week, or time of day.
+
+In view of this, you are tasked to discover factors affecting road traffic accidents in the [Bangkok Metropolitan Region BMR](https://en.wikipedia.org/wiki/Bangkok_Metropolitan_Region) by employing both spatial spatio-temporal point patterns analysis methods.
+
+The specific objectives of this take-home exercise are as follows:
+
+-   To visualize the spatio-temporal dynamics of road traffic accidents in BMR using appropriate statistical graphics and geovisualization methods.
+-   To conduct detailed spatial analysis of road traffic accidents using appropriate Network Spatial Point Patterns Analysis methods.
+-   To conduct detailed spatio-temporal analysis of road traffic accidents using appropriate Temporal Network Spatial Point Patterns Analysis methods.
+
+## The Data
+
+For the purpose of this exercise, three basic data sets must be used, they are:
+
+-   [Thailand Road Accident \[2019-2022\]](https://www.kaggle.com/datasets/thaweewatboy/thailand-road-accident-2019-2022) on Kaggle
+
+-   [Thailand Roads (OpenStreetMap Export)](https://data.humdata.org/dataset/hotosm_tha_roads) on HDX.
+
+-   [Thailand - Subnational Administrative Boundaries](https://data.humdata.org/dataset/cod-ab-tha?) on HDX.
+
+Students are free to include other data sets if they help in the study.
+
+## Grading Criteria
+
+This exercise will be graded by using the following criteria:
+
+-   **Geospatial Data Wrangling (20 marks):** This is an important aspect of geospatial analytics. You will be assessed on your ability to employ appropriate R functions from various R packages specifically designed for modern data science such as readr, tidyverse (tidyr, dplyr, ggplot2), sf just to mention a few of them, to perform the entire geospatial data wrangling processes, including. This is not limited to data import, data extraction, data cleaning and data transformation. Besides assessing your ability to use the R functions, this criterion also includes your ability to clean and derive appropriate variables to meet the analysis need.
+
+::: callout-warning
+All data are like vast grassland full of land mines. Your job is to clear those mines and not to step on them).
+:::
+
+-   **Geospatial Analysis (25 marks):** In this exercise, you are expected to utilize the geospatial analytics methods introduced in class, along with the R packages provided during the hands-on exercises, to perform your analysis. You will be assessed on your ability to apply these methods correctly and to provide accurate interpretations and discussions of the analysis results.
+
+-   **Geovisualisation and Geocommunication (25 marks):** In this section, your ability to effectively communicate complex geospatial analysis results through user-friendly visual representations will be assessed. Since this course is focused on geospatial analysis, it is crucial that you demonstrate proficiency in using appropriate geovisualization techniques to clearly convey the findings of your analysis.
+
+-   **Reproducibility (20 marks):** This is a key learning outcome of this course. You will be assessed on your ability to thoroughly document the analysis procedures using code chunks within Quarto. It is important to note that simply providing the code chunks is insufficient; you must also include explanations of the purpose behind each step and the R function(s) used.
+
+-   **Bonus (10 marks):** Demonstrate your ability to employ methods beyond what you had learned in class to gain insights from the data. The methods used must be geospatial in nature.
+
+## Submission Instructions
+
+-   The write-up of the take-home exercise must be in **Quarto html document** format. You are required to publish the write-up on [**Netlify**](https://www.netlify.com/).
+-   The R project of the take-home exercise must be pushed onto your [Github](https://github.com/) repository.
+-   You are required to provide the links to Netlify service of the take-home exercise write-up and github repository on eLearn.
+
+## Due Date
+
+**22nd September 2024 (Sunday), 11.59pm (midnight)**.
+
+## References
+
+-   WHO (2023) [Road traffic injuries](https://www.who.int/news-room/fact-sheets/detail/road-traffic-injuries)
+
+-   [Road traffic deaths and injuries in Thailand](https://cdn.who.int/media/docs/default-source/thailand/roadsafety/overview-en-final-25-7-19.pdf?sfvrsn=f9d7a862_2)
+
+-   Lewin, I. (1982). Driver training: A perceptual-motor skill approach. Ergonomics, 25(10), 917–924.
+
+-   Elander, J., West, R., & French, D. (1993). Behavioral correlates of individual differences in road-traffic crash risk: An examination of methods and findings. Psychological Bulletin, 113(2), 279.
+
+## Peer Learning
+
+-   [Christover Manafe](https://isss626-camanafe.netlify.app/take_home_ex/take_home_ex01/take_home_ex01)
+-   [Teng Kok Wai](https://isss626-gaa.netlify.app/take-home_ex/take-home_ex01/take-home_ex01)
+-   [Nguyen Bao Thu Phuong](https://geospatialanalytics-phuongnbt.netlify.app/take-home_ex/take-home_ex01/take-home_ex01)

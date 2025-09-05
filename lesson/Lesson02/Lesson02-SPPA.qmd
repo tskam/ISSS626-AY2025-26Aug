@@ -184,8 +184,7 @@ Characteristics:
 
 -   The probability of observing a point varies across the space, often depending on underlying factors like geography, environmental conditions, or other spatial variables.
 -   The density of points can be higher in some regions and lower in others, leading to clusters or dispersed patterns.
-
-Model: - Modeled by an Inhomogeneous Poisson Process (IPP), where the intensity function λ(x,y) varies with location. The intensity can be a function of spatial covariates or other influences.
+-   Modeled by an Inhomogeneous Poisson Process (IPP), where the intensity function λ(x,y) varies with location. The intensity can be a function of spatial covariates or other influences.
 :::
 :::::
 
@@ -350,7 +349,9 @@ Adaptive schemes adjust itself according to the density of data: - Shorter bandw
 
 ::::: columns
 ::: {.column width="50%"}
--   CSR/IRP satisfy two conditions: - Any event has equal probability of being in any location, a **1st order** effect.
+-   CSR/IRP satisfy two conditions:
+
+    -   Any event has equal probability of being in any location, a **1st order** effect.
 
     -   The location of one event is independent of the location of another event, a **2nd order** effect.
 
@@ -627,7 +628,8 @@ Compare K(h) to 𝜋ℎ\^2
 ::: {.column width="50%"}
 ![](img/image4-42.jpg)
 
--   Above the envelop: significant cluster pattern - Below the envelop: significant regular
+-   Above the envelop: significant cluster pattern
+-   Below the envelop: significant regular
 -   Inside the envelop: CSR
 :::
 :::::
@@ -689,6 +691,59 @@ The modified L function
 ![](img/image4-46.jpg)
 :::
 :::::
+
+## Monte Carlo hypothesis testing in spatstat
+
+-   In spatial point pattern analysis, we usually test whether the observed pattern is consistent with some null model (e.g., Complete Spatial Randomness, CSR).
+-   **spatstat** does this by simulating `nsim` realisations of the null model.
+-   For each simulation, it computes the test statistic (e.g., K-function, L-function, G-function, etc.) and compares it with the observed data.
+
+------------------------------------------------------------------------
+
+### Role of nsim
+
+-   nsim is the number of simulated patterns generated under the null hypothesis.
+-   A higher nsim means more accurate estimation of the sampling distribution, and more precise p-values.
+-   But p-values in Monte Carlo tests are discrete, and the smallest achievable p-value is
+
+![](img/image4-47.jpg)
+
+For example:
+
+-   If nsim = 99, the smallest p-value you can report is 0.01.
+-   If nsim = 999, the smallest possible p-value is 0.001.
+
+So, larger nsim = finer resolution of p-values.
+
+------------------------------------------------------------------------
+
+### Confidence level and envelopes in spatstat
+
+When you use `envelope()`:
+
+-   By default, you get pointwise simulation envelopes at a certain confidence level (e.g., 95%).
+-   The confidence level is related to how wide the simulation band is. For a 95% envelope:
+-   You drop the top 2.5% and bottom 2.5% of simulated values at each distance r.
+
+The achievable confidence level is constrained by nsim:
+
+-   For example, if nsim = 99, the finest possible two-tailed envelope is at 98% confidence (exclude the most extreme 1 value in each tail).
+-   To get a "true" 95% envelope, you’d need nsim divisible appropriately (but spatstat interpolates when necessary).
+
+------------------------------------------------------------------------
+
+### Confidence level and envelopes in spatstat
+
+So the relationship is:
+
+![](img/image4-48.jpg){width="265"}
+
+------------------------------------------------------------------------
+
+### Rule of thumb in practice
+
+-   Use at least nsim = 99 for quick tests, but prefer nsim = 999 or more if you want stable p-values and smooth envelopes.
+-   Report p-values in terms of Monte Carlo resolution (e.g., “p \< 0.05, based on 99 simulations” or “p \< 0.001, based on 999 simulations”).
 
 ## References
 

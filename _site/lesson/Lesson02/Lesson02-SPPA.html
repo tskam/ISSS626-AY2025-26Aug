@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.32">
 
   <meta name="author" content="Dr.&nbsp;Kam Tin Seong Assoc. Professor of Information Systems(Practice)">
-  <meta name="dcterms.date" content="2025-08-15">
+  <meta name="dcterms.date" content="2025-09-06">
   <title>ISSS626 – Lesson 2: Spatial Point Patterns Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -141,7 +141,7 @@ Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems(Practice)
     </div>
 </div>
 
-  <p class="date">15 Aug 2025</p>
+  <p class="date">06 Sep 2025</p>
 </section>
 <section id="content" class="slide level2">
 <h2>Content</h2>
@@ -345,8 +345,8 @@ Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems(Practice)
 <ul>
 <li>The probability of observing a point varies across the space, often depending on underlying factors like geography, environmental conditions, or other spatial variables.</li>
 <li>The density of points can be higher in some regions and lower in others, leading to clusters or dispersed patterns.</li>
+<li>Modeled by an Inhomogeneous Poisson Process (IPP), where the intensity function λ(x,y) varies with location. The intensity can be a function of spatial covariates or other influences.</li>
 </ul>
-<p>Model: - Modeled by an Inhomogeneous Poisson Process (IPP), where the intensity function λ(x,y) varies with location. The intensity can be a function of spatial covariates or other influences.</p>
 </div></div>
 </section>
 <section id="spatial-point-patterns-analysis-techniques" class="slide level2">
@@ -510,9 +510,10 @@ Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems(Practice)
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>CSR/IRP satisfy two conditions: - Any event has equal probability of being in any location, a <strong>1st order</strong> effect.</p>
+<li><p>CSR/IRP satisfy two conditions:</p>
 <ul>
-<li>The location of one event is independent of the location of another event, a <strong>2nd order</strong> effect.</li>
+<li><p>Any event has equal probability of being in any location, a <strong>1st order</strong> effect.</p></li>
+<li><p>The location of one event is independent of the location of another event, a <strong>2nd order</strong> effect.</p></li>
 </ul></li>
 </ul>
 <p>Reference: <a href="https://mgimond.github.io/Spatial/hypothesis-testing.html">Chapter 12 Hypothesis testing of Intro to GIS and Spatial Analysis</a></p>
@@ -749,7 +750,8 @@ Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems(Practice)
 </div><div class="column" style="width:50%;">
 <p><img data-src="img/image4-42.jpg"></p>
 <ul>
-<li>Above the envelop: significant cluster pattern - Below the envelop: significant regular</li>
+<li>Above the envelop: significant cluster pattern</li>
+<li>Below the envelop: significant regular</li>
 <li>Inside the envelop: CSR</li>
 </ul>
 </div></div>
@@ -799,6 +801,59 @@ Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems(Practice)
 </div><div class="column" style="width:50%;">
 <p><img data-src="img/image4-46.jpg"></p>
 </div></div>
+</section>
+<section id="monte-carlo-hypothesis-testing-in-spatstat" class="slide level2">
+<h2>Monte Carlo hypothesis testing in spatstat</h2>
+<ul>
+<li>In spatial point pattern analysis, we usually test whether the observed pattern is consistent with some null model (e.g., Complete Spatial Randomness, CSR).</li>
+<li><strong>spatstat</strong> does this by simulating <code>nsim</code> realisations of the null model.</li>
+<li>For each simulation, it computes the test statistic (e.g., K-function, L-function, G-function, etc.) and compares it with the observed data.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="role-of-nsim">Role of nsim</h3>
+<ul>
+<li>nsim is the number of simulated patterns generated under the null hypothesis.</li>
+<li>A higher nsim means more accurate estimation of the sampling distribution, and more precise p-values.</li>
+<li>But p-values in Monte Carlo tests are discrete, and the smallest achievable p-value is</li>
+</ul>
+
+<img data-src="img/image4-47.jpg" class="r-stretch"><p>For example:</p>
+<ul>
+<li>If nsim = 99, the smallest p-value you can report is 0.01.</li>
+<li>If nsim = 999, the smallest possible p-value is 0.001.</li>
+</ul>
+<p>So, larger nsim = finer resolution of p-values.</p>
+</section>
+<section class="slide level2">
+
+<h3 id="confidence-level-and-envelopes-in-spatstat">Confidence level and envelopes in spatstat</h3>
+<p>When you use <code>envelope()</code>:</p>
+<ul>
+<li>By default, you get pointwise simulation envelopes at a certain confidence level (e.g., 95%).</li>
+<li>The confidence level is related to how wide the simulation band is. For a 95% envelope:</li>
+<li>You drop the top 2.5% and bottom 2.5% of simulated values at each distance r.</li>
+</ul>
+<p>The achievable confidence level is constrained by nsim:</p>
+<ul>
+<li>For example, if nsim = 99, the finest possible two-tailed envelope is at 98% confidence (exclude the most extreme 1 value in each tail).</li>
+<li>To get a “true” 95% envelope, you’d need nsim divisible appropriately (but spatstat interpolates when necessary).</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="confidence-level-and-envelopes-in-spatstat-1">Confidence level and envelopes in spatstat</h3>
+<p>So the relationship is:</p>
+
+<img data-src="img/image4-48.jpg" width="265" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="rule-of-thumb-in-practice">Rule of thumb in practice</h3>
+<ul>
+<li>Use at least nsim = 99 for quick tests, but prefer nsim = 999 or more if you want stable p-values and smooth envelopes.</li>
+<li>Report p-values in terms of Monte Carlo resolution (e.g., “p &lt; 0.05, based on 99 simulations” or “p &lt; 0.001, based on 999 simulations”).</li>
+</ul>
 </section>
 <section id="references" class="slide level2">
 <h2>References</h2>

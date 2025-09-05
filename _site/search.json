@@ -382,7 +382,7 @@
     "href": "outline/Lesson02_outline.html#core-readings",
     "title": "Lesson 2: Spatial Point Patterns Analysis",
     "section": "Core Readings",
-    "text": "Core Readings\n\nYuan, Y., Qiang, Y., Bin Asad, K., and Chow, T. E. (2020). Point Pattern Analysis. The Geographic Information Science & Technology Body of Knowledge (1st Quarter 2020 Edition), John P. Wilson (ed.). DOI: 10.22224/gistbok/2020.1.13.\nYin, P. (2020). Kernels and Density Estimation. The Geographic Information Science & Technology Body of Knowledge (1st Quarter 2020 Edition), John P. Wilson (ed.). DOI: 10.22224/gistbok/2020.1.12\nChapter 7 Spatial Point Pattern Analysis of Roger S. Bivand, Edzer Pebesma and Virgilio Gómez-Rubio (2013) Applied Spatial Data Analysis with R (2nd Edition), Springer.\n\n\nEnrichment Resources\nProf. Luc Anselin on point pattern analysis (YouTube):\n\nPoint Pattern Analysis Concepts\nPoint Pattern Analysis: Clustered, Regular and Dispersed Patterns\nPoint Pattern Analysis: Nearest Neighbor Statistics\nPoint Pattern Analysis: Quadrat Counts\nPoint Pattern Analysis: F and J Functions\nPoint Pattern Analysis: K, L and Kd Functions"
+    "text": "Core Readings\n\nYuan, Y., Qiang, Y., Bin Asad, K., and Chow, T. E. (2020). Point Pattern Analysis. The Geographic Information Science & Technology Body of Knowledge (1st Quarter 2020 Edition), John P. Wilson (ed.). DOI: 10.22224/gistbok/2020.1.13\nYin, P. (2020). Kernels and Density Estimation. The Geographic Information Science & Technology Body of Knowledge (1st Quarter 2020 Edition), John P. Wilson (ed.). DOI: 10.22224/gistbok/2020.1.12\nChapter 4 Spatial distribution of points of Floch, J.M., Marcon, E. and Puech, F. (2018) Handbook of Spatial Analysis: Theory and Application with R.\n\n\nEnrichment Resources\nProf. Luc Anselin on point pattern analysis (YouTube):\n\nPoint Pattern Analysis Concepts\nPoint Pattern Analysis: Clustered, Regular and Dispersed Patterns\nPoint Pattern Analysis: Nearest Neighbor Statistics\nPoint Pattern Analysis: Quadrat Counts\nPoint Pattern Analysis: F and J Functions\nPoint Pattern Analysis: K, L and Kd Functions"
   },
   {
     "objectID": "outline/Lesson02_outline.html#references",
@@ -2118,7 +2118,7 @@
     "href": "lesson/Lesson02/Lesson02-SPPA.html#heterogeneous-spatial-point-patterns",
     "title": "Lesson 2: Spatial Point Patterns Analysis",
     "section": "Heterogeneous Spatial Point Patterns",
-    "text": "Heterogeneous Spatial Point Patterns\n\n\nA heterogeneous spatial point pattern assumes that the intensity of points varies across the study area. The intensity function is not constant and may depend on spatial covariates, leading to non-uniform distribution.\n\n\nCharacteristics:\n\nThe probability of observing a point varies across the space, often depending on underlying factors like geography, environmental conditions, or other spatial variables.\nThe density of points can be higher in some regions and lower in others, leading to clusters or dispersed patterns.\n\nModel: - Modeled by an Inhomogeneous Poisson Process (IPP), where the intensity function λ(x,y) varies with location. The intensity can be a function of spatial covariates or other influences."
+    "text": "Heterogeneous Spatial Point Patterns\n\n\nA heterogeneous spatial point pattern assumes that the intensity of points varies across the study area. The intensity function is not constant and may depend on spatial covariates, leading to non-uniform distribution.\n\n\nCharacteristics:\n\nThe probability of observing a point varies across the space, often depending on underlying factors like geography, environmental conditions, or other spatial variables.\nThe density of points can be higher in some regions and lower in others, leading to clusters or dispersed patterns.\nModeled by an Inhomogeneous Poisson Process (IPP), where the intensity function λ(x,y) varies with location. The intensity can be a function of spatial covariates or other influences."
   },
   {
     "objectID": "lesson/Lesson02/Lesson02-SPPA.html#spatial-point-patterns-analysis-techniques",
@@ -2903,5 +2903,12 @@
     "title": "Take-home Exercise 1: Geospatial Analytics for Public Good",
     "section": "Peer Learning",
     "text": "Peer Learning\n\nChristover Manafe\nTeng Kok Wai\nNguyen Bao Thu Phuong"
+  },
+  {
+    "objectID": "lesson/Lesson02/Lesson02-SPPA.html#monte-carlo-hypothesis-testing-in-spatstat",
+    "href": "lesson/Lesson02/Lesson02-SPPA.html#monte-carlo-hypothesis-testing-in-spatstat",
+    "title": "Lesson 2: Spatial Point Patterns Analysis",
+    "section": "Monte Carlo hypothesis testing in spatstat",
+    "text": "Monte Carlo hypothesis testing in spatstat\n\nIn spatial point pattern analysis, we usually test whether the observed pattern is consistent with some null model (e.g., Complete Spatial Randomness, CSR).\nspatstat does this by simulating nsim realisations of the null model.\nFor each simulation, it computes the test statistic (e.g., K-function, L-function, G-function, etc.) and compares it with the observed data."
   }
 ]

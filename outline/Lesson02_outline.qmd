@@ -36,9 +36,9 @@ Spatial Point Pattern Analysis is the evaluation of the pattern, or distribution
 
 ## Core Readings
 
--   Yuan, Y., Qiang, Y., Bin Asad, K., and Chow, T. E. (2020). [Point Pattern Analysis](https://gistbok-ltb.ucgis.org/page/20/concept/5485). The Geographic Information Science & Technology Body of Knowledge (1st Quarter 2020 Edition), John P. Wilson (ed.). DOI: 10.22224/gistbok/2020.1.13.
--   Yin, P. (2020). [Kernels and Density Estimation](https://gistbok-ltb.ucgis.org/page/20/concept/5486). The Geographic Information Science & Technology Body of Knowledge (1st Quarter 2020 Edition), John P. Wilson (ed.). DOI: 10.22224/gistbok/2020.1.12
--   [Chapter 7 Spatial Point Pattern Analysis](https://link-springer-com.libproxy.smu.edu.sg/chapter/10.1007/978-1-4614-7618-4_7) of Roger S. Bivand, Edzer Pebesma and Virgilio Gómez-Rubio (2013) **Applied Spatial Data Analysis with R** (2nd Edition), Springer.
+-   Yuan, Y., Qiang, Y., Bin Asad, K., and Chow, T. E. (2020). [Point Pattern Analysis](https://gistbok-ltb.ucgis.org/page/30/concept/9213). The Geographic Information Science & Technology Body of Knowledge (1st Quarter 2020 Edition), John P. Wilson (ed.). DOI: 10.22224/gistbok/2020.1.13
+-   Yin, P. (2020). [Kernels and Density Estimation](https://gistbok-ltb.ucgis.org/page/30/concept/9214). The Geographic Information Science & Technology Body of Knowledge (1st Quarter 2020 Edition), John P. Wilson (ed.). DOI: 10.22224/gistbok/2020.1.12
+-   [Chapter 4 Spatial distribution of points](https://www.insee.fr/en/statistiques/fichier/3635545/imet131-h-chapitre-4.pdf) of Floch, J.M., Marcon, E. and Puech, F. (2018) [Handbook of Spatial Analysis: Theory and Application with R](https://www.insee.fr/en/information/3635545).
 
 ### Enrichment Resources
 
@@ -46,7 +46,7 @@ Prof. Luc Anselin on point pattern analysis (YouTube):
 
 -   [Point Pattern Analysis Concepts](https://www.youtube.com/watch?v=BN94XXT6Io4)
 -   [Point Pattern Analysis: Clustered, Regular and Dispersed Patterns](https://www.youtube.com/watch?v=FdcTgcOdAUg)
--   [Point Pattern Analysis: Nearest Neighbor Statistics](•%20Point%20Pattern%20Analysis:%20Nearest%20Neighbor%20Statistics)
+-   [Point Pattern Analysis: Nearest Neighbor Statistics](https://www.youtube.com/watch?v=npWXTbRNLtM)
 -   [Point Pattern Analysis: Quadrat Counts](https://www.youtube.com/watch?v=Ww95WKxUoZk)
 -   [Point Pattern Analysis: F and J Functions](https://www.youtube.com/watch?v=uNpbf7Y6WM8)
 -   [Point Pattern Analysis: K, L and Kd Functions](https://www.youtube.com/watch?v=oT_jMTkkld8)

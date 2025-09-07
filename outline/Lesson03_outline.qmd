@@ -1,5 +1,5 @@
 ---
-title: "Lesson 4: Spatio-Temporal Point Patterns Analysis"
+title: "Lesson 3: Spatio-Temporal Point Patterns Analysis"
 date: "August 31, 2024"
 date-modified: "last-modified"
 format: html

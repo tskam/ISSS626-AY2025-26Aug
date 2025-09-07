@@ -2473,30 +2473,30 @@
   {
     "objectID": "outline/Lesson03_outline.html",
     "href": "outline/Lesson03_outline.html",
-    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "title": "Lesson 4: Spatio-Temporal Point Patterns Analysis",
     "section": "",
-    "text": "In this lesson, you will learn two advanced spatial point patterns analysis methods, they are: spatiotemporal KDE and the Network Constrained KDE. Using real-world use cases, you will also gain hands-on experience on using spNetwork to analyse spatial point patterns and temporal spatial point event along networks."
+    "text": "A spatio-temporal point process (also called space-time or spatial-temporal point process) is a random collection of points, where each point represents the time and location of an event. Examples of events include incidence of disease, sightings or births of a species, or the occurrences of fires, earthquakes, lightning strikes, tsunamis, or volcanic eruptions. In this lesson, you will learn the basic concepts and methods of Spatio-temporal Point Patterns Analysis. You will also gain hands-on experience on using these methods to discover real-world point processes."
   },
   {
     "objectID": "outline/Lesson03_outline.html#content",
     "href": "outline/Lesson03_outline.html#content",
-    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "title": "Lesson 4: Spatio-Temporal Point Patterns Analysis",
     "section": "Content",
-    "text": "Content\n\nSpatiotemporal Kernel Density Estimation\nNetwork Constrained Kernel Density Estimation (NCKDE)\n\nBasic concepts of network constrained spatial point patterns\nNetwork Constrained KDE methods\nThe Three versions of Network Constrained KDE\n\nTemporal Network Kernel Density Estimation (TNKED)\n\nTemporal dimension\nSpatial dimension\nSpatiotemporal point patterns\nThe Temporal Network Kernel Density Estimation method\n\n\n\nLesson Slides and Hands-on Notes\n\nLesson 3 slides\nHands-on Exercise 3: Network Constrained Spatial Point Patterns Analysis."
+    "text": "Content\n\nSpatio-temporal Point Processes\n\nBasic concepts of spatio-temporal point processes.\nExamples of real-world spatio-temporal point processes.\n\nSpatio-temporal Point Patterns Analysis methods\n\nSpatio-temporal Kernel Density Estimation (STKDE)\nSpatio-temporal K-functions\n\n\n\nLesson Slides and Hands-on Notes\n\nLesson 3 slides\nHands-on Exercise 3: Spatio-Temporal Point Patterns Analysis."
   },
   {
     "objectID": "outline/Lesson03_outline.html#references",
     "href": "outline/Lesson03_outline.html#references",
-    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "title": "Lesson 4: Spatio-Temporal Point Patterns Analysis",
     "section": "References",
-    "text": "References\n\nATSUYUKI OKABE, TOSHIAKI SATOH & KOKICHI SUGIHARA (2009) “A kernel density estimation method for networks, its computational method and a GIS-based tool”, International Journal of Geographical Information Science, Vol. 23, No. 1, January 2009, pp. 7–32.\nIkuho Yamada & Jean-Claude Thill (2007) “Local Indicators of Network-Constrained Clusters in Spatial Point Patterns”, Geographical Analysis, Vol. 39, pp 268–292.\nJérémy Gelb & Philippe Apparicio (2023) “Temporal Network Kernel Density Estimation”, Geographical Analysis. (Online open access version)"
+    "text": "References\n\nJonatan A. González, et. al. (2016) “Spatio-temporal point process statistics: A review”, Spatial Statistics, Volume 18, Part B, November 2016, Pages 505-544.\nAlexander Hohl et. al.“Spatiotemporal Point Pattern Analysis Using Ripley’s K” in Geospatial Data Science Techniques and Applications.\nTonini, Marj et. al. (2017) “Evolution of forest fires in Portugal: from spatio-temporal point events to smoothed density maps”, Natural hazards (Dordrecht), 2017-02, Vol.85 (3), p.1489-1510. Available at SMU eJournal.\nJuan, P et. al. (2012) “Pinpointing spatio-temporal interactions in wildfire patterns”, Stochastic environmental research and risk assessment, 2012-12, Vol.26 (8), p.1131-1150. Available at SMU eJournal."
   },
   {
     "objectID": "outline/Lesson03_outline.html#all-about-r",
     "href": "outline/Lesson03_outline.html#all-about-r",
-    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "title": "Lesson 4: Spatio-Temporal Point Patterns Analysis",
     "section": "All About R",
-    "text": "All About R\n\nspNetwork: An R package to perform spatial analysis on networks.\n\nDetails about NKDE\nNetwork k Functions\nNetwork Kernel Density Estimate\nTemporal Network Kernel Density Estimate"
+    "text": "All About R\n\nGonzález & Moraga, “Non-Parametric Analysis of Spatial and Spatio-Temporal Point Patterns”, The R Journal, 2023\nstpp\n\nstpp: An R Package for Plotting, Simulating and Analyzing Spatio-Temporal Point Patterns, Journal of Statistical Software (JSS), April 2013, Volume 53, Issue 2.\n\nsparr: Spatial and Spatiotemporal Relative Risk\nstopp\n\nstpp: An R Package for Plotting, Simulating and Analysing Spatio-Temporal Point Patterns"
   },
   {
     "objectID": "outline/Lesson05_outline.html",
@@ -2910,5 +2910,166 @@
     "title": "Lesson 2: Spatial Point Patterns Analysis",
     "section": "Monte Carlo hypothesis testing in spatstat",
     "text": "Monte Carlo hypothesis testing in spatstat\n\nIn spatial point pattern analysis, we usually test whether the observed pattern is consistent with some null model (e.g., Complete Spatial Randomness, CSR).\nspatstat does this by simulating nsim realisations of the null model.\nFor each simulation, it computes the test statistic (e.g., K-function, L-function, G-function, etc.) and compares it with the observed data."
+  },
+  {
+    "objectID": "outline/Lesson04_outline-NSPPA.html",
+    "href": "outline/Lesson04_outline-NSPPA.html",
+    "title": "Lesson 4: Spatial Weights and Applications",
+    "section": "",
+    "text": "Computing spatial weight is an essential step toward measuring the strength of the spatial relationships between objects. In this lesson, the basic concept of spatial weight will be introduced. This is followed by a discussion of methods to compute spatial weights."
+  },
+  {
+    "objectID": "outline/Lesson04_outline-NSPPA.html#content",
+    "href": "outline/Lesson04_outline-NSPPA.html#content",
+    "title": "Lesson 4: Spatial Weights and Applications",
+    "section": "Content",
+    "text": "Content\n\nTobler’s First law of Geography\nPrinciples of Spatial Autocorrelation\nConcepts of Spatial Proximity and Spatial Weights\n\nContiguity-Based Spatial Weights: Rook’s & Queen’s\nDistance-Band Spatial Weights: fixed and adaptive\n\nApplications of Spatial Weights\n\nSpatially lagged variables\nGeographically Weighted Summary Statistics\nSpatially lagged rates"
+  },
+  {
+    "objectID": "outline/Lesson04_outline-NSPPA.html#lesson-slides-and-hands-on-notes",
+    "href": "outline/Lesson04_outline-NSPPA.html#lesson-slides-and-hands-on-notes",
+    "title": "Lesson 4: Spatial Weights and Applications",
+    "section": "Lesson Slides and Hands-on Notes",
+    "text": "Lesson Slides and Hands-on Notes\n\nLesson 4 slides.\nHands-on Exercise 4\n\n\nSelf-reading Before Meet-up\nTo read before class:\n\nChapter 2. Codifying the neighbourhood structure of Handbook of Spatial Analysis: Theory and Application with R.\n\nAlternatively\n\nChapter 9: Modelling Areal Data of Applied Spatial Data Analysis with R (2nd Edition). This book is available in smu digital library. Until section 9.3.1."
+  },
+  {
+    "objectID": "outline/Lesson04_outline-NSPPA.html#references",
+    "href": "outline/Lesson04_outline-NSPPA.html#references",
+    "title": "Lesson 4: Spatial Weights and Applications",
+    "section": "References",
+    "text": "References\n\nFrançois Bavaud (2010) “Models for Spatial Weights: A Systematic Look” Geographical Analysis, Vol. 30, No.2, pp 153-171.\nTony H. Grubesic and Andrea L. Rosso (2014) “The Use of Spatially Lagged Explanatory Variables for Modeling Neighborhood Amenities and Mobility in Older Adults”, Cityscape, Vol. 16, No. 2, pp. 205-214."
+  },
+  {
+    "objectID": "outline/Lesson04_outline-NSPPA.html#all-about-r",
+    "href": "outline/Lesson04_outline-NSPPA.html#all-about-r",
+    "title": "Lesson 4: Spatial Weights and Applications",
+    "section": "All About R",
+    "text": "All About R\n\nspdep package\n\ndnearneigh()\nknearneigh()"
+  },
+  {
+    "objectID": "outline/Lesson03_outline_bk.html",
+    "href": "outline/Lesson03_outline_bk.html",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "",
+    "text": "In this lesson, you will learn two advanced spatial point patterns analysis methods, they are: spatiotemporal KDE and the Network Constrained KDE. Using real-world use cases, you will also gain hands-on experience on using spNetwork to analyse spatial point patterns and temporal spatial point event along networks."
+  },
+  {
+    "objectID": "outline/Lesson03_outline_bk.html#content",
+    "href": "outline/Lesson03_outline_bk.html#content",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "Content",
+    "text": "Content\n\nSpatiotemporal Kernel Density Estimation\nNetwork Constrained Kernel Density Estimation (NCKDE)\n\nBasic concepts of network constrained spatial point patterns\nNetwork Constrained KDE methods\nThe Three versions of Network Constrained KDE\n\nTemporal Network Kernel Density Estimation (TNKED)\n\nTemporal dimension\nSpatial dimension\nSpatiotemporal point patterns\nThe Temporal Network Kernel Density Estimation method\n\n\n\nLesson Slides and Hands-on Notes\n\nLesson 3 slides\nHands-on Exercise 3: Network Constrained Spatial Point Patterns Analysis."
+  },
+  {
+    "objectID": "outline/Lesson03_outline_bk.html#references",
+    "href": "outline/Lesson03_outline_bk.html#references",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "References",
+    "text": "References\n\nATSUYUKI OKABE, TOSHIAKI SATOH & KOKICHI SUGIHARA (2009) “A kernel density estimation method for networks, its computational method and a GIS-based tool”, International Journal of Geographical Information Science, Vol. 23, No. 1, January 2009, pp. 7–32.\nIkuho Yamada & Jean-Claude Thill (2007) “Local Indicators of Network-Constrained Clusters in Spatial Point Patterns”, Geographical Analysis, Vol. 39, pp 268–292.\nJérémy Gelb & Philippe Apparicio (2023) “Temporal Network Kernel Density Estimation”, Geographical Analysis. (Online open access version)"
+  },
+  {
+    "objectID": "outline/Lesson03_outline_bk.html#all-about-r",
+    "href": "outline/Lesson03_outline_bk.html#all-about-r",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "All About R",
+    "text": "All About R\n\nspNetwork: An R package to perform spatial analysis on networks.\n\nDetails about NKDE\nNetwork k Functions\nNetwork Kernel Density Estimate\nTemporal Network Kernel Density Estimate"
+  },
+  {
+    "objectID": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html",
+    "href": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "",
+    "text": "Network Constrained Kernel Density Estimation (NCKDE)\n\nBasic concepts of network constrained spatial point patterns\nNetwork Constrained KDE methods\nThe Three versions of Network Constrained KDE\n\nTemporal Network Kernel Density Estimation (TNKED)\n\nTemporal dimension\nSpatial dimension\nSpatio-temporal point patterns\n\n\n\nWelcome to Lesson 3: Spatial Point Pattern Analysis, a family of spatial statistics specially developed to model and to test distribution of spatial point events.\nThe lesson proceeding is divided into three main section. First, I will share with you what are real world spatial point events. This is followed by explaining the concepts and methods of 1st-order and 2nd-order spatial point patterns analysis."
+  },
+  {
+    "objectID": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#content",
+    "href": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#content",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "",
+    "text": "Network Constrained Kernel Density Estimation (NCKDE)\n\nBasic concepts of network constrained spatial point patterns\nNetwork Constrained KDE methods\nThe Three versions of Network Constrained KDE\n\nTemporal Network Kernel Density Estimation (TNKED)\n\nTemporal dimension\nSpatial dimension\nSpatio-temporal point patterns\n\n\n\nWelcome to Lesson 3: Spatial Point Pattern Analysis, a family of spatial statistics specially developed to model and to test distribution of spatial point events.\nThe lesson proceeding is divided into three main section. First, I will share with you what are real world spatial point events. This is followed by explaining the concepts and methods of 1st-order and 2nd-order spatial point patterns analysis."
+  },
+  {
+    "objectID": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#network-constrained-point-processes",
+    "href": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#network-constrained-point-processes",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "Network Constrained Point Processes",
+    "text": "Network Constrained Point Processes\nMany real world point event are not randomly distributed. Their distribution, on the other hand, are constrained by network such as roads, rivers, and fault lines just to name a few of them.\n\n\nRoad traffic accidents within Bangkok City. \n\nLocation of banks at Central, Hong Kong"
+  },
+  {
+    "objectID": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#network-constrained-kernel-density-estimation-nkde",
+    "href": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#network-constrained-kernel-density-estimation-nkde",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "Network Constrained Kernel Density Estimation (NKDE)",
+    "text": "Network Constrained Kernel Density Estimation (NKDE)\nNetwork Kernel Density Estimation, in short, NKDE is a geospatial analytics methods specially designed to computer intensity of spatial point event either located along or occurred along linear networks.\n\n\nMathematically, NKDE can be defined as: \nwhere K must be a probability density function and verifies the two following conditions:"
+  },
+  {
+    "objectID": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#network-constrained-kernel-density-estimation-nkde-1",
+    "href": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#network-constrained-kernel-density-estimation-nkde-1",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "Network Constrained Kernel Density Estimation (NKDE)",
+    "text": "Network Constrained Kernel Density Estimation (NKDE)\n\nPlanar KDE versus NKDE\n\n\nFigure on the right shows the basic differences between the Planar KDE and Network KDE for the same spatial point event data. To estimate th density values at a focal point X, the planar KDE treats the whole 2-D space as the context and finds four point events (black circle) within a search bandwidth (i.e. h), whereas the Network KDE only finds two point events within the same bandwidth in the network space based on network distance.\n\n\n\n\n\n\n\nNetwork Constrained Kernel Density Estimation (NKDE) method\nTo calculate a Network Kernel Density Estimate (NKDE), it is possible to:\n\nuse lixels instead of pixels. A lixel is a linear equivalent of a pixel on a network. The lines of the network are split into lixels according to a chosen resolution. The centres of the lixels are sampling points for which the density will be estimated.\ncalculate network distances between objects instead of Euclidean distances.\nadjust the kernel function to deal with the anisotropic space\n\n\n\n\nNKDE Method\n\nTo perform a NKDE, the events must be snapped on the network. The snapped events are shown here in green.\n\n\n\n\n\n\n\n\n\n\n\nNKDE Method\n\n\nThe mass of each event can be seen as a third dimension and is evaluated by a selected kernel function (K) within a specified bandwidth. The kernel function must satisfy the following conditions:\n\nThe total mass of an event is 1, and is spread according to the function K within the bandwidth.\n\nIn the figure below, we can see that the “influence” of each point is limited within the bandwidth and decreases when we move away from the event.\n\n\n\n\n\n\nNKDE Method\n\n\nWith this method, one can evaluate the density of the studied phenomenon at each location on the network. In the figure below, 3 sampling points (s1, s2 and s3) are added in blue.\n\n\nWhere S1, S2, and S3 are calculated by using the formulas below:\n\nand the general formular will be defined as:\n\n\n\n\n\nwith 𝒅𝑠𝑖 the density estimated at the sample point 𝑠𝒊, 𝒃𝑤 the bandwidth and 𝑒𝑗 an event.\n\n\n\n\n\nNKDE Method\n\n\nThe proposed kernel functions in the spNetwork package are:"
+  },
+  {
+    "objectID": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#the-three-version-of-nkde",
+    "href": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#the-three-version-of-nkde",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "The Three version of NKDE",
+    "text": "The Three version of NKDE\n\nSimple method\n\n\nThe first method was proposed by Xie and Yan (2008). Considering the planar KDE, they defined the NKDE with the following formula:\n\n\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThis method remains useful for two reasons:\n\nFor quick data visualization. With big datasets, it might be useful to use this simple method to do a primary investigation.\nIn a purely geographical view, this method is intuitive. In the case of crime analysis for example, one could argue that the strength of an event should not be affected by intersections on the network. In that case, the kernel function is seen as a distance decaying function."
+  },
+  {
+    "objectID": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#the-three-version-of-nkde-1",
+    "href": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#the-three-version-of-nkde-1",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "The Three version of NKDE",
+    "text": "The Three version of NKDE\n\nDiscontinuous method\n\n\nThis method is introduced by Okabe and Sugihara (2012). The discontinuous NKDE is easily presented by a figure:\n Note that the density of the kernel function is equally divided at intersections.\n\n\n\n\n\n\n\nWarning\n\n\n\nAs one can see, the values of the NKDE are split at intersections to avoid the multiplication of the mass observed in the simple version. However, this creates a discontinuous NKDE, which is counter-intuitive. It leads to sharp differences between density values in the network, and could be problematic in networks with many intersections."
+  },
+  {
+    "objectID": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#the-three-version-of-nkde-2",
+    "href": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#the-three-version-of-nkde-2",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "The Three version of NKDE",
+    "text": "The Three version of NKDE\n\nContinue method\n\n\nThe method merges the best of the two worlds: it adjusts the values of the NKDE at intersections to ensure that it integrates to 1 on its domain, and applies a backward correction to force the density values to be continuous.\nThis process is accomplished by a recursive function. This function is more time consuming, so it might be necessary to stop it when the recursion is too deep. Considering that the kernel density is divided at each intersection, stopping the function at deep level 16 should give results almost identical to the true values.\n\n\nNote that there are three different equations to calculate the kernel density depending on the situation (here, q1, q2, q3).\n\n\n\n\n\n\nNote\n\n\n\nAs one can see, the values of the NKDE are continuous, and the density values close to the events have been adjusted. This leads to smoother results than the discontinuous method."
+  },
+  {
+    "objectID": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#temporal-network-kernel-density-estimate",
+    "href": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#temporal-network-kernel-density-estimate",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "Temporal Network Kernel Density Estimate",
+    "text": "Temporal Network Kernel Density Estimate\n\n\nEvents recorded on a network often have a temporal dimension. In that context, one could estimate the density of events in both time and network spaces.\nThe spatio-temporal kernel is calculated as the product of the network kernel density and the time kernel density.\n\nFor a sample point at location l and time t, the Temporal Network Kernel Density Estimate (TNKDE) is calculated as follows:"
+  },
+  {
+    "objectID": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#references",
+    "href": "lesson/Lesson03_ASPPA/Lesson03-Advanced_SPPA.html#references",
+    "title": "Lesson 3: Advanced Spatial Point Patterns Analysis",
+    "section": "References",
+    "text": "References\n\nNetwork Kernel Density Estimate\nTemporal Network Kernel Density Estimate"
+  },
+  {
+    "objectID": "lesson/Lesson03/Lesson03-STPPA.html",
+    "href": "lesson/Lesson03/Lesson03-STPPA.html",
+    "title": "Lesson 4: Spatio-Temporal Point Patterns Analysis (STPPA)",
+    "section": "",
+    "text": "Basic concepts of Spatio-Temporal Point Process\nSpatio-Temporal Kernel Density Estimation"
+  },
+  {
+    "objectID": "lesson/Lesson03/Lesson03-STPPA.html#content",
+    "href": "lesson/Lesson03/Lesson03-STPPA.html#content",
+    "title": "Lesson 3: Spatio-Temporal Point Patterns Analysis (STPPA)",
+    "section": "Content",
+    "text": "Content\n\nBasic concepts of Spatio-Temporal Point Process\nSpatio-Temporal Kernel Density Estimation"
+  },
+  {
+    "objectID": "lesson/Lesson03/Lesson03-STPPA.html#what-is-a-spatio-temporal-point-process",
+    "href": "lesson/Lesson03/Lesson03-STPPA.html#what-is-a-spatio-temporal-point-process",
+    "title": "Lesson 3: Spatio-Temporal Point Patterns Analysis (STPPA)",
+    "section": "What is a Spatio-Temporal Point Process",
+    "text": "What is a Spatio-Temporal Point Process\nA spatio-temporal point process (also called space-time or spatial-temporal point process) is a random collection of points, where each point represents the time and location of an event. Examples of events include incidence of disease, sightings or births of a species, or the occurrences of fires, earthquakes, lightning strikes, tsunamis, or volcanic eruptions. Typically the spatio-temporal point events are recorded in three-dimension, namely: longitude, latitude, and time as shown in the figure below."
+  },
+  {
+    "objectID": "lesson/Lesson03/Lesson03-STPPA.html#spatio-temporal-kde-stkde",
+    "href": "lesson/Lesson03/Lesson03-STPPA.html#spatio-temporal-kde-stkde",
+    "title": "Lesson 3: Spatio-Temporal Point Patterns Analysis (STPPA)",
+    "section": "Spatio-Temporal KDE (STKDE)",
+    "text": "Spatio-Temporal KDE (STKDE)\nMathematically, STKDE is defined as"
   }
 ]

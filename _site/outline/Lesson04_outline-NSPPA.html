@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-08-31">
+<meta name="dcterms.date" content="2024-07-21">
 
-<title>Lesson 4: Spatio-Temporal Point Patterns Analysis – ISSS626</title>
+<title>Lesson 4: Spatial Weights and Applications – ISSS626</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -209,9 +209,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a>
+  <li><a href="#content" id="toc-content" class="nav-link active" data-scroll-target="#content">Content</a></li>
+  <li><a href="#lesson-slides-and-hands-on-notes" id="toc-lesson-slides-and-hands-on-notes" class="nav-link" data-scroll-target="#lesson-slides-and-hands-on-notes">Lesson Slides and Hands-on Notes</a>
   <ul class="collapse">
-  <li><a href="#lesson-slides-and-hands-on-notes" id="toc-lesson-slides-and-hands-on-notes" class="nav-link" data-scroll-target="#lesson-slides-and-hands-on-notes">Lesson Slides and Hands-on Notes</a></li>
+  <li><a href="#self-reading-before-meet-up" id="toc-self-reading-before-meet-up" class="nav-link" data-scroll-target="#self-reading-before-meet-up">Self-reading Before Meet-up</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   <li><a href="#all-about-r" id="toc-all-about-r" class="nav-link" data-scroll-target="#all-about-r">All About R</a></li>
@@ -223,7 +224,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lesson 4: Spatio-Temporal Point Patterns Analysis</h1>
+<h1 class="title">Lesson 4: Spatial Weights and Applications</h1>
 </div>
 
 
@@ -234,14 +235,14 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 31, 2024</p>
+      <p class="date">July 21, 2024</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">September 7, 2025</p>
+      <p class="date-modified">August 15, 2025</p>
     </div>
   </div>
     
@@ -252,50 +253,57 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>A spatio-temporal point process (also called space-time or spatial-temporal point process) is a random collection of points, where each point represents the time and location of an event. Examples of events include incidence of disease, sightings or births of a species, or the occurrences of fires, earthquakes, lightning strikes, tsunamis, or volcanic eruptions. In this lesson, you will learn the basic concepts and methods of Spatio-temporal Point Patterns Analysis. You will also gain hands-on experience on using these methods to discover real-world point processes.</p>
+<p>Computing spatial weight is an essential step toward measuring the strength of the spatial relationships between objects. In this lesson, the basic concept of spatial weight will be introduced. This is followed by a discussion of methods to compute spatial weights.</p>
 <section id="content" class="level2">
 <h2 class="anchored" data-anchor-id="content">Content</h2>
 <ul>
-<li>Spatio-temporal Point Processes
+<li>Tobler’s First law of Geography</li>
+<li>Principles of Spatial Autocorrelation</li>
+<li>Concepts of Spatial Proximity and Spatial Weights
 <ul>
-<li>Basic concepts of spatio-temporal point processes.</li>
-<li>Examples of real-world spatio-temporal point processes.</li>
+<li>Contiguity-Based Spatial Weights: Rook’s &amp; Queen’s</li>
+<li>Distance-Band Spatial Weights: fixed and adaptive</li>
 </ul></li>
-<li>Spatio-temporal Point Patterns Analysis methods
+<li>Applications of Spatial Weights
 <ul>
-<li>Spatio-temporal Kernel Density Estimation (STKDE)</li>
-<li>Spatio-temporal K-functions</li>
+<li>Spatially lagged variables</li>
+<li>Geographically Weighted Summary Statistics</li>
+<li>Spatially lagged rates</li>
 </ul></li>
 </ul>
-<section id="lesson-slides-and-hands-on-notes" class="level3">
-<h3 class="anchored" data-anchor-id="lesson-slides-and-hands-on-notes">Lesson Slides and Hands-on Notes</h3>
+</section>
+<section id="lesson-slides-and-hands-on-notes" class="level2">
+<h2 class="anchored" data-anchor-id="lesson-slides-and-hands-on-notes">Lesson Slides and Hands-on Notes</h2>
 <ul>
-<li><p><a href="../lesson/Lesson03/Lesson03-STPPA.html">Lesson 3</a> slides</p></li>
-<li><p><a href="https://r4gdsa.netlify.app/chap06">Hands-on Exercise 3: Spatio-Temporal Point Patterns Analysis</a>.</p></li>
+<li><a href="../lesson/Lesson04/Lesson04-Spatial_Weights.html">Lesson 4</a> slides.</li>
+<li><a href="https://r4gdsa.netlify.app/chap08.html">Hands-on Exercise 4</a></li>
+</ul>
+<section id="self-reading-before-meet-up" class="level3">
+<h3 class="anchored" data-anchor-id="self-reading-before-meet-up">Self-reading Before Meet-up</h3>
+<p>To read before class:</p>
+<ul>
+<li>Chapter 2. <a href="https://www.insee.fr/en/statistiques/fichier/3635545/imet131-f-chapitre-2.pdf">Codifying the neighbourhood structure</a> of <a href="https://www.insee.fr/en/information/3635545">Handbook of Spatial Analysis: Theory and Application with R</a>.</li>
+</ul>
+<p>Alternatively</p>
+<ul>
+<li>Chapter 9: Modelling Areal Data of Applied Spatial Data Analysis with R (2nd Edition). This book is available in smu digital library. Until section 9.3.1.</li>
 </ul>
 </section>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li>Jonatan A. González, et. al.&nbsp;(2016) <a href="https://www.sciencedirect.com/science/article/abs/pii/S2211675316301130">“Spatio-temporal point process statistics: A review”</a>, <em>Spatial Statistics</em>, Volume 18, Part B, November 2016, Pages 505-544.</li>
-<li>Alexander Hohl et. al.<a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://pages.charlotte.edu/eric-delmelle/wp-content/uploads/sites/150/2019/09/Spatiotemporal-Point-Pattern-Analysis-Using-Ripleys-K-Function.pdf&amp;ved=2ahUKEwiL24W_8qyIAxXzXGwGHe2RL8wQFnoECDAQAQ&amp;usg=AOvVaw18Au9kh6LfNH_RJpPglq2J">“Spatiotemporal Point Pattern Analysis Using Ripley’s K”</a> in <strong>Geospatial Data Science Techniques and Applications</strong>.</li>
-<li>Tonini, Marj et. al.&nbsp;(2017) “Evolution of forest fires in Portugal: from spatio-temporal point events to smoothed density maps”, <em>Natural hazards</em> (Dordrecht), 2017-02, Vol.85 (3), p.1489-1510. Available at SMU eJournal.</li>
-<li>Juan, P et. al.&nbsp;(2012) “Pinpointing spatio-temporal interactions in wildfire patterns”, <em>Stochastic environmental research and risk assessment</em>, 2012-12, Vol.26 (8), p.1131-1150. Available at SMU eJournal.</li>
+<li><p>François Bavaud (2010) <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4632.1998.tb00394.x">“Models for Spatial Weights: A Systematic Look”</a> <em>Geographical Analysis</em>, Vol. 30, No.2, pp 153-171.</p></li>
+<li><p>Tony H. Grubesic and Andrea L. Rosso (2014) <a href="https://www-jstor-org.libproxy.smu.edu.sg/stable/26326897?sid=primo&amp;seq=1#metadata_info_tab_contents">“The Use of Spatially Lagged Explanatory Variables for Modeling Neighborhood Amenities and Mobility in Older Adults”</a>, <em>Cityscape</em>, Vol. 16, No.&nbsp;2, pp.&nbsp;205-214.</p></li>
 </ul>
 </section>
 <section id="all-about-r" class="level2">
 <h2 class="anchored" data-anchor-id="all-about-r">All About R</h2>
 <ul>
-<li>González &amp; Moraga, “<a href="https://journal.r-project.org/articles/RJ-2023-025/">Non-Parametric Analysis of Spatial and Spatio-Temporal Point Patterns</a>”, The R Journal, 2023</li>
-<li><a href="https://cran.r-project.org/web/packages/stpp/index.html">stpp</a>
+<li><a href="https://r-spatial.github.io/spdep/articles/CO69.html">spdep</a> package
 <ul>
-<li><a href="https://www.jstatsoft.org/article/view/v053i02">stpp: An R Package for Plotting, Simulating and Analyzing Spatio-Temporal Point Patterns</a>, Journal of Statistical Software (JSS), April 2013, Volume 53, Issue 2.</li>
-</ul></li>
-<li><a href="https://tilmandavies.github.io/sparr/index.html">sparr: Spatial and Spatiotemporal Relative Risk</a></li>
-<li><a href="https://cran.r-project.org/web/packages/stopp/index.html">stopp</a>
-<ul>
-<li><a href="https://csgb.au.dk/fileadmin/www.csgb.au.dk/Events/SummerSchool2013/Diggle_stpp_vignette.pdf">stpp: An R Package for Plotting, Simulating and Analysing Spatio-Temporal Point Patterns</a></li>
+<li><a href="https://r-spatial.github.io/spdep/reference/dnearneigh.html">dnearneigh()</a></li>
+<li><a href="https://r-spatial.github.io/spdep/reference/knearneigh.html">knearneigh()</a></li>
 </ul></li>
 </ul>
 

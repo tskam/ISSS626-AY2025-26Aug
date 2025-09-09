@@ -5,41 +5,48 @@ editor: visual
 
 ## Setting the Scene
 
-According to World Health Organisation (WHO), road traffic accidents cause the death of approximately 1.19 million people each year leave between 20 and 50 million people with non-fatal injuries. More than half of all road traffic deaths occur among vulnerable road users, such as pedestrians, cyclists and motorcyclists.
+The locations of businesses and firms are central to urban development, influencing economic growth, job creation, and the availability of resources and services for residents and other businesses. Strategic locations provide competitive advantages, access to talent and infrastructure, and impact brand image and market positioning, while also shaping the city's overall character and functionality by fostering specialized districts and facilitating efficient supply chains and employee commutes.
 
-Road traffic injuries are the leading cause of death for children and young adults aged 5–29. Yet two thirds of road traffic fatalities occur among people of working age (18–59 years). Nine in 10 fatalities on the roads occur in low- and middle-income countries, even though these countries have around 60% of the world's vehicles.
-
-In addition to the human suffering caused by road traffic injuries, they also incur a heavy economic burden on victims and their families, both through treatment costs for the injured and through loss of productivity of those killed or disabled. More broadly, road traffic injuries have a serious impact on national economies, costing countries 3% of their annual gross domestic product.
-
-Thailand’s roads are the deadliest in Southeast Asia and among the worst in the world, according to the World Health Organisation. About 20,000 people die in road accidents each year, or about 56 deaths a day (WHO).
-
-Between 2014 and 2021, Thailand experienced a notable increase in accident frequencies. Specifically, 19% of all accidents in Thailand occurred on the national highways, which constituted the primary public thoroughfares connecting various regions, provinces, districts, and significant locations within a comprehensive network. Within the broader context of accidents across the country, there existed a considerable 66% likelihood of encountering accident-prone zones, often termed 'black spots,' distributed as follows: 66% on straight road segments, 13% at curves, 6% at median points of cross-shaped intersections, 5% at T-shaped intersections and Y-shaped intersections, 3% at cross-shaped intersections, 2% on bridges, and 2% on steep slopes, respectively.
+Studying the spatio-temporal patterns of businesses and firms is crucial for urban development because it reveals how economic activity and urban forms evolve, enabling better urban planning, promoting sustainability, identifying urban inefficiencies, and enhancing quality of life. By understanding where and when businesses locate and operate, urban planners can design cities more effectively, anticipate growth, ensure resource efficiency, and tailor infrastructure to support economic vitality and community well-being.
 
 ## Objectives
 
-By and large, road traffic accidents can be attributed by two major factors, namely: behavioural and environmental factors. Behavioural factors in driving are considered to be major causes of traffic accidents either in direct or indirect manner (Lewin, 1982). These factors can be further grouped into two as, driver behavior (also called driver/driving style) and driver performance, in other words, driver/driving skills (Elander, West, & French, 1993). Environmental factors, on the other hand, includes but not limited to weather condition such as poor visibility during heavy rain or foggy and road conditions such as sharp bend road, slippery slope road, and [blind spot](https://en.wikipedia.org/wiki/Vehicle_blind_spot).
-
-Previous studies have demonstrated the significant potential of Spatial Point Patterns Analysis (SPPA) in exploring and identifying factors influencing road traffic accidents. However, these studies often focus solely on either behavioral or environmental factors, with limited consideration of temporal factors such as season, day of the week, or time of day.
-
-In view of this, you are tasked to discover factors affecting road traffic accidents in the [Bangkok Metropolitan Region BMR](https://en.wikipedia.org/wiki/Bangkok_Metropolitan_Region) by employing both spatial spatio-temporal point patterns analysis methods.
+In this take-home exercise, we are interested to investigate the spatial and spatio-temporal patterns of new businesses and firms established in Singapore for the first six months of 2025
 
 The specific objectives of this take-home exercise are as follows:
 
--   To visualize the spatio-temporal dynamics of road traffic accidents in BMR using appropriate statistical graphics and geovisualization methods.
--   To conduct detailed spatial analysis of road traffic accidents using appropriate Network Spatial Point Patterns Analysis methods.
--   To conduct detailed spatio-temporal analysis of road traffic accidents using appropriate Temporal Network Spatial Point Patterns Analysis methods.
+-   To identify the "where" and "when" of new business entities, revealing clusters, patterns, and trends that are crucial for informed urban planning, resource allocation, and economic development.
+-   To identify complex interaction patterns and emergent phenomena in the distribution of new businesses beyond simple proximity or density, such as clustering of related businesses, the influence of past trends on future locations, and the overall structural development of commercial areas, which are crucial for scientific urban planning and policy-making.
+
+By understanding where businesses are located and how their distribution changes over time, urban planners nad managers can unlock spatial intelligence, optimize operations, and create effective strategies to attract investment and promote sustainable growth.
+
+## The Tasks
+
+The specific tasks of this hands-on exercise are as follow:
+
+1.  Download ACRA (Accounting and Corporate Regulatory Authority) Information on Corporate Entities datasets from data.gov.sg.
+
+2.  Select at least three business types by referring to [2-digit or 3-digit Singapore Standard Industrial Classification (SSIS) 2020](https://classification.codes/classifications/industry/ssic-singapore).  Prepare and tidy the data by applying appropriate data wrangling method.
+
+3.  Extract the selected business entities registered between 1st January 2024 to 30th June 2025.
+
+4.  Geocode the selected records and convert them into simple point features.
+
+5.  Compute spatial and spatio-temporal KDE of the selected business types.
+
+6.  Perform second order spatial and spatio-temporal analysis on the selected business types.
+
+7.  Describe and discuss the analysis results obtained from Step 5 and 6.
+
+8.  For each geovisualisation prepared, write a short report of not more than 150 words describing the spatio-temporal patterns revealed by the geovisualisation and statistical graphics.
+
+9.  With reference to the analysis results above, discuss how these findings can be used to support urban land use planning and management. (Not more than 500 words)
 
 ## The Data
 
-For the purpose of this exercise, three basic data sets must be used, they are:
+For the purpose of this exercise, **Information on Corporate Entities** datasets of ACRA must be used. There are a total of 27 csv files organised alphabetically. To extract business entities of interest, you need to refer to [2-digit or 3-digit Singapore Standard Industrial Classification (SSIS) 2020](https://classification.codes/classifications/industry/ssic-singapore).
 
--   [Thailand Road Accident \[2019-2022\]](https://www.kaggle.com/datasets/thaweewatboy/thailand-road-accident-2019-2022) on Kaggle
-
--   [Thailand Roads (OpenStreetMap Export)](https://data.humdata.org/dataset/hotosm_tha_roads) on HDX.
-
--   [Thailand - Subnational Administrative Boundaries](https://data.humdata.org/dataset/cod-ab-tha?) on HDX.
-
-Students are free to include other data sets if they help in the study.
+Students are free to include other data sets to support the analysis.
 
 ## Grading Criteria
 
@@ -67,17 +74,13 @@ All data are like vast grassland full of land mines. Your job is to clear those 
 
 ## Due Date
 
-**22nd September 2024 (Sunday), 11.59pm (midnight)**.
+**24th September 2025 (Wednesday), 11.59pm (midnight)**.
 
 ## References
 
--   WHO (2023) [Road traffic injuries](https://www.who.int/news-room/fact-sheets/detail/road-traffic-injuries)
-
--   [Road traffic deaths and injuries in Thailand](https://cdn.who.int/media/docs/default-source/thailand/roadsafety/overview-en-final-25-7-19.pdf?sfvrsn=f9d7a862_2)
-
--   Lewin, I. (1982). Driver training: A perceptual-motor skill approach. Ergonomics, 25(10), 917–924.
-
--   Elander, J., West, R., & French, D. (1993). Behavioral correlates of individual differences in road-traffic crash risk: An examination of methods and findings. Psychological Bulletin, 113(2), 279.
+-   Park, S., Seo, H. & Koo, H. "Exploring the spatio-temporal clusters of closed restaurants after the COVID-19 outbreak in Seoul using relative risk surfaces". *Sci Rep* 13, 13889 (2023). https://doi.org/10.1038/s41598-023-40937-5
+-   Ben-Said, M. "Spatial point-pattern analysis as a powerful tool in identifying pattern-process relationships in plant ecology: an updated review." *Ecol Process* 10, 56 (2021). https://doi.org/10.1186/s13717-021-00314-4
+-   Ding, X., Zheng, F., Lyu, G. et al. "An exploration of the spatial and temporal factors influencing industrial park vitality using multi-source geospatial data". Sci Rep 15, 29584 (2025). https://doi.org/10.1038/s41598-025-15294-0
 
 ## Peer Learning
 

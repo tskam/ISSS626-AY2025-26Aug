@@ -3078,5 +3078,229 @@
     "title": "Take-home Exercise 1: Geospatial Analytics for Public Good",
     "section": "The Tasks",
     "text": "The Tasks\nThe specific tasks of this hands-on exercise are as follow:\n\nDownload ACRA (Accounting and Corporate Regulatory Authority) Information on Corporate Entities datasets from data.gov.sg.\nSelect at least three business types by referring to 2-digit or 3-digit Singapore Standard Industrial Classification (SSIS) 2020. Prepare and tidy the data by applying appropriate data wrangling method.\nExtract the selected business entities registered between 1st January 2024 to 30th June 2025.\nGeocode the selected records and convert them into simple point features.\nCompute spatial and spatio-temporal KDE of the selected business types.\nPerform second order spatial and spatio-temporal analysis on the selected business types.\nDescribe and discuss the analysis results obtained from Step 5 and 6.\nFor each geovisualisation prepared, write a short report of not more than 150 words describing the spatio-temporal patterns revealed by the geovisualisation and statistical graphics.\nWith reference to the analysis results above, discuss how these findings can be used to support urban land use planning and management. (Not more than 500 words)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#learning-outcome",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#learning-outcome",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Learning Outcome",
+    "text": "Learning Outcome\nBy the end of this hands-on exercise, you will be able to:\n\nPreparing ACRA (Accounting and Corporate Regulatory Authority) Information on Corporate Entities datasets downloaded from data.gov.sg portal for geocoding,\nGeocoding the tidydata by using SLA OneMap API,\nConverting the geocoded transaction data into sf point feature data.frame, and\nWrangling the sf point features to avoid overlapping point features."
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#loading-the-r-package",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#loading-the-r-package",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Loading the R package",
+    "text": "Loading the R package\n\nThe taskThe code\n\n\nWrite a code chunk to install and load tidyverse, sf, tmap and httr into R environment.\n\n\n\n\n\n\nNote\n\n\n\nhttr is an R package specially designed to provide a wrapper for the curl package, customised to the demands of modern web APIs. Key features: Functions for the most important http verbs: GET(), HEAD(), PATCH(), PUT(), DELETE() and POST().\ndplyr is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges. It is a must learned package for modern data scientists and data analysts. Refer to this chapter to learn more about dplyr.\nlubridate is an R package specially designed to handle date and date-time data type. Refer to this chapter to learn more about handle date and datetime with lubridate.\n\n\n\n\n\n\n\n\npacman::p_load(tidyverse, sf, tmap, httr)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#importing-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#importing-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Importing data",
+    "text": "Importing data\nThe code chunk below imports multiple csv files in a specified folder and append them into a single tibble data frame.\n\n\nfolder_path &lt;- \"data/aspatial\"\nfile_list &lt;- list.files(path = folder_path, \n                        pattern = \"^realis.*\\\\.csv$\", \n                        full.names = TRUE)\n\nrealis_data &lt;- file_list %&gt;%\n  map_dfr(read_csv)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#importing-acra-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#importing-acra-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Importing ACRA data",
+    "text": "Importing ACRA data\n\nThe taskThe code\n\n\nWrite a code chunk to perform the followings:\n\nimporting an ACRA data set into RStudio as tibble data frame, and\ndrop the unnecessary fields such as fields with excessive missing values or fields with only single values.\n\n\n\n\n\nfolder_path &lt;- \"data/aspatial/acra\"\nfile_list &lt;- list.files(path = folder_path, \n                        pattern = \"^ACRA*.*\\\\.csv$\", \n                        full.names = TRUE)\n\nacra_data &lt;- file_list %&gt;%\n  map_dfr(read_csv)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#wrangling-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#wrangling-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Wrangling data",
+    "text": "Wrangling data\n\nThe taskThe code\n\n\nWrite a code chunk to perform the followings:\n\nconverting values in Sale Date field from character to numerical date format, and\nextracting resale and condominium transaction records.\n\n\n\n\n\ncondo_resale &lt;- realis_data %&gt;%\n  mutate(`Sale Date` = dmy(`Sale Date`)) %&gt;%\n  filter(`Type of Sale` == \"Resale\" &\n           `Property Type` == \"Condominium\")"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#geocoding",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#geocoding",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Geocoding",
+    "text": "Geocoding\n\nThe taskThe code\n\n\nWrite a function to perform the following tasks:\n\nExtracting unique postal code from the postal_code field of the tidied tibble data frame,\nperforming geocode by submitting the postal codes to SLA OneMap Reverse Geocode API, and\nsave the return results into two data frames namely found (for records that the postal codes are found) and not_found (for record that postal codes are not found).\n\n\n\n\n\npostcodes &lt;- unique(biz_56111$postal_code)\n\nurl &lt;- \"https://onemap.gov.sg/api/common/elastic/search\"\n\nfound &lt;- data.frame()\nnot_found &lt;- data.frame(postcode = character())\n\nfor (pc in postcodes) {\n  query &lt;- list(\n    searchVal = pc,\n    returnGeom = \"Y\",\n    getAddrDetails = \"Y\",\n    pageNum = \"1\"\n  )\n  \n  res &lt;- GET(url, query = query)\n  json &lt;- content(res)\n  \n  if (json$found != 0) {\n    df &lt;- as.data.frame(json$results, stringsAsFactors = FALSE)\n    df$input_postcode &lt;- pc\n    found &lt;- bind_rows(found, df)\n  } else {\n    not_found &lt;- bind_rows(not_found, data.frame(postcode = pc))\n  }\n}"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#tidying-field-names",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#tidying-field-names",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Tidying field names",
+    "text": "Tidying field names\n\n\nfound &lt;- found %&gt;%\n  select(c(6:8)) %&gt;%\n  rename(POSTAL = `results.POSTAL`,\n         XCOORD = `results.X`,\n         YCOORD = `results.Y`)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#converting-to-point-feature-data-frame",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#converting-to-point-feature-data-frame",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Converting to Point Feature Data Frame",
+    "text": "Converting to Point Feature Data Frame\n\nThe tasksJoining tablesConvering to sf\n\n\n\nWrite a code chunk to join condo_resale and found. Name the output condo_resale_geocoded.\nWrite a code chunk to convert condo_resale_geocoded from tibble data frame to sf point feature data frame.\n\n\n\n\n\ncondo_resale_geocoded = left_join(\n  condo_resale, found, \n  by = c('Postal Code' = 'POSTAL'))\n\n\n\n\n\n\ncondo_resale_sf &lt;- st_as_sf(condo_resale_geocoded, \n                            coords = c(\"XCOORD\",\n                                       \"YCOORD\"),\n                            crs=3414)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#cleaning-spatial-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#cleaning-spatial-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Cleaning Spatial Data",
+    "text": "Cleaning Spatial Data\n\nChecking for overlapping point featuresSpatial jittering\n\n\nThe code chunk below is used to check if there are overlapping point features.\n\n\noverlapping_points &lt;- condo_resale_sf %&gt;%\n  mutate(overlap = lengths(st_equals(., .)) &gt; 1)\n\n\n\n\nIn the code code chunk below, st_jitter() of sf package is used to move the point features by 5m to avoid overlapping point features.\n\n\ncondo_resale_sf &lt;- condo_resale_sf %&gt;%\n  st_jitter(amount = 2)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#appending-the-location-information",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#appending-the-location-information",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Appending the location information",
+    "text": "Appending the location information\n\nThe taksThe code\n\n\nWrite a code chunk to append the location information (i.e. x- and y-coordinates) to biz_56111 sf data frame.\n\n\n\n\nbiz_56111 = biz_56111 %&gt;%\n  left_join(found, \n            by = c('postal_code' = 'POSTAL'))"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#tidying-acra-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#tidying-acra-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Tidying ACRA data",
+    "text": "Tidying ACRA data\n\nThe taskThe code\n\n\nWrite a code chunk to perform the followings:\n\nselect the target businesses by using SSIC code,\nderive the year and month fields from registration_incorporation_date field,\ntidy postal code values to ensure avoid 5-digit postal codes by mistake, and\nselect businesses registered in 2025.\n\n\n\n\n\nbiz_56111 &lt;- acra_data %&gt;%\n  select(1:24) %&gt;%\n  filter(primary_ssic_code == 56111) %&gt;%\n  rename(date = registration_incorporation_date) %&gt;%\n  mutate(date = as.Date(date),\n         YEAR = year(date),\n         MONTH_NUM = month(date),\n         MONTH_ABBR = month(date, \n                            label = TRUE, \n                            abbr = TRUE)) %&gt;% \n  mutate(\n    postal_code = str_pad(postal_code, \n    width = 6, side = \"left\", pad = \"0\")) %&gt;%\n           filter(YEAR == 2025)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#visualising-the-distribution",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#visualising-the-distribution",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Visualising the distribution",
+    "text": "Visualising the distribution\n\nThe taskThe code\n\n\nWrite a code chunk to reveal the distribution of newly registered businesses by month.\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = biz_56111,\n       aes(x = MONTH_ABBR)) +\n  geom_bar()"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#converting-into-sf-data-frame",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#converting-into-sf-data-frame",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Converting into SF data frame",
+    "text": "Converting into SF data frame\n\nThe TaskThe code\n\n\nWrite a code chunk to convert biz_56111 tibble data frame into sf data frame.\n\n\n\n\nbiz_56111_sf &lt;- st_as_sf(biz_56111, \n                         coords = c(\"X\",\"Y\"),\n                         crs=3414)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#visualising-the-business",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#visualising-the-business",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Visualising the business",
+    "text": "Visualising the business\n\nThe TaskThe code\n\n\n\n\n\n\n\n\n\n\n\n\ntmap_mode('view')\ntm_shape(biz_56111_sf)+\n  tm_dots()"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#saving-the-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#saving-the-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Saving the data",
+    "text": "Saving the data\n\nThe taskThe code\n\n\nWrite a code chunk to save the tidied data into rds format for future use.\n\n\n\n\nwrite_rds(biz_56111, \"data/rds/biz_56111.rds\")"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#saving-acra-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#saving-acra-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Saving ACRA data",
+    "text": "Saving ACRA data\n\nThe taskThe code\n\n\nWrite a code chunk to save the consolidated ACRA data.\n\n\n\n\nwrite_rds(acra_data,\n          \"data/rds/acra_data.rds\")"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#tidying-the-geocoded-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03.html#tidying-the-geocoded-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Tidying the geocoded data",
+    "text": "Tidying the geocoded data\n\nThe taskThe code\n\n\nThe geocoded data frame (i.e. found) contained many redundant fields. We only need the first ten fields. Write a code chunk to tidy the geocoded data frame.\n\n\n\n\nfound &lt;- found %&gt;%\n  select(1:10)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html",
+    "title": "In-class Exercise 3: Interactive K-function",
+    "section": "",
+    "text": "pacman::p_load(sf, terra, spatstat, \n               tmap, rvest, tidyverse,\n               ggthemes, plotly)\n\n\nchildcare_sf &lt;- read_rds(\"data/rds/childcare_sf.rds\") \n\n\nchildcare_ppp &lt;- as.ppp(childcare_sf) %&gt;%\n  rjitter(retry = TRUE,\n          nsim = 1,\n          drop = TRUE)\n\n\npg &lt;- mpsz_cl %&gt;%\n  filter(PLN_AREA_N == \"PUNGGOL\")\ntm &lt;- mpsz_cl %&gt;%\n  filter(PLN_AREA_N == \"TAMPINES\")\nck &lt;- mpsz_cl %&gt;%\n  filter(PLN_AREA_N == \"CHOA CHU KANG\")\njw &lt;- mpsz_cl %&gt;%\n  filter(PLN_AREA_N == \"JURONG WEST\")\n\n\npg_owin = as.owin(pg)\ntm_owin = as.owin(tm)\nck_owin = as.owin(ck)\njw_owin = as.owin(jw)\n\n\nchildcare_pg_ppp = childcare_ppp[pg_owin]\nchildcare_tm_ppp = childcare_ppp[tm_owin]\nchildcare_ck_ppp = childcare_ppp[ck_owin]\nchildcare_jw_ppp = childcare_ppp[jw_owin]\n\n\nTampines planning area\n\nComputing L-fucntion estimate\n\nL_tm = Lest(childcare_tm_ppp, correction = \"Ripley\")\nplot(L_tm, . -r ~ r, \n     ylab= \"L(d)-r\", xlab = \"d(m)\", \n     xlim=c(0,1000))\n\n\n\n\n\n\n\n\n\nset.seed(1234)\nL_tm.csr &lt;- envelope(childcare_tm_ppp, Lest, \n                     nsim = 99, \n                     rank = 1, \n                     glocal=TRUE)\n\nGenerating 99 simulations of CSR  ...\n1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,\n21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,\n41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,\n61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,\n81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, \n99.\n\nDone.\n\n\nThen, plot the model output by using the code chun below.\n\nplot(L_tm.csr, . - r ~ r, \n     xlab=\"d\", ylab=\"L(d)-r\", xlim=c(0,500))\n\n\n\n\n\n\n\n\n\ntitle &lt;- \"Pairwise Distance: L function\"\n\nLcsr_df &lt;- as.data.frame(L_tm.csr)\n\ncolour=c(\"#0D657D\",\"#ee770d\",\"#D3D3D3\")\ncsr_plot &lt;- ggplot(Lcsr_df, aes(r, obs-r))+\n  # plot observed value\n  geom_line(colour=c(\"#4d4d4d\"))+\n  geom_line(aes(r,theo-r), colour=\"red\", linetype = \"dashed\")+\n  # plot simulation envelopes\n  geom_ribbon(aes(ymin=lo-r,ymax=hi-r),alpha=0.1, colour=c(\"#91bfdb\")) +\n  xlab(\"Distance r (m)\") +\n  ylab(\"L(r)-r\") +\n  geom_rug(data=Lcsr_df[Lcsr_df$obs &gt; Lcsr_df$hi,], sides=\"b\", colour=colour[1])  +\n  geom_rug(data=Lcsr_df[Lcsr_df$obs &lt; Lcsr_df$lo,], sides=\"b\", colour=colour[2]) +\n  geom_rug(data=Lcsr_df[Lcsr_df$obs &gt;= Lcsr_df$lo & Lcsr_df$obs &lt;= Lcsr_df$hi,], sides=\"b\", color=colour[3]) +\n  theme_tufte()+\n  ggtitle(title)\n\ntext1&lt;-\"Significant clustering\"\ntext2&lt;-\"Significant segregation\"\ntext3&lt;-\"Not significant clustering/segregation\"\n\n# the below conditional statement is required to ensure that the labels (text1/2/3) are assigned to the correct traces\nif (nrow(Lcsr_df[Lcsr_df$obs &gt; Lcsr_df$hi,])==0){ \n  if (nrow(Lcsr_df[Lcsr_df$obs &lt; Lcsr_df$lo,])==0){ \n    ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n      style(text = text3, traces = 4) %&gt;%\n      rangeslider() \n  }else if (nrow(Lcsr_df[Lcsr_df$obs &gt;= Lcsr_df$lo & Lcsr_df$obs &lt;= Lcsr_df$hi,])==0){ \n    ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n      style(text = text2, traces = 4) %&gt;%\n      rangeslider() \n  }else {\n    ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n      style(text = text2, traces = 4) %&gt;%\n      style(text = text3, traces = 5) %&gt;%\n      rangeslider() \n  }\n} else if (nrow(Lcsr_df[Lcsr_df$obs &lt; Lcsr_df$lo,])==0){\n  if (nrow(Lcsr_df[Lcsr_df$obs &gt;= Lcsr_df$lo & Lcsr_df$obs &lt;= Lcsr_df$hi,])==0){\n    ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n      style(text = text1, traces = 4) %&gt;%\n      rangeslider() \n  } else{\n    ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n      style(text = text1, traces = 4) %&gt;%\n      style(text = text3, traces = 5) %&gt;%\n      rangeslider()\n  }\n} else{\n  ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n    style(text = text1, traces = 4) %&gt;%\n    style(text = text2, traces = 5) %&gt;%\n    style(text = text3, traces = 6) %&gt;%\n    rangeslider() %&gt;%\n    layout(yaxis = list(range = c(-100, 200)))\n  }"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#learning-outcome",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#learning-outcome",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Learning Outcome",
+    "text": "Learning Outcome\nBy the end of this hands-on exercise, you will be able to:\n\nPreparing ACRA (Accounting and Corporate Regulatory Authority) Information on Corporate Entities datasets downloaded from data.gov.sg portal for geocoding,\nGeocoding the tidydata by using SLA OneMap API,\nConverting the geocoded transaction data into sf point feature data.frame, and\nWrangling the sf point features to avoid overlapping point features."
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#loading-the-r-package",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#loading-the-r-package",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Loading the R package",
+    "text": "Loading the R package\n\nThe taskThe code\n\n\nWrite a code chunk to install and load tidyverse, sf, tmap and httr into R environment.\n\n\n\n\n\n\nNote\n\n\n\nhttr is an R package specially designed to provide a wrapper for the curl package, customised to the demands of modern web APIs. Key features: Functions for the most important http verbs: GET(), HEAD(), PATCH(), PUT(), DELETE() and POST().\ndplyr is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges. It is a must learned package for modern data scientists and data analysts. Refer to this chapter to learn more about dplyr.\nlubridate is an R package specially designed to handle date and date-time data type. Refer to this chapter to learn more about handle date and datetime with lubridate.\n\n\n\n\n\n\n\n\npacman::p_load(tidyverse, sf, tmap, httr)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#importing-acra-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#importing-acra-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Importing ACRA data",
+    "text": "Importing ACRA data\n\nThe taskThe code\n\n\nWrite a code chunk to perform the followings:\n\nimporting an ACRA data set into RStudio as tibble data frame, and\ndrop the unnecessary fields such as fields with excessive missing values or fields with only single values.\n\n\n\n\n\nfolder_path &lt;- \"data/aspatial/acra\"\nfile_list &lt;- list.files(path = folder_path, \n                        pattern = \"^ACRA*.*\\\\.csv$\", \n                        full.names = TRUE)\n\nacra_data &lt;- file_list %&gt;%\n  map_dfr(read_csv)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#saving-acra-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#saving-acra-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Saving ACRA data",
+    "text": "Saving ACRA data\n\nThe taskThe code\n\n\nWrite a code chunk to save the consolidated ACRA data.\n\n\n\n\nwrite_rds(acra_data,\n          \"data/rds/acra_data.rds\")"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#tidying-acra-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#tidying-acra-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Tidying ACRA data",
+    "text": "Tidying ACRA data\n\nThe taskThe code\n\n\nWrite a code chunk to perform the followings:\n\nselect the target businesses by using SSIC code,\nderive the year and month fields from registration_incorporation_date field,\ntidy postal code values to ensure avoid 5-digit postal codes by mistake, and\nselect businesses registered in 2025.\n\n\n\n\n\nbiz_56111 &lt;- acra_data %&gt;%\n  select(1:24) %&gt;%\n  filter(primary_ssic_code == 56111) %&gt;%\n  rename(date = registration_incorporation_date) %&gt;%\n  mutate(date = as.Date(date),\n         YEAR = year(date),\n         MONTH_NUM = month(date),\n         MONTH_ABBR = month(date, \n                            label = TRUE, \n                            abbr = TRUE)) %&gt;% \n  mutate(\n    postal_code = str_pad(postal_code, \n    width = 6, side = \"left\", pad = \"0\")) %&gt;%\n           filter(YEAR == 2025)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#geocoding",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#geocoding",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Geocoding",
+    "text": "Geocoding\n\nThe taskThe code\n\n\nWrite a function to perform the following tasks:\n\nExtracting unique postal code from the postal_code field of the tidied tibble data frame,\nperforming geocode by submitting the postal codes to SLA OneMap Reverse Geocode API, and\nsave the return results into two data frames namely found (for records that the postal codes are found) and not_found (for record that postal codes are not found).\n\n\n\n\n\npostcodes &lt;- unique(biz_56111$postal_code)\n\nurl &lt;- \"https://onemap.gov.sg/api/common/elastic/search\"\n\nfound &lt;- data.frame()\nnot_found &lt;- data.frame(postcode = character())\n\nfor (pc in postcodes) {\n  query &lt;- list(\n    searchVal = pc,\n    returnGeom = \"Y\",\n    getAddrDetails = \"Y\",\n    pageNum = \"1\"\n  )\n  \n  res &lt;- GET(url, query = query)\n  json &lt;- content(res)\n  \n  if (json$found != 0) {\n    df &lt;- as.data.frame(json$results, stringsAsFactors = FALSE)\n    df$input_postcode &lt;- pc\n    found &lt;- bind_rows(found, df)\n  } else {\n    not_found &lt;- bind_rows(not_found, data.frame(postcode = pc))\n  }\n}"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#tidying-the-geocoded-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#tidying-the-geocoded-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Tidying the geocoded data",
+    "text": "Tidying the geocoded data\n\nThe taskThe code\n\n\nThe geocoded data frame (i.e. found) contained many redundant fields. We only need the first ten fields. Write a code chunk to tidy the geocoded data frame.\n\n\n\n\nfound &lt;- found %&gt;%\n  select(1:10)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#appending-the-location-information",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#appending-the-location-information",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Appending the location information",
+    "text": "Appending the location information\n\nThe taksThe code\n\n\nWrite a code chunk to append the location information (i.e. x- and y-coordinates) to biz_56111 sf data frame.\n\n\n\n\nbiz_56111 = biz_56111 %&gt;%\n  left_join(found, \n            by = c('postal_code' = 'POSTAL'))"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#saving-the-data",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#saving-the-data",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Saving the data",
+    "text": "Saving the data\n\nThe taskThe code\n\n\nWrite a code chunk to save the tidied data into rds format for future use.\n\n\n\n\nwrite_rds(biz_56111, \"data/rds/biz_56111.rds\")"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#converting-into-sf-data-frame",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#converting-into-sf-data-frame",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Converting into SF data frame",
+    "text": "Converting into SF data frame\n\nThe TaskThe code\n\n\nWrite a code chunk to convert biz_56111 tibble data frame into sf data frame.\n\n\n\n\nbiz_56111_sf &lt;- st_as_sf(biz_56111, \n                         coords = c(\"X\",\"Y\"),\n                         crs=3414)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#visualising-the-distribution",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#visualising-the-distribution",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Visualising the distribution",
+    "text": "Visualising the distribution\n\nThe taskThe code\n\n\nWrite a code chunk to reveal the distribution of newly registered businesses by month.\n\n\n\n\n\n\n\n\n\n\n\n\n\nggplot(data = biz_56111,\n       aes(x = MONTH_ABBR)) +\n  geom_bar()"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#visualising-the-business",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03b.html#visualising-the-business",
+    "title": "In-class Exercise 3: Working with Open Government Data",
+    "section": "Visualising the business",
+    "text": "Visualising the business\n\nThe TaskThe code\n\n\n\n\n\n\n\n\n\n\n\n\ntmap_mode('view')\ntm_shape(biz_56111_sf)+\n  tm_dots()"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03a.html",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03a.html",
+    "title": "In-class Exercise 3: Interactive K-function",
+    "section": "",
+    "text": "pacman::p_load(sf, terra, spatstat, \n               tmap, rvest, tidyverse,\n               ggthemes, plotly)\nchildcare_sf &lt;- read_rds(\"data/rds/childcare_sf.rds\")\nchildcare_ppp &lt;- as.ppp(childcare_sf) %&gt;%\n  rjitter(retry = TRUE,\n          nsim = 1,\n          drop = TRUE)\npg &lt;- mpsz_cl %&gt;%\n  filter(PLN_AREA_N == \"PUNGGOL\")\ntm &lt;- mpsz_cl %&gt;%\n  filter(PLN_AREA_N == \"TAMPINES\")\nck &lt;- mpsz_cl %&gt;%\n  filter(PLN_AREA_N == \"CHOA CHU KANG\")\njw &lt;- mpsz_cl %&gt;%\n  filter(PLN_AREA_N == \"JURONG WEST\")\npg_owin = as.owin(pg)\ntm_owin = as.owin(tm)\nck_owin = as.owin(ck)\njw_owin = as.owin(jw)\nchildcare_pg_ppp = childcare_ppp[pg_owin]\nchildcare_tm_ppp = childcare_ppp[tm_owin]\nchildcare_ck_ppp = childcare_ppp[ck_owin]\nchildcare_jw_ppp = childcare_ppp[jw_owin]"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03/In-class_Ex03a.html#building-an-interative-plot-with-ggplotly",
+    "href": "In-class_Ex/In-class_Ex03/In-class_Ex03a.html#building-an-interative-plot-with-ggplotly",
+    "title": "In-class Exercise 3: Interactive K-function",
+    "section": "Building an interative plot with ggplotly",
+    "text": "Building an interative plot with ggplotly\nThe previous code chunks uses plot() to visualise the envelopes of the second-order summary statistics (such as L-function). The output is a static plot, therefore it can be difficult to make accurate guesstimates of the statistics and the corresponding distance, r.\nThe below code chunk converts the output (which is in a list form) into a dataframe, which can be used to generate a similar plot using appropriate aesthetic mappings from ggplot package. Finally, ggplotly() is used to convert the ggplot into an interactive plotly visualisation.\nThe codes were referenced from a R-blogger article. Further modifications were made to enhance the user experience by customizing the tooltips for greater clarity and intuition.\n\ntitle &lt;- \"Pairwise Distance: L function\"\n\nLcsr_df &lt;- as.data.frame(L_tm.csr)\n\ncolour=c(\"#0D657D\",\"#ee770d\",\"#D3D3D3\")\ncsr_plot &lt;- ggplot(Lcsr_df, aes(r, obs-r))+\n  # plot observed value\n  geom_line(colour=c(\"#4d4d4d\"))+\n  geom_line(aes(r,theo-r), colour=\"red\", linetype = \"dashed\")+\n  # plot simulation envelopes\n  geom_ribbon(aes(ymin=lo-r,ymax=hi-r),alpha=0.1, colour=c(\"#91bfdb\")) +\n  xlab(\"Distance r (m)\") +\n  ylab(\"L(r)-r\") +\n  geom_rug(data=Lcsr_df[Lcsr_df$obs &gt; Lcsr_df$hi,], sides=\"b\", colour=colour[1])  +\n  geom_rug(data=Lcsr_df[Lcsr_df$obs &lt; Lcsr_df$lo,], sides=\"b\", colour=colour[2]) +\n  geom_rug(data=Lcsr_df[Lcsr_df$obs &gt;= Lcsr_df$lo & Lcsr_df$obs &lt;= Lcsr_df$hi,], sides=\"b\", color=colour[3]) +\n  theme_tufte()+\n  ggtitle(title)\n\ntext1&lt;-\"Significant clustering\"\ntext2&lt;-\"Significant segregation\"\ntext3&lt;-\"Not significant clustering/segregation\"\n\n# the below conditional statement is required to ensure that the labels (text1/2/3) are assigned to the correct traces\nif (nrow(Lcsr_df[Lcsr_df$obs &gt; Lcsr_df$hi,])==0){ \n  if (nrow(Lcsr_df[Lcsr_df$obs &lt; Lcsr_df$lo,])==0){ \n    ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n      style(text = text3, traces = 4) %&gt;%\n      rangeslider() \n  }else if (nrow(Lcsr_df[Lcsr_df$obs &gt;= Lcsr_df$lo & Lcsr_df$obs &lt;= Lcsr_df$hi,])==0){ \n    ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n      style(text = text2, traces = 4) %&gt;%\n      rangeslider() \n  }else {\n    ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n      style(text = text2, traces = 4) %&gt;%\n      style(text = text3, traces = 5) %&gt;%\n      rangeslider() \n  }\n} else if (nrow(Lcsr_df[Lcsr_df$obs &lt; Lcsr_df$lo,])==0){\n  if (nrow(Lcsr_df[Lcsr_df$obs &gt;= Lcsr_df$lo & Lcsr_df$obs &lt;= Lcsr_df$hi,])==0){\n    ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n      style(text = text1, traces = 4) %&gt;%\n      rangeslider() \n  } else{\n    ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n      style(text = text1, traces = 4) %&gt;%\n      style(text = text3, traces = 5) %&gt;%\n      rangeslider()\n  }\n} else{\n  ggplotly(csr_plot, dynamicTicks=T) %&gt;%\n    style(text = text1, traces = 4) %&gt;%\n    style(text = text2, traces = 5) %&gt;%\n    style(text = text3, traces = 6) %&gt;%\n    rangeslider()\n  }\n\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe main features of the above visualisation:\n\nThe observed and theoretical values of L(r)-r (including the upper and lower curves of the simulated envelope) can be found in the tooltip upon hovering the cursor over the geometry layers.\nThe range slider below the plot enables users to pan and zoom in to a specific range of distance.\nThe colored bands at the bottom of the line graph gives a clearer indication of significant or insignificant spatial segregation/ clustering at distance r. Dark green bands indicate significant clustering, orange indicate significant segregation, while grey indicates insignificant clustering/segregation.\nTooltips were added to provide color legend information."
   }
 ]

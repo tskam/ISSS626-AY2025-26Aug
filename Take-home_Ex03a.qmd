@@ -1,0 +1,84 @@
+---
+title: "Take-home Exercise 3a: Modelling Geography of Financial Inclusion with Geographically Weighted Methods"
+date: "October 1, 2024"
+date-modified: "last-modified"
+format: html
+toc: true
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  freeze: auto
+editor: visual
+---
+
+::: callout-important
+This handout provides the context, the task, the expectation and the grading criteria of Take-home Exercise 3. Students must review and understand them before getting started with the take-home exercise.
+:::
+
+## Setting the Scene
+
+According to [Wikipedia](https://en.wikipedia.org/wiki/Financial_inclusion), **financial inclusion** is the availability and equality of opportunities to access financial services.  It refers to processes by which individuals and businesses can access appropriate, affordable, and timely financial products and services - which include banking, loan, equity, and insurance products.  It provides paths to enhance inclusiveness in economic growth by enabling the unbanked population to access the means for savings, investment, and insurance towards improving household income and reducing income inequality. 
+
+## The Task
+
+In this take-home exercise, you are required to build an explanatory model to determine factors affecting financial inclusion by using geographical weighted regression methods.
+
+## The Data
+
+For the purpose of this take-home exercise, either [FinScope Uganda 2023](https://fsduganda.or.ug/data-sets-finscope-uganda-2023-survey-report/) or [FinScope Tanzania 2023](https://www.fsdt.or.tz/finscope/) should be used.  The study should be conducted at the district level.  The district level boundary GIS data can be downloaded from [geoBoundaries](https://www.geoboundaries.org/) portal.  
+
+## Grading Criteria
+
+This exercise will be graded by using the following criteria:
+
+-   **Geospatial Data Wrangling (20 marks):** This is an important aspect of geospatial analytics. You will be assessed on your ability:
+
+    -   to employ appropriate R functions from various R packages specifically designed for modern data science such as readxl, tidyverse (tidyr, dplyr, ggplot2), sf just to mention a few of them, to perform the import and extract the data.
+    -   to clean and derive appropriate variables for meeting the analysis need.
+
+::: callout-warning
+All data are like vast grassland full of land mines. Your job is to clear those mines and not to step on them.
+:::
+
+-   **Geospatial Analysis (30 marks):** In this exercise, you are expected to use the appropriate non-spatial regression method and geographically weighted regression methods learned in Lesson 7 to perform the analysis. You will be assessed on your ability:
+
+    -   to describe the methods used correctly including model diagnostics, and
+    -   to provide accurate interpretation of the analysis results.
+
+-   **Geovisualisation and geocommunication (20 marks):** In this section, you will be assessed on your ability to communicate the results in business friendly visual representations. This course is geospatial centric, hence, it is important for you to demonstrate your competency in using appropriate geovisualisation techniques to reveal and communicate the findings of your analysis.
+
+-   **Reproducibility (15 marks):** This is an important learning outcome of this exercise. You will be assessed on your ability to provide a comprehensive documentation of the analysis procedures in the form of code chunks of Quarto. It is important to note that it is not enough by merely providing the code chunk without any explanation on the purpose and R function(s) used.
+
+-   **Bonus (15 marks):** Demonstrate your ability to employ methods beyond what you had learned in class to gain insights from the data.
+
+## Submission Instructions
+
+-   The write-up of the take-home exercise must be in **Quarto html document** format. You are required to publish the write-up on [**Netlify**](https://www.netlify.com/).
+-   Zip the take-home exercise folder and upload it onto eLearn. If the size of the zip file is beyond the capacity of eLearn, you can upload it on SMU OneDrive and provide the download link on eLearn..
+
+## Due Date
+
+10th November 2024 (Sunday), 11.59pm (midnight).
+
+## Learning from senior
+
+You are advised to review these sample submissions prepared by your seniors.
+
+
+## Q & A
+
+Please submit your questions or queries related to this take-home exercise on Piazza.
+
+## Peer Learning
+
+## Reference
+
+-   [FinScope Tanzania 2023](https://www.afi-global.org/wp-content/uploads/2023/08/FinScopeTanzania-2023-Full-Report-Insights-that-Drive-Innovation.pdf)
+-   [FinScope Uganda 2023](https://fsduganda.or.ug/finscope-uganda-2023-survey/)
+
+### Research articles
+
+-   Kaliba, Aloyce R ; Bishagazi, Kaihula P ; Gongwe, Anne G (2023) **"Financial Inclusion in Tanzania Determinants, Barriers, and Impact"**, *The Journal of developing areas*, Vol.57 (2), pp.65-87. SMU library e-journal.
+-   Jana S. Hamdan, Katharina Lehmann-Uschner & Lukas Menkhoff (2022) **Mobile Money, Financial Inclusion, and Unmet Opportunities: Evidence from Uganda**, The Journal of Development Studies, 58:4, 671-691. SMU library e-journal.
+-   Nguyen, Nhan Thien, et. al. (2021) **"The convergence of financial inclusion across provinces in Vietnam: A novel approach"** *PloS one*, Vol.16 (8). SMU library e-journal.

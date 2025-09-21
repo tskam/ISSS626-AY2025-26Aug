@@ -20,9 +20,34 @@ date-format: "DD MMM YYYY"
 editor: visual 
 ---
 
+## Overview
+
+- **Geographically Weighted Summary Statistics (GWSS)** are methods that calculate summary statistics (like mean, standard deviation, or median) for local areas within a dataset, rather than for the entire dataset globally. 
+
+- Each calculation assigns weights to nearby data points, with closer points receiving higher weights, using a specified kernel function (e.g., bisquare or Gaussian) and bandwidth to define the neighborhood's influence. This allows for the detection of spatial heterogeneity, where statistical relationships and patterns vary across the study area, providing more detailed and localized insights than traditional global statistics.
+
+---
+
+### Application of GWSS
+
+- GWSS are applied to understand how relationships between variables vary across geographic space in fields like environmental science, health, and socio-economics.
+- Applications include analyzing spatial variations in ecological processes, mapping health disparities, assessing the relationship between human activities and landscape changes, and identifying spatial patterns in geochemical anomalies. 
+- By creating local models instead of a single global one, GWSS reveals localized relationships and spatial non-stationarity, leading to more targeted resource management and policy interventions.
+
+---
+
+### Learning Outcome
+
+By the end of this in-class exercise, you will gain hands-on experience in
+
+- extracting and preparing geospatial analytics data by using appropriate fiunctions of **sf**, **readr** and **dplyr** packages. 
+- computing geographically weighted summaries statistics and correlation coefficients by using `gwss()` of **GWmodel** package,
+- extracting, creating and integrating SDF data frame of gwss object with hunan sf data frame by using appropriate **dplyr** functions, and 
+- visualising the output of `gwss()` using appropriate choropleth mapping functions of **tmap** package. 
+
 ## Loading the package
 
-In this in-class exercise, sf, spdep, tmap, tidyverse, knitr and GWmodel will be used.
+To complete this exercise, sf, spdep, tmap, tidyverse, knitr and GWmodel will be used.
 
 :::: panel-tabset
 ### DIY

@@ -209,9 +209,36 @@ Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems(Practice)
 
   <p class="date">21 Sep 2025</p>
 </section>
+<section id="overview" class="slide level2">
+<h2>Overview</h2>
+<ul>
+<li><p><strong>Geographically Weighted Summary Statistics (GWSS)</strong> are methods that calculate summary statistics (like mean, standard deviation, or median) for local areas within a dataset, rather than for the entire dataset globally.</p></li>
+<li><p>Each calculation assigns weights to nearby data points, with closer points receiving higher weights, using a specified kernel function (e.g., bisquare or Gaussian) and bandwidth to define the neighborhood’s influence. This allows for the detection of spatial heterogeneity, where statistical relationships and patterns vary across the study area, providing more detailed and localized insights than traditional global statistics.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="application-of-gwss">Application of GWSS</h3>
+<ul>
+<li>GWSS are applied to understand how relationships between variables vary across geographic space in fields like environmental science, health, and socio-economics.</li>
+<li>Applications include analyzing spatial variations in ecological processes, mapping health disparities, assessing the relationship between human activities and landscape changes, and identifying spatial patterns in geochemical anomalies.</li>
+<li>By creating local models instead of a single global one, GWSS reveals localized relationships and spatial non-stationarity, leading to more targeted resource management and policy interventions.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="learning-outcome">Learning Outcome</h3>
+<p>By the end of this in-class exercise, you will gain hands-on experience in</p>
+<ul>
+<li>extracting and preparing geospatial analytics data by using appropriate fiunctions of <strong>sf</strong>, <strong>readr</strong> and <strong>dplyr</strong> packages.</li>
+<li>computing geographically weighted summaries statistics and correlation coefficients by using <code>gwss()</code> of <strong>GWmodel</strong> package,</li>
+<li>extracting, creating and integrating SDF data frame of gwss object with hunan sf data frame by using appropriate <strong>dplyr</strong> functions, and</li>
+<li>visualising the output of <code>gwss()</code> using appropriate choropleth mapping functions of <strong>tmap</strong> package.</li>
+</ul>
+</section>
 <section id="loading-the-package" class="slide level2">
 <h2>Loading the package</h2>
-<p>In this in-class exercise, sf, spdep, tmap, tidyverse, knitr and GWmodel will be used.</p>
+<p>To complete this exercise, sf, spdep, tmap, tidyverse, knitr and GWmodel will be used.</p>
 <div class="panel-tabset">
 <ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">DIY</a></li><li><a href="#tabset-1-2">The code</a></li></ul>
 <div class="tab-content">

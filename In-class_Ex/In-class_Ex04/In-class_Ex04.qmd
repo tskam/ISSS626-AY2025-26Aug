@@ -12,7 +12,7 @@ format:
     slide-number: true
     show-slide-number: all
 execute: 
-  eval: false
+  eval: true
   echo: true
   warning: false
   freeze: true
@@ -86,7 +86,7 @@ hunan_sf <- left_join(hunan_sf, hunan2012) %>%
 Using the steps you learned from Hands-on Exercise 5, prepare a choropleth map showing the geographic distribution of GDPPC of Hunan Province.
 
 ```{r}
-#| fig-width: 12
+#| fig-width: 16
 #| fig-height: 6
 #| echo: false
 basemap <- tm_shape(hunan_sf) +
@@ -127,7 +127,7 @@ hunan_sp <- hunan_sf %>%
 ```
 :::
 
-## Geographically Weighted Summary Statistics with adaptive bandwidth
+## Geographically Weighted Summary Statistics (GSWW) with adaptive bandwidth
 
 ### Determine adaptive bandwidth
 
@@ -161,9 +161,11 @@ bw_AIC
 :::
 :::::
 
-## Geographically Weighted Summary Statistics with adaptive bandwidth
+---
 
 ### Computing geographically wieghted summary statistics
+
+The code chunk below computes geographically weighted summary statistics by using `gwss()` of GWmodel package.  The analysis is performed using adaptive distance weighted.  The distance is derived using AIC method and the kernel method used id bisquare.
 
 ::: {style="font-size: 1.50em"}
 ```{r}
@@ -171,16 +173,25 @@ gwstat <- gwss(data = hunan_sp,
                vars = "GDPPC",
                bw = bw_AIC,
                kernel = "bisquare",
+               quantile = TRUE,
                adaptive = TRUE,
                longlat = T)
 ```
 :::
 
-## Geographically Weighted Summary Statistics with adaptive bandwidth
+::: callout-note
+gwss support five kernel methods, namely gaussian, exponential, bisquare, tricube, and boxcar.  Repeat the code chunk above with different kernel methods and compare their results visually.
+:::
+
+---
 
 ### Preparing the output data
 
-Code chunk below is used to extract **SDF** data table from **gwss** object output from `gwss()`. It will be converted into data.frame by using `as.data.frame()`.
+::: callout-important
+`gwss()` with **quantile** argument computes eight local summary statistics, namely: local means, local standard deviations, local variance, local skew, local coefficients of variation, local Median, local medians, local interquartile ranges, and local quantile imbalances.  They are output in **SDF** data frame.
+:::
+
+Code chunk below is used to extract **SDF** data table from **gwss** object output from `gwss()` for subsequent geovilisation. It will be converted into data.frame by using `as.data.frame()`.
 
 ::: {style="font-size: 1.50em"}
 ```{r}
@@ -196,7 +207,9 @@ hunan_gstat <- cbind(hunan_sf, gwstat_df)
 ```
 :::
 
-## Visualising geographically weighted summary statistics
+---
+
+### Visualising geographically weighted summary statistics
 
 :::::: panel-tabset
 ### The Geographically Weighted Mean
@@ -207,16 +220,17 @@ hunan_gstat <- cbind(hunan_sf, gwstat_df)
 #| fig-height: 9
 #| echo: false
 tm_shape(hunan_gstat) +
-  tm_fill("GDPPC_LM",
-          n = 5,
-          style = "quantile") +
-  tm_borders(alpha = 0.5) +
+  tm_polygons(fill = "GDPPC_LM",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 5,
+                values = "brewer.blues"),
+              fill.legend = tm_legend(
+                title = "local Mean")) +
+  tm_borders(fill_alpha = 0.5) +
   tm_layout(main.title = "Distribution of geographically wieghted mean",
             main.title.position = "center",
             main.title.size = 2.0,
-            legend.text.size = 1.2,
-            legend.height = 1.50, 
-            legend.width = 1.50,
             frame = TRUE)
 ```
 :::
@@ -224,27 +238,28 @@ tm_shape(hunan_gstat) +
 
 ### The code
 
-::: {style="font-size: 1.50em"}
+::: {style="font-size: 1.30em"}
 ```{r}
 #| eval: false
 tm_shape(hunan_gstat) +
-  tm_fill("GDPPC_LM",
-          n = 5,
-          style = "quantile") +
-  tm_borders(alpha = 0.5) +
+  tm_polygons(fill = "GDPPC_LM",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 5,
+                values = "brewer.blues"),
+              fill.legend = tm_legend(
+                title = "local Mean")) +
+  tm_borders(fill_alpha = 0.5) +
   tm_layout(main.title = "Distribution of geographically wieghted mean",
             main.title.position = "center",
             main.title.size = 2.0,
-            legend.text.size = 1.2,
-            legend.height = 1.50, 
-            legend.width = 1.50,
             frame = TRUE)
 ```
 :::
 ::::::
 
-## Geographically Weighted Summary Statistics with fixed
 
+## GWSS with Fixed Bandwidth
 ### Determine fixed bandwidth
 
 ::::: panel-tabset
@@ -277,9 +292,9 @@ bw_AIC
 :::
 :::::
 
-## Geographically Weighted Summary Statistics with fixed
+---
 
-### Computing adaptive bandwidth
+### Computing adaptive bandwidth GWSS
 
 ::: {style="font-size: 1.50em"}
 ```{r}
@@ -288,11 +303,12 @@ gwstat <- gwss(data = hunan_sp,
                bw = bw_AIC,
                kernel = "bisquare",
                adaptive = FALSE,
+               quantile = FALSE,
                longlat = T)
 ```
 :::
 
-## Geographically Weighted Summary Statistics with fixed bandwidth
+---
 
 ### Preparing the output data
 
@@ -312,7 +328,7 @@ hunan_gstat <- cbind(hunan_sf, gwstat_df)
 ```
 :::
 
-## Geographically Weighted Summary Statistics with fixed
+---
 
 ### Visualising geographically weighted summary statistics
 
@@ -325,16 +341,17 @@ hunan_gstat <- cbind(hunan_sf, gwstat_df)
 #| fig-height: 9
 #| echo: false
 tm_shape(hunan_gstat) +
-  tm_fill("GDPPC_LM",
-          n = 5,
-          style = "quantile") +
-  tm_borders(alpha = 0.5) +
+  tm_polygons(fill = "GDPPC_LM",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 5,
+                values = "brewer.blues"),
+              fill.legend = tm_legend(
+                title = "local Mean")) +
+  tm_borders(fill_alpha = 0.5) +
   tm_layout(main.title = "Distribution of geographically wieghted mean",
             main.title.position = "center",
             main.title.size = 2.0,
-            legend.text.size = 1.2,
-            legend.height = 1.50, 
-            legend.width = 1.50,
             frame = TRUE)
 ```
 :::
@@ -342,26 +359,27 @@ tm_shape(hunan_gstat) +
 
 ### The code
 
-::: {style="font-size: 1.50em"}
+::: {style="font-size: 1.30em"}
 ```{r}
 #| eval: false
 tm_shape(hunan_gstat) +
-  tm_fill("GDPPC_LM",
-          n = 5,
-          style = "quantile") +
-  tm_borders(alpha = 0.5) +
+  tm_polygons(fill = "GDPPC_LM",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 5,
+                values = "brewer.blues"),
+              fill.legend = tm_legend(
+                title = "local Mean")) +
+  tm_borders(fill_alpha = 0.5) +
   tm_layout(main.title = "Distribution of geographically wieghted mean",
             main.title.position = "center",
             main.title.size = 2.0,
-            legend.text.size = 1.2,
-            legend.height = 1.50, 
-            legend.width = 1.50,
             frame = TRUE)
 ```
 :::
 ::::::
 
-## Geographically Weighted Correlation with Adaptive Bandwidth
+## Geographically Weighted Correlation
 
 Business question: Is there any relationship between GDP per capita and Gross Industry Output?
 
@@ -405,9 +423,9 @@ ggscatterstats(
 :::
 ::::
 
-## Geographically Weighted Correlation with Adaptive Bandwidth
+---
 
-Geospatial analytics solution
+### Geospatial analytics solution
 
 ::::::: panel-tabset
 ### Determine the bandwidth
@@ -456,7 +474,9 @@ hunan_Corr <- cbind(hunan_sf, gwstat_df)
 :::
 :::::::
 
-## Visualising Local Correlation
+---
+
+### Visualising Local Correlation
 
 :::: panel-tabset
 ### Local Correlation Coefficient
@@ -464,18 +484,18 @@ hunan_Corr <- cbind(hunan_sf, gwstat_df)
 ```{r}
 #| fig-height: 7
 #| echo: false
-tm_shape(hunan_Corr) +
-  tm_fill("gwCorr",
-          n = 5,
-          style = "quantile") +
-  tm_borders(alpha = 0.5) +
-  tm_layout(main.title = "Local Correlation Coefficient",
-            main.title.position = "center",
-            main.title.size = 2.0,
-            legend.text.size = 1.2,
-            legend.height = 1.50, 
-            legend.width = 1.50,
-            frame = TRUE)
+tm_shape(hunan_Corr) + 
+tm_polygons(fill = "gwCorr",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 5,
+                values = "brewer.blues"),
+                fill.legend = tm_legend(
+                title = "local Correlation Coefficient")) +
+  tm_borders(fill_alpha = 0.5) + 
+  tm_title("Local Correlation Coefficient", 
+  size = 2.0) +
+  tm_layout(frame = TRUE)
 ```
 
 ### Local Spearman Coefficient
@@ -484,17 +504,17 @@ tm_shape(hunan_Corr) +
 #| fig-height: 7
 #| echo: false
 tm_shape(hunan_Corr) +
-  tm_fill("gwSpearman",
-          n = 5,
-          style = "quantile") +
-  tm_borders(alpha = 0.5) +
-  tm_layout(main.title = "Local Spearman Rho",
-            main.title.position = "center",
-            main.title.size = 2.0,
-            legend.text.size = 1.2,
-            legend.height = 1.50, 
-            legend.width = 1.50,
-            frame = TRUE)
+  tm_polygons(fill = "gwSpearman",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 5,
+                values = "brewer.blues"),
+              fill.legend = tm_legend(
+                title = "local Spearman Rho")) +
+  tm_borders(fill_alpha = 0.5) +
+  tm_title("Local Spearman Rho", 
+  size = 2.0) +
+  tm_layout(frame = TRUE)
 ```
 
 ### The code
@@ -503,17 +523,17 @@ tm_shape(hunan_Corr) +
 ```{r}
 #| eval: false
 tm_shape(hunan_Corr) +
-  tm_fill("gwSpearman",
-          n = 5,
-          style = "quantile") +
-  tm_borders(alpha = 0.5) +
-  tm_layout(main.title = "Local Spearman Rho",
-            main.title.position = "center",
-            main.title.size = 2.0,
-            legend.text.size = 1.2,
-            legend.height = 1.50, 
-            legend.width = 1.50,
-            frame = TRUE)
+  tm_polygons(fill = "gwSpearman",
+              fill.scale = tm_scale_intervals(
+                style = "quantile",
+                n = 5,
+                values = "brewer.blues"),
+              fill.legend = tm_legend(
+                title = "local Spearman Rho")) +
+  tm_borders(fill_alpha = 0.5) +
+  tm_title("Local Spearman Rho", 
+  size = 2.0) +
+  tm_layout(frame = TRUE)
 ```
 :::
 ::::

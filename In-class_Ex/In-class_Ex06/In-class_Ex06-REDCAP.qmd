@@ -38,8 +38,10 @@ rownames(shan_ict) <- NULL
 ```
 
 ```{r}
-schc_clusters <- schc(6, queen_w, shan_ict, "complete",
-                      cpu_threads = 1)
+schc_clusters <- schc(k=6, 
+                      w=queen_w, 
+                      df=shan_ict, 
+                      method="complete")
 schc_clusters
 ```
 

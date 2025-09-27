@@ -1011,15 +1011,15 @@
     "objectID": "In-class_Ex/In-class_Ex09/In-class_Ex09.html#getting-started",
     "href": "In-class_Ex/In-class_Ex09/In-class_Ex09.html#getting-started",
     "title": "In-class Exercise 9: Geography of Accessibility",
-    "section": "Getting Started",
-    "text": "Getting Started\n\n\npacman::p_load(SpatialAcc, sf, tidyverse, \n               tmap, ggstatsplot)"
+    "section": "",
+    "text": "pacman::p_load(SpatialAcc, sf, tidyverse, \n               tmap, ggstatsplot)"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex09/In-class_Ex09.html#count-number-of-points-within-a-distance",
     "href": "In-class_Ex/In-class_Ex09/In-class_Ex09.html#count-number-of-points-within-a-distance",
     "title": "In-class Exercise 9: Geography of Accessibility",
     "section": "Count Number of Points within a Distance",
-    "text": "Count Number of Points within a Distance\n\nThe taskDIYThe codeBufferingVisualisingCounting points\n\n\n\nTo count number of point features (i.e. CHAS clinics) within 1km of another point features (i.e. eldercare centre).\n\n\n\n\n\n\n\nNote\n\n\nTo complete this section of the in-class exercise, you need to download both the CHAS Clinics and Eldercare Services data sets from data.gov.sg portal. The in-class exercise assumes explicitly the downloaded data sets are saved in rawdata sub-folder of In-class_Ex09 folder. Remember to unzip the file if necessary.\n\n\n\n\n\n\nDownload ELDERCARE shapefile and CHAS kml file from data.gov.sg\nUsing the steps your learned in Hands-on Exercise 1, import ELDERCARE shapefile and CHAS kml file into R\n\n\n\nELDERCARE is in shapefile format, the code chunk below will be used:\n\n\neldercare &lt;- st_read(dsn = \"data/rawdata\",\n                     layer = \"ELDERCARE\") %&gt;%\n  st_transform(crs = 3414)\n\n\nThe code chunk below is used to import kml file.\n\n\nCHAS &lt;- st_read(\"data/rawdata/CHASClinics.kml\") %&gt;%\n  st_transform(crs = 3414)\n\n\n\n\nNext, st_buffer() of sf package is used to create a buffer of 1km around each eldercare features\n\n\nbuffer_1km &lt;- st_buffer(eldercare, \n                        dist = 1000)\n\n\n\n\n\n\nThe code chunk below is used to plot the newly created buffers and the CHAS clinics.\n\n\ntmap_mode(\"view\")\ntm_shape(buffer_1km) +\n  tm_polygons() +\ntm_shape(CHAS) +\n  tm_dots()\n\n\n\n\n\n\n\n\n\nLastly, the code chunk below is used to count the number of CHAS clinics with 1km of each eldercare centre.\n\n\nbuffer_1km$pts_count &lt;- lengths(\n  st_intersects(buffer_1km, CHAS))"
+    "text": "Count Number of Points within a Distance\n\nThe taskDIYThe codeBufferingVisualisingCounting points\n\n\n\nTo count number of point features (i.e. CHAS clinics) within 1km of another point features (i.e. eldercare centre).\n\n\n\n\n\n\n\nNote\n\n\n\nTo complete this section of the in-class exercise, you need to download both the CHAS Clinics and Eldercare Services data sets from data.gov.sg portal. The in-class exercise assumes explicitly the downloaded data sets are saved in rawdata sub-folder of In-class_Ex09 folder. Remember to unzip the file if necessary.\n\n\n\n\n\nDownload ELDERCARE shapefile and CHAS kml file from data.gov.sg\nUsing the steps your learned in Hands-on Exercise 1, import ELDERCARE shapefile and CHAS kml file into R\n\n\n\nELDERCARE is in shapefile format, the code chunk below will be used:\n\n\neldercare &lt;- st_read(dsn = \"data/rawdata\",\n                     layer = \"ELDERCARE\") %&gt;%\n  st_transform(crs = 3414)\n\n\nThe code chunk below is used to import kml file.\n\n\nCHAS &lt;- st_read(\"data/rawdata/CHASClinics.kml\") %&gt;%\n  st_transform(crs = 3414)\n\n\n\n\nNext, st_buffer() of sf package is used to create a buffer of 1km around each eldercare features\n\n\nbuffer_1km &lt;- st_buffer(eldercare, \n                        dist = 1000)\n\n\n\n\n\n\nThe code chunk below is used to plot the newly created buffers and the CHAS clinics.\n\n\ntmap_mode(\"view\")\ntm_shape(buffer_1km) +\n  tm_polygons() +\ntm_shape(CHAS) +\n  tm_dots()\n\n\n\n\n\n\n\n\n\n\nLastly, the code chunk below is used to count the number of CHAS clinics with 1km of each eldercare centre.\n\n\nbuffer_1km$pts_count &lt;- lengths(\n  st_intersects(buffer_1km, CHAS))"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex09/In-class_Ex09.html#importing-data",
@@ -1040,7 +1040,7 @@
     "href": "In-class_Ex/In-class_Ex09/In-class_Ex09.html#computing-handsens-accessibility",
     "title": "In-class Exercise 9: Geography of Accessibility",
     "section": "Computing Handsen’s Accessibility",
-    "text": "Computing Handsen’s Accessibility\n\nThe base codeTidy the outputCombine code chunk\n\n\n\n\nacc_Hansen &lt;- data.frame(ac(hexagons$demand,\n                            eldercare$capacity,\n                            distmat_km, \n                            #d0 = 50,\n                            power = 2, \n                            family = \"Hansen\"))\n\n\n\n\n\n\ncolnames(acc_Hansen) &lt;- \"accHansen\"\n\nacc_Hansen &lt;- as_tibble(acc_Hansen)\n\nhexagon_Hansen &lt;- bind_cols(hexagons, acc_Hansen)\n\n\n\n\n\n\nacc_Hansen &lt;- data.frame(ac(hexagons$demand,\n                            eldercare$capacity,\n                            distmat_km, \n                            #d0 = 50,\n                            power = 0.5, \n                            family = \"Hansen\"))\n\ncolnames(acc_Hansen) &lt;- \"accHansen\"\nacc_Hansen &lt;- as_tibble(acc_Hansen)\nhexagon_Hansen &lt;- bind_cols(hexagons, acc_Hansen)"
+    "text": "Computing Handsen’s Accessibility\n\nThe base codeTidy the outputCombine code chunk\n\n\n\n\nacc_Hansen &lt;- data.frame(ac(hexagons$demand,\n                            eldercare$capacity,\n                            distmat_km, \n                            #d0 = 50,\n                            power = 2, \n                            family = \"Hansen\"))\n\n\n\n\n\n\ncolnames(acc_Hansen) &lt;- \"accHansen\"\n\nacc_Hansen &lt;- as_tibble(acc_Hansen)\n\nhexagon_Hansen &lt;- bind_cols(hexagons, acc_Hansen)\n\n\n\n\n\n\nacc_Hansen &lt;- data.frame(ac(hexagons$demand,\n                            eldercare$capacity,\n                            distmat_km, \n                            #d0 = 50,\n                            power = 0.5, \n                            family = \"Hansen\"))\n\ncolnames(acc_Hansen) &lt;- \"accHansen\"\nacc_Hansen &lt;- as_tibble(acc_Hansen)\nhexagon_Hansen &lt;- bind_cols(hexagons, acc_Hansen)\n\n\n\n\n\n\n\nVisualising Accessibility\n\nThe codeThe plot\n\n\n\n\nmapex &lt;- st_bbox(hexagons)\n\ntmap_mode(\"plot\")\ntm_shape(hexagon_Hansen,\n         bbox = mapex) + \n  tm_fill(col = \"accHansen\",\n          n = 10,\n          style = \"quantile\",\n          border.col = \"black\",\n          border.lwd = 1) +\ntm_shape(eldercare) +\n  tm_symbols(size = 0.1) +\n  tm_layout(main.title = \"Accessibility to eldercare: Hansen method\",\n            main.title.position = \"center\",\n            main.title.size = 2,\n            legend.outside = FALSE,\n            legend.height = 0.45, \n            legend.width = 3.0,\n            legend.format = list(digits = 6),\n            legend.position = c(\"right\", \"top\"),\n            frame = TRUE) +\n  tm_compass(type=\"8star\", size = 2) +\n  tm_scale_bar(width = 0.15) +\n  tm_grid(lwd = 0.1, alpha = 0.5)\n\n\n\n\n\n\n\n\n\n\n\nStatistical graphic\n\nThe codeThe plot\n\n\n\n\nhexagon_Hansen &lt;- st_join(hexagon_Hansen, mpsz, \n                          join = st_intersects)\n\n\n\n\nggbetweenstats(\n  data = hexagon_Hansen,\n  x = REGION_N,\n  y = accHansen,\n  type = \"p\")"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex07/In-class_Ex07-gwr.html",
@@ -1747,7 +1747,7 @@
     "href": "In-class_Ex/In-class_Ex05/In-class_Ex05-GLSA.html#the-data",
     "title": "In-class Exercise 5: Global and Local Measures of Spatial Autocorrelation: sfdep methods",
     "section": "The Data",
-    "text": "The Data\nFor the purpose of this in-class exercise, the Hunan data sets will be used. There are two data sets in this use case, they are:\n\nHunan, a geospatial data set in ESRI shapefile format, and\nHunan_2012, an attribute data set in csv format.\n\n\nDo It Yourself!The code\n\n\nUsing the steps you learned in previous lesson, import Hunan shapefile into R environment as an sf data frame.\n\n\n\n\nhunan &lt;- st_read(dsn = \"data/geospatial\", \n                 layer = \"Hunan\")"
+    "text": "The Data\nFor the purpose of this in-class exercise, the Hunan data sets will be used. There are two data sets in this use case, they are:\n\nHunan, a geospatial data set in ESRI shapefile format, and\nHunan_2012, an attribute data set in csv format.\n\n\nDo It Yourself!The code\n\n\nUsing the steps you learned in previous lesson, import Hunan shapefile into R environment as an sf data frame.\n\n\n\n\nhunan &lt;- st_read(dsn = \"data/geospatial\", \n                 layer = \"Hunan\")\n\nReading layer `Hunan' from data source \n  `C:\\tskam\\ISSS626-AY2025-26Aug\\In-class_Ex\\In-class_Ex05\\data\\geospatial' \n  using driver `ESRI Shapefile'\nSimple feature collection with 88 features and 7 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: 108.7831 ymin: 24.6342 xmax: 114.2544 ymax: 30.12812\nGeodetic CRS:  WGS 84"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex05/In-class_Ex05-GLSA.html#importing-attribute-table",
@@ -1768,7 +1768,7 @@
     "href": "In-class_Ex/In-class_Ex05/In-class_Ex05-GLSA.html#plotting-a-choropleth-map",
     "title": "In-class Exercise 5: Global and Local Measures of Spatial Autocorrelation: sfdep methods",
     "section": "Plotting a choropleth map",
-    "text": "Plotting a choropleth map\n\nDo It Yourself!The plotThe code\n\n\nUsing the steps you learned in previous lesson, plot a choropleth map showing the distribution of GDPPC of Hunan Province.\n\n\n\n\n\n\n\ntmap_mode(\"plot\")\ntm_shape(hunan_GDPPC) +\n  tm_fill(\"GDPPC\", \n          style = \"quantile\", \n          palette = \"Blues\",\n          title = \"GDPPC\") +\n  tm_layout(main.title = \"Distribution of GDP per capita by county, Hunan Province\",\n            main.title.position = \"center\",\n            main.title.size = 1.2,\n            legend.height = 0.45, \n            legend.width = 0.35,\n            frame = TRUE) +\n  tm_borders(alpha = 0.5) +\n  tm_compass(type=\"8star\", size = 2) +\n  tm_scale_bar() +\n  tm_grid(alpha =0.2)"
+    "text": "Plotting a choropleth map\n\nDo It Yourself!The plotThe code\n\n\nUsing the steps you learned in previous lesson, plot a choropleth map showing the distribution of GDPPC of Hunan Province.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntmap_mode(\"plot\")\ntm_shape(hunan_GDPPC) +\n  tm_fill(\"GDPPC\", \n          style = \"quantile\", \n          palette = \"Blues\",\n          title = \"GDPPC\") +\n  tm_layout(main.title = \"Distribution of GDP per capita by county, Hunan Province\",\n            main.title.position = \"center\",\n            main.title.size = 1.2,\n            legend.height = 0.45, \n            legend.width = 0.35,\n            frame = TRUE) +\n  tm_borders(alpha = 0.5) +\n  tm_compass(type=\"8star\", size = 2) +\n  tm_scale_bar() +\n  tm_grid(alpha =0.2)"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex05/In-class_Ex05-GLSA.html#global-measures-of-spatial-association",
@@ -1802,43 +1802,43 @@
     "objectID": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#getting-started",
     "href": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#getting-started",
     "title": "In-class Exercise 8: Supplement to Hands-on Exercise 8",
-    "section": "Getting Started",
-    "text": "Getting Started\nInstalling and Loading R packages\n\n\npacman::p_load(sf, spdep, GWmodel, SpatialML, \n               tmap, rsample, Metrics, tidyverse,\n               knitr, kableExtra)"
+    "section": "",
+    "text": "pacman::p_load(sf, spdep, GWmodel, SpatialML, \n               tmap, rsample, Metrics, tidyverse,\n               knitr, kableExtra)"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#preparing-data",
     "href": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#preparing-data",
     "title": "In-class Exercise 8: Supplement to Hands-on Exercise 8",
     "section": "Preparing Data",
-    "text": "Preparing Data\n\nData importData SamplingChecking of overlapping pointSpatial jitter\n\n\n\n\nmdata &lt;- read_rds(\"data/rds/mdata.rds\")\n\n\n\n\nCalibrating predictive models are computational intensive, especially random forest method is used. For quick prototyping, a 10% sample will be selected at random from the data by using the code chunk below.\n\n\nset.seed(1234)\nHDB_sample &lt;- mdata %&gt;%\n  sample_n(1500)\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\nWhen using GWmodel to calibrate explanatory or predictive models, it is very important to ensure that there are no overlapping point features\n\n\n\nThe code chunk below is used to check if there are overlapping point features.\n\n\noverlapping_points &lt;- HDB_sample %&gt;%\n  mutate(overlap = lengths(st_equals(., .)) &gt; 1)\n\n\n\n\nIn the code code chunk below, st_jitter() of sf package is used to move the point features by 5m to avoid overlapping point features.\n\n\nHDB_sample &lt;- HDB_sample %&gt;%\n  st_jitter(amount = 5)"
+    "text": "Preparing Data\n\nData importData SamplingChecking of overlapping pointSpatial jitter\n\n\n\n\nmdata &lt;- read_rds(\"data/rds/mdata.rds\")\n\n\n\n\nCalibrating predictive models are computational intensive, especially random forest method is used. For quick prototyping, a 10% sample will be selected at random from the data by using the code chunk below.\n\n\nset.seed(1234)\nHDB_sample &lt;- mdata %&gt;%\n  sample_n(1500)\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nWhen using GWmodel to calibrate explanatory or predictive models, it is very important to ensure that there are no overlapping point features\n\n\nThe code chunk below is used to check if there are overlapping point features.\n\n\noverlapping_points &lt;- HDB_sample %&gt;%\n  mutate(overlap = lengths(st_equals(., .)) &gt; 1)\n\n\n\n\nIn the code code chunk below, st_jitter() of sf package is used to move the point features by 5m to avoid overlapping point features.\n\n\nHDB_sample &lt;- HDB_sample %&gt;%\n  st_jitter(amount = 5)"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#data-sampling-1",
     "href": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#data-sampling-1",
     "title": "In-class Exercise 8: Supplement to Hands-on Exercise 8",
     "section": "Data Sampling",
-    "text": "Data Sampling\nThe entire data are split into training and test data sets with 65% and 35% respectively by using initial_split() of rsample package. rsample is one of the package of tigymodels.\n\n\nset.seed(1234)\nresale_split &lt;- initial_split(HDB_sample, \n                              prop = 6.67/10,)\ntrain_data &lt;- training(resale_split)\ntest_data &lt;- testing(resale_split)"
+    "text": "Data Sampling\nThe entire data are split into training and test data sets with 65% and 35% respectively by using initial_split() of rsample package. rsample is one of the package of tigymodels.\n\n\nset.seed(1234)\nresale_split &lt;- initial_split(HDB_sample, \n                              prop = 6.67/10,)\ntrain_data &lt;- training(resale_split)\ntest_data &lt;- testing(resale_split)\n\n\n\n\nMulticollinearity check\n\nThe codeThe plot\n\n\nIn order to avoid multicollineariy. In the code chunk below, ggcorrmat() of ggstatsplot is used to plot a correlation matrix to check if there are pairs of highly correlated independent variables.\n\n\nmdata_nogeo &lt;- mdata %&gt;%\n  st_drop_geometry()\nggstatsplot::ggcorrmat(mdata_nogeo[, 2:17])"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#building-a-non-spatial-multiple-linear-regression",
     "href": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#building-a-non-spatial-multiple-linear-regression",
     "title": "In-class Exercise 8: Supplement to Hands-on Exercise 8",
     "section": "Building a non-spatial multiple linear regression",
-    "text": "Building a non-spatial multiple linear regression\n\nThe reportThe code chunk\n\n\n\n\n\n\n\nprice_mlr &lt;- lm(resale_price ~ floor_area_sqm +\n                  storey_order + remaining_lease_mths +\n                  PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER +\n                  PROX_MRT + PROX_PARK + PROX_MALL + \n                  PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +\n                  WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +\n                  WITHIN_1KM_PRISCH,\n                data=train_data)\nolsrr::ols_regress(price_mlr)"
+    "text": "Building a non-spatial multiple linear regression\n\nThe reportThe code chunk\n\n\n\n\n\n\n\nprice_mlr &lt;- lm(resale_price ~ floor_area_sqm +\n                  storey_order + remaining_lease_mths +\n                  PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER +\n                  PROX_MRT + PROX_PARK + PROX_MALL + \n                  PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +\n                  WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +\n                  WITHIN_1KM_PRISCH,\n                data=train_data)\nolsrr::ols_regress(price_mlr)\n\n\n\n\n\n\n\nMulticollinearity check with VIF\n\nVIFPlotting VIF\n\n\n\n\nvif &lt;- performance::check_collinearity(price_mlr)\nkable(vif, \n      caption = \"Variance Inflation Factor (VIF) Results\") %&gt;%\n  kable_styling(font_size = 18) \n\n\n\n\n\n\nplot(vif) +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#predictive-modelling-with-gwr",
     "href": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#predictive-modelling-with-gwr",
     "title": "In-class Exercise 8: Supplement to Hands-on Exercise 8",
     "section": "Predictive Modelling with gwr",
-    "text": "Predictive Modelling with gwr\nComputing adaptive bandwidth\n\nThe codeThe output\n\n\n\n\nbw_adaptive &lt;- bw.gwr(resale_price ~ floor_area_sqm +\n                  storey_order + remaining_lease_mths +\n                  PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER +\n                  PROX_MRT + PROX_PARK + PROX_MALL + \n                  PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +\n                  WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +\n                  WITHIN_1KM_PRISCH,\n                  data=train_data,\n                  approach=\"CV\",\n                  kernel=\"gaussian\",\n                  adaptive=TRUE,\n                  longlat=FALSE)\n\n\n\n\n\n\nbw_adaptive"
+    "text": "Predictive Modelling with gwr\n\nComputing adaptive bandwidth\n\nThe codeThe output\n\n\n\n\nbw_adaptive &lt;- bw.gwr(resale_price ~ floor_area_sqm +\n                  storey_order + remaining_lease_mths +\n                  PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER +\n                  PROX_MRT + PROX_PARK + PROX_MALL + \n                  PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +\n                  WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +\n                  WITHIN_1KM_PRISCH,\n                  data=train_data,\n                  approach=\"CV\",\n                  kernel=\"gaussian\",\n                  adaptive=TRUE,\n                  longlat=FALSE)\n\n\n\n\n\n\nbw_adaptive\n\n\n\n\n\n\n\n\nModel calibration\n\nThe codeThe output\n\n\n\n\ngwr_adaptive &lt;- gwr.basic(formula = resale_price ~\n                            floor_area_sqm + storey_order +\n                            remaining_lease_mths + PROX_CBD + \n                            PROX_ELDERLYCARE + PROX_HAWKER +\n                            PROX_MRT + PROX_PARK + PROX_MALL + \n                            PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +\n                            WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +\n                            WITHIN_1KM_PRISCH,\n                          data=train_data,\n                          bw=bw_adaptive, \n                          kernel = 'gaussian', \n                          adaptive=TRUE,\n                          longlat = FALSE)"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#predictive-modelling-with-mlr",
     "href": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#predictive-modelling-with-mlr",
     "title": "In-class Exercise 8: Supplement to Hands-on Exercise 8",
     "section": "Predictive Modelling with MLR",
-    "text": "Predictive Modelling with MLR\nPredicting with test data\n\nTest data bwPredicting\n\n\n\n\ngwr_bw_test_adaptive &lt;- bw.gwr(resale_price ~ floor_area_sqm +\n                  storey_order + remaining_lease_mths +\n                  PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER +\n                  PROX_MRT + PROX_PARK + PROX_MALL + \n                  PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +\n                  WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +\n                  WITHIN_1KM_PRISCH,\n                  data=test_data,\n                  approach=\"CV\",\n                  kernel=\"gaussian\",\n                  adaptive=TRUE,\n                  longlat=FALSE)\n\n\n\n\n\n\ngwr_pred &lt;- gwr.predict(formula = resale_price ~\n                          floor_area_sqm + storey_order +\n                          remaining_lease_mths + PROX_CBD + \n                          PROX_ELDERLYCARE + PROX_HAWKER + \n                          PROX_MRT + PROX_PARK + PROX_MALL + \n                          PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +\n                          WITHIN_350M_CHILDCARE + WITHIN_350M_BUS + \n                          WITHIN_1KM_PRISCH, \n                        data=train_data, \n                        predictdata = test_data, \n                        bw=bw_adaptive, \n                        kernel = 'gaussian', \n                        adaptive=TRUE, \n                        longlat = FALSE)"
+    "text": "Predictive Modelling with MLR\n\nPredicting with test data\n\nTest data bwPredicting\n\n\n\n\ngwr_bw_test_adaptive &lt;- bw.gwr(resale_price ~ floor_area_sqm +\n                  storey_order + remaining_lease_mths +\n                  PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER +\n                  PROX_MRT + PROX_PARK + PROX_MALL + \n                  PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +\n                  WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +\n                  WITHIN_1KM_PRISCH,\n                  data=test_data,\n                  approach=\"CV\",\n                  kernel=\"gaussian\",\n                  adaptive=TRUE,\n                  longlat=FALSE)\n\n\n\n\n\n\ngwr_pred &lt;- gwr.predict(formula = resale_price ~\n                          floor_area_sqm + storey_order +\n                          remaining_lease_mths + PROX_CBD + \n                          PROX_ELDERLYCARE + PROX_HAWKER + \n                          PROX_MRT + PROX_PARK + PROX_MALL + \n                          PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +\n                          WITHIN_350M_CHILDCARE + WITHIN_350M_BUS + \n                          WITHIN_1KM_PRISCH, \n                        data=train_data, \n                        predictdata = test_data, \n                        bw=bw_adaptive, \n                        kernel = 'gaussian', \n                        adaptive=TRUE, \n                        longlat = FALSE)"
   },
   {
     "objectID": "In-class_Ex/In-class_Ex08/In-class_Ex08.html#predictive-modelling-rf-method",
@@ -2847,5 +2847,82 @@
     "title": "In-class Exercise 4: Geographically Weighted Summary Statistics - gwModel methods",
     "section": "Overview",
     "text": "Overview\n\nGeographically Weighted Summary Statistics (GWSS) are methods that calculate summary statistics (like mean, standard deviation, or median) for local areas within a dataset, rather than for the entire dataset globally.\nEach calculation assigns weights to nearby data points, with closer points receiving higher weights, using a specified kernel function (e.g., bisquare or Gaussian) and bandwidth to define the neighborhood’s influence. This allows for the detection of spatial heterogeneity, where statistical relationships and patterns vary across the study area, providing more detailed and localized insights than traditional global statistics."
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#overview",
+    "href": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#overview",
+    "title": "In-class Exercise 5: Emerging Hot Spot Analysis",
+    "section": "Overview",
+    "text": "Overview\n\n\n\nEmerging Hot Spot Analysis (EHSA) is a spatio-temporal analysis method for revealing and describing how hot spot and cold spot areas evolve over time. The analysis consist of four main steps:\n\nBuilding a space-time cube,\nCalculating Getis-Ord local Gi* statistic for each bin by using an FDR correction,\nEvaluating these hot and cold spot trends by using Mann-Kendall trend test,\nCategorising each study area location by referring to the resultant trend z-score and p-value for each location with data, and with the hot spot z-score and p-value for each bin.\n\n\n\n\n\n\n\nImportant\n\n\nIt is highly recommended to read Emerging Hot Spot Analysis before you continue the exercise."
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#getting-started",
+    "href": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#getting-started",
+    "title": "In-class Exercise 5: Emerging Hot Spot Analysis",
+    "section": "Getting started",
+    "text": "Getting started\nInstalling and Loading the R Packages\n\n\nAs usual, p_load() of pacman package will be used to check if the necessary packages have been installed in R, if yes, load the packages on R environment.\nSix R packages are need for this in-class exercise, they are: sf, sfdep, tmap, plotly, and tidyverse.\n\n\npacman::p_load(sf, sfdep, tmap, \n               plotly, tidyverse, \n               Kendall)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#the-data",
+    "href": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#the-data",
+    "title": "In-class Exercise 5: Emerging Hot Spot Analysis",
+    "section": "The Data",
+    "text": "The Data\n\n\nFor the purpose of this in-class exercise, the Hunan data sets will be used. There are two data sets in this use case, they are:\n\nHunan, a geospatial data set in ESRI shapefile format, and\nHunan_GDPPC, an attribute data set in csv format.\n\nBefore getting started, reveal the content of Hunan_GDPPC.csv by using Notepad and MS Excel."
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#creating-a-time-series-cube",
+    "href": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#creating-a-time-series-cube",
+    "title": "In-class Exercise 5: Emerging Hot Spot Analysis",
+    "section": "Creating a Time Series Cube",
+    "text": "Creating a Time Series Cube\nBefore getting started, students must read this article to learn the basic concept of spatio-temporal cube and its implementation in sfdep package.\nIn the code chunk below, spacetime() of sfdep ised used to create an spatio-temporal cube.\n\n\nGDPPC_st &lt;- spacetime(GDPPC, hunan,\n                      .loc_col = \"County\",\n                      .time_col = \"Year\")\n\n\nNext, is_spacetime_cube() of sfdep package will be used to verify if GDPPC_st is indeed an space-time cube object.\n\n\nis_spacetime_cube(GDPPC_st)\n\n[1] TRUE\n\n\n\nThe TRUE return confirms that GDPPC_st object is indeed an time-space cube."
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#computing-gi",
+    "href": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#computing-gi",
+    "title": "In-class Exercise 5: Emerging Hot Spot Analysis",
+    "section": "Computing Gi*",
+    "text": "Computing Gi*\nNext, we will compute the local Gi* statistics.\nDeriving the spatial weights\n\n\nThe code chunk below will be used to identify neighbors and to derive an inverse distance weights.\n\n\nGDPPC_nb &lt;- GDPPC_st %&gt;%\n  activate(\"geometry\") %&gt;%\n  mutate(nb = include_self(\n    st_contiguity(geometry)),\n    wt = st_inverse_distance(nb, \n                             geometry, \n                             scale = 1,\n                             alpha = 1),\n    .before = 1) %&gt;%\n  set_nbs(\"nb\") %&gt;%\n  set_wts(\"wt\")\n\n\n\n\n\n\n\n\n\nThings to learn from the code chunk above\n\n\n\nactivate() of dplyr package is used to activate the geometry context\nmutate() of dplyr package is used to create two new columns nb and wt.\nThen we will activate the data context again and copy over the nb and wt columns to each time-slice using set_nbs() and set_wts()\n\nrow order is very important so do not rearrange the observations after using set_nbs() or set_wts().\n\n\n\n\n\n\nNote that this dataset now has neighbors and weights for each time-slice."
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#computing-gi-1",
+    "href": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#computing-gi-1",
+    "title": "In-class Exercise 5: Emerging Hot Spot Analysis",
+    "section": "Computing Gi*",
+    "text": "Computing Gi*\n\n\nWe can use these new columns to manually calculate the local Gi* for each location. We can do this by grouping by Year and using local_gstar_perm() of sfdep package. After which, we use unnest() to unnest gi_star column of the newly created gi_starts data.frame.\n\n\ngi_stars &lt;- GDPPC_nb %&gt;% \n  group_by(Year) %&gt;% \n  mutate(gi_star = local_gstar_perm(\n    GDPPC, nb, wt)) %&gt;% \n  tidyr::unnest(gi_star)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#mann-kendall-test",
+    "href": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#mann-kendall-test",
+    "title": "In-class Exercise 5: Emerging Hot Spot Analysis",
+    "section": "Mann-Kendall Test",
+    "text": "Mann-Kendall Test\nA monotonic series or function is one that only increases (or decreases) and never changes direction. So long as the function either stays flat or continues to increase, it is monotonic.\nH0: No monotonic trend\nH1: Monotonic trend is present\nInterpretation\n\nReject the null-hypothesis null if the p-value is smaller than the alpha value (i.e. 1-confident level)\nTau ranges between -1 and 1 where:\n\n-1 is a perfectly decreasing series, and\n1 is a perfectly increasing series.\n\n\n\n\n\n\n\n\nImportant\n\n\nYou are encouraged to read Mann-Kendall Test For Monotonic Trend to learn more about the concepts and method of Mann-Kendall test.."
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#performing-emerging-hotspot-analysis",
+    "href": "In-class_Ex/In-class_Ex05/In-class_Ex05-EHSA.html#performing-emerging-hotspot-analysis",
+    "title": "In-class Exercise 5: Emerging Hot Spot Analysis",
+    "section": "Performing Emerging Hotspot Analysis",
+    "text": "Performing Emerging Hotspot Analysis\n\n\nLastly, we will perform EHSA analysis by using emerging_hotspot_analysis() of sfdep package. It takes a spacetime object x (i.e. GDPPC_st), and the quoted name of the variable of interest (i.e. GDPPC) for .var argument. The k argument is used to specify the number of time lags which is set to 1 by default. Lastly, nsim map numbers of simulation to be performed.\n\n\n\nehsa &lt;- emerging_hotspot_analysis(\n  x = GDPPC_st, \n  .var = \"GDPPC\", \n  k = 1, \n  nsim = 99\n)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex09/In-class_Ex09.html",
+    "href": "In-class_Ex/In-class_Ex09/In-class_Ex09.html",
+    "title": "In-class Exercise 9: Geography of Accessibility",
+    "section": "",
+    "text": "pacman::p_load(SpatialAcc, sf, tidyverse, \n               tmap, ggstatsplot)"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex06/In-class_Ex06-REDCAP.html",
+    "href": "In-class_Ex/In-class_Ex06/In-class_Ex06-REDCAP.html",
+    "title": "In-class Exercise 6: Spatially Constrained Clustering: REDCAP methods",
+    "section": "",
+    "text": "pacman::p_load(sf, rgeoda, tidyverse)\n\n\nshan_ict &lt;- read_rds(\"data/rds/shan_ict.rds\")\nshan_sf &lt;- read_rds(\"data/rds/shan_sf.rds\")\n\n\nqueen_w &lt;- queen_weights(shan_sf)\nsummary(queen_w)\n\n\nrownames(shan_ict) &lt;- NULL\n\n\nschc_clusters &lt;- schc(6, queen_w, shan_ict, \"complete\",\n                      cpu_threads = 1)\nschc_clusters\n\n\nshan_clusters &lt;- skater(6, queen_w, shan_ict,\n                        cpu_threads = 1)\n\n\nredcap_clusters &lt;- redcap(6, queen_w, shan_ict,\n                          \"firstorder-singlelinkage\")\nredcap_clusters"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex08/In-class_Ex08.html",
+    "href": "In-class_Ex/In-class_Ex08/In-class_Ex08.html",
+    "title": "In-class Exercise 8: Supplement to Hands-on Exercise 8",
+    "section": "",
+    "text": "pacman::p_load(sf, spdep, GWmodel, SpatialML, \n               tmap, rsample, Metrics, tidyverse,\n               knitr, kableExtra)"
   }
 ]

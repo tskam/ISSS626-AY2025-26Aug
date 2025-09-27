@@ -1,5 +1,5 @@
 ---
-title: "In-class Exercise 6: Emerging Hot Spot Analysis"
+title: "In-class Exercise 5: Emerging Hot Spot Analysis"
 author: "Dr. Kam Tin Seong<br/>Assoc. Professor of Information Systems(Practice)"
 institute: "School of Computing and Information Systems,<br/>Singapore Management University"
 date: "last-modified"
@@ -12,7 +12,7 @@ format:
     slide-number: true
     show-slide-number: all
 execute: 
-  eval: false
+  eval: true
   echo: true
   warning: false
   freeze: true
@@ -50,7 +50,7 @@ It is highly recommended to read [Emerging Hot Spot Analysis](https://sfdep.josi
 :::: {.column width="50%"}
 As usual, `p_load()` of **pacman** package will be used to check if the necessary packages have been installed in R, if yes, load the packages on R environment.
 
-Five R packages are need for this in-class exercise, they are: sf, sfdep, tmap, plotly, and tidyverse.
+Six R packages are need for this in-class exercise, they are: sf, sfdep, tmap, plotly, and tidyverse.
 
 ::: {style="font-size: 1.5em"}
 ```{r}
@@ -84,7 +84,8 @@ In the code chunk below, `st_read()` of **sf** package is used to import *Hunan*
 ::: {style="font-size: 1.5em"}
 ```{r}
 hunan <- st_read(dsn = "data/geospatial", 
-                 layer = "Hunan")
+                 layer = "Hunan") %>% 
+  st_transform(crs = 32650)
 ```
 :::
 
@@ -405,10 +406,10 @@ ehsa_sig <- hunan_ehsa  %>%
 tmap_mode("plot")
 tm_shape(hunan_ehsa) +
   tm_polygons() +
-  tm_borders(alpha = 0.5) +
+  tm_borders(fill_alpha = 0.5) +
 tm_shape(ehsa_sig) +
   tm_fill("classification") + 
-  tm_borders(alpha = 0.4)
+  tm_borders(fill_alpha = 0.4)
 ```
 :::
 :::::::
@@ -422,10 +423,10 @@ ehsa_sig <- hunan_ehsa  %>%
 tmap_mode("plot")
 tm_shape(hunan_ehsa) +
   tm_polygons() +
-  tm_borders(alpha = 0.5) +
+  tm_borders(fill_alpha = 0.5) +
 tm_shape(ehsa_sig) +
   tm_fill("classification") + 
-  tm_borders(alpha = 0.4)
+  tm_borders(fill_alpha = 0.4)
 ```
 :::
 :::::::::

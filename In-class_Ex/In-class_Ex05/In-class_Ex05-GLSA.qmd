@@ -12,7 +12,7 @@ format:
     slide-number: true
     show-slide-number: all
 execute: 
-  eval: false
+  eval: true
   echo: true
   warning: false
   freeze: true

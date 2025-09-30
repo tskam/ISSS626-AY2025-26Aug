@@ -24,7 +24,6 @@ pacman::p_load(sf, rgeoda, tidyverse)
 ```
 
 ```{r}
-shan_ict <- read_rds("data/rds/shan_ict.rds")
 shan_sf <- read_rds("data/rds/shan_sf.rds")
 ```
 
@@ -34,25 +33,37 @@ summary(queen_w)
 ```
 
 ```{r}
-rownames(shan_ict) <- NULL
+shan_data <- shan_sf |>
+  select(16:20) |>
+  st_drop_geometry()
 ```
 
 ```{r}
-schc_clusters <- schc(k=6, 
+schc_clusters <- schc(k=5, 
                       w=queen_w, 
-                      df=shan_ict, 
-                      method="complete")
-schc_clusters
+                      df=shan_data, 
+                      method="ward")
 ```
 
 ```{r}
-shan_clusters <- skater(6, queen_w, shan_ict,
+skater_clusters <- skater(k=6, 
+                        w=queen_w, 
+                        df=shan_data,
                         cpu_threads = 1)
-
 ```
 
 ```{r}
-redcap_clusters <- redcap(6, queen_w, shan_ict,
-                          "firstorder-singlelinkage")
-redcap_clusters
+redcap_clusters <- redcap(k=6, 
+                          w=queen_w, 
+                          df=shan_data,
+                          method="firstorder-singlelinkage")
+```
+
+```{r}
+clusters <- as.data.frame(schc_clusters$Clusters)
+```
+
+```{r}
+shan_sf <- shan_sf |>
+  cbind(clusters)
 ```

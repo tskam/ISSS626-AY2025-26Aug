@@ -1,6 +1,6 @@
 ---
-title: "Take-home Exercise 2: Discovering impacts of COVID-19 on Thailand tourism economy at the province level using spatial and spatio-temporal statistics"
-date: "January 8, 2023"
+title: "Take-home Exercise 2: "
+date: "September 30, 2025"
 date-modified: "last-modified"
 format: html
 toc: true
@@ -18,67 +18,147 @@ This handout provides the context, the task, the expectation and the grading cri
 
 ## Setting the Scene
 
-Tourism is one of Thailand's largest industries, accounting for some 20% of the gross domestic product (GDP). In 2019, Thailand earned 90 billion US\$ from domestic and international tourism, but the COVID-19 pandemic caused revenues to crash to 24 billion US\$ in 2020.
+Urban mobility refers to the movement of people and goods within and between cities, spanning all modes of transport such as walking, cycling, public transit, private vehicles, and freight. Driven by factors like population growth and climate change, urban mobility planning aims to create smart, efficient, and sustainable networks that reduce congestion and emissions while enhancing quality of life and economic vitality. Key developments include the rise of shared mobility services, autonomous vehicles, and integrated smart systems that prioritize user experience, safety, and inclusivity in urban environments.
 
-Figure below shows the total revenue receipt from tourism sector from January 2019 until Feb 2023. The figure reveals that the revenue from tourism industry have been recovered gradually since September 2021.
+As city-wide urban infrastructures such as buses, taxis, mass rapid transit, public utilities and roads become digital, the datasets obtained can be used as a framework for tracking movement patterns through space and time. This is especially true with the widespread deployment of pervasive computing technologies such as smart cards, GPS, and RFID in vehicles. For example, routes and ridership data were collected with the use of smart cards and Global Positioning System (GPS) devices available on the public buses. These large-scale movement datasets often contain patterns that reveal important characteristics of urban mobility. Identifying and analyzing such patterns can deepen our understanding of human mobility, supporting better urban management. For both public and private transport providers, these insights enable more informed decisions and improved service planning.
 
-![](img/th_ex2_img1.png)
-
-However, it is important to note that the tourism economy of Thailand are not evenly distributed. Figure below reveals that the tourism economy of Thailand are mainly focus on five provinces, namely Bangkok, Phuket, Chiang Mai, Sukhothai and Phetchaburi.
-
-![](img/th_ex2_img2.png)
+In real-world practices, the use of these massive locational aware data to gain better urban mobility patterns and trends, however, tend to be confined to simple tracking and mapping with GIS applications. This is mainly because conventional GIS tools lack robust geospatial statistics capabilities for analyzing and modeling spatial and spatio-temporal data.
 
 ## Objectives
 
-As a curious geospatial analytics green horn, you are interested to discover:
+Local Measures of Spatial Autocorrelation (LMSA) are geospatial statisticals for identifying specific locations within a map that show significant spatial clustering of similar or dissimilar values. Unlike global measures that summarize the entire map, LMSA tests each location individually to determine whether its value, in relation to its neighbors, is more clustered or dispersed than expected by chance. This helps to find hotspots (high values clustered together), coldspots (low values clustered together), and outliers (high values surrounded by low values, or vice versa) by calculating a value for each individual location. The popular LMSA statistics include Local Moran’s I, Local Geary’s C, and the Getis-Ord Gi\*.
 
--   if the key indicators of tourism economy of Thailand are independent from space and space and time.\
--   If the tourism economy is indeed spatial and spatio-temporal dependent, then, you would like to detect where are the clusters and outliers, and the emerging hot spot/cold spot areas.
+Emerging Hot Spot Analysis (EHSA) is a spatio-temporal technique that complements LMSA when working with spatio-temporal data. It uses a space-time cube to identify and categorize clusters of high or low values (hot and cold spots) over time. By combining local Gi\* statistics to find clusters with the Mann-Kendall test to detect trends, EHSA categorizes locations into trends such as "new," "intensifying," "diminishing," or "sporadic" hot and cold spots, revealing how spatial patterns are evolving.
+
+Both LMSA and EHSA hold tremendous potential to address complex urban mobility problems facing society. Using *Passenger Volume by Origin Destination Bus Stops* provided by [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.html), in this exercise, you will explore two important geospatial statistical approaches for analysing urban mobility:
+
+### Local Measures of Spatial Autocorrelation (LMSA)
+
+-   Learn how to apply Local Moran’s I, Local Geary’s C, and the Getis-Ord Gi\* statistic.
+-   Understand how LMSA differs from global measures by testing each location individually, revealing where values cluster together or stand apart.
+-   Identify hotspots (areas of high values clustered together), cold spots (areas of low values clustered together), and spatial outliers (unusual locations where high values are surrounded by low values, or vice versa).
+
+### Emerging Hot Spot Analysis (EHSA)
+
+-   Learn how EHSA complements LMSA by adding a temporal dimension.
+-   Use the space-time cube framework to track how hot and cold spots evolve over time.
+-   Apply EHSA categories (e.g., “new,” “intensifying,” “diminishing,” “sporadic”) to understand whether travel patterns are strengthening, weakening, or shifting.
+
+In conclusion, the objectives of this hands-on exercises are:
+
+-   To discover how bus mobility patterns differ across neighborhoods, providing deeper insights than global summary measures.
+-   To detect emerging patterns in urban mobility, helping planners anticipate commuting demands and design more responsive bus services and policies.
 
 ## The Task
 
 The specific tasks of this take-home exercise are as follows:
 
--   Using appropriate function of **sf** and **tidyverse**, preparing the following geospatial data layer:
-    -   a study area layer in sf polygon features. It must be at [province level](https://en.wikipedia.org/wiki/Provinces_of_Thailand) (including Bangkok) of Thailand.
-    -   a tourism economy indicators layer within the study area in sf polygon features.
-    -   a derived tourism economy indicator layer in [**spacetime s3 class of sfdep**](https://sfdep.josiahparry.com/articles/spacetime-s3). Keep the time series at **month and year levels**.
--   Using the extracted data, perform global spatial autocorrelation analysis by using [sfdep methods](https://is415-gaa-tskam.netlify.app/in-class_ex/in-class_ex05/in-class_ex05-glsa).
--   Using the extracted data, perform local spatial autocorrelation analysis by using [sfdep methods](https://r4gdsa.netlify.app/chap10.html).
--   Using the extracted data, perform emerging hotspot analysis by using [sfdep methods](https://is415-gaa-tskam.netlify.app/in-class_ex/in-class_ex05/in-class_ex05-ehsa).
--   Describe the spatial patterns revealed by the analysis above.
+### Geospatial Data Science
+
+-   Derive an analytical hexagon data of 375m (this distance is the perpendicular distance between the centre of the hexagon and its edges) to represent the [traffic analysis zone (TAZ)](https://tmg.utoronto.ca/files/Reports/Traffic-Zone-Guidance_March-2021_Final.pdf).
+
+-   With reference to the time intervals provided in the table below, compute the passenger trips generated by origin at the hexagon level.
+
+    | Peak hour period       | Bus tap on time |
+    |------------------------|-----------------|
+    | Weekday morning peak   | 6am to 9am      |
+    | Weekday afternoon peak | 5pm to 8pm      |
+    | Weekend/holiday        | 11am to 8pm     |
+
+-   Display the geographical distribution of the passenger trips by using appropriate geovisualisation methods,
+
+-   Describe the spatial patterns revealed by the geovisualisation (not more than 200 words per visual).
+
+### Local Measures of Spatial Association (LMSA) Analysis
+
+-   Compute LMSA statistic of the passengers trips generate by origin at hexagon level.
+-   Display the LMSA maps of the passengers trips generate by origin at hexagon level. The maps should only display the significant (i.e. p-value \< 0.05)\
+-   With reference to the analysis results, draw statistical conclusions (not more than 200 words per visual).
+
+### Emerging Hot Spot Analysis(EHSA)
+
+With reference to the passenger trips by origin at the hexagon level for the three time intervals given above:
+
+-   Perform Mann-Kendall Test by using the spatio-temporal local Gi\* values,
+-   Prepared EHSA maps of the Gi\* values of the passenger trips by origin at the hexagon level. The maps should only display the significant (i.e. p-value \< 0.05).\
+-   With reference to the EHSA maps and data visualisation prepared, describe the spatial patterns reveled. (not more than 250 words per cluster).
 
 ## The Data
 
-For the purpose of this take-home exercise, two data sets shall be used, they are:
+### Apstial data
 
--   [Thailand Domestic Tourism Statistics](https://www.kaggle.com/datasets/thaweewatboy/thailand-domestic-tourism-statistics) at Kaggle. You are required to use **version 2** of the data set.
+For the purpose of this take-home exercise, the latest month *Passenger Volume by Origin Destination Bus Stops* downloaded from [LTA DataMall](https://datamall.lta.gov.sg/content/datamall/en.html) will be used.
 
--   [Thailand - Subnational Administrative Boundaries](https://data.humdata.org/dataset/cod-ab-tha?) at HDX. You are required to use the province boundary data set.
+### Geospatial data
+
+Two geospatial data will be used in this study, they are:
+
+-   *Bus Stop Location* from LTA DataMall. It provides information about all the bus stops currently being serviced by buses, including the bus stop code (identifier) and location coordinates.
+-   *Master Plan 2019 Subzone Boundary (No Sea)* from [Singapore's open data portal](data.gov.sg).
 
 ## Grading Criteria
 
 This exercise will be graded by using the following criteria:
 
--   **Geospatial Data Wrangling (20 marks):** This is an important aspect of geospatial analytics. You will be assessed on your ability:
+-   **Geospatial Data Wrangling (20 marks):** You will be assessed on your ability to prepare analysis-ready data, including:
 
-    -   to employ appropriate R functions from various R packages specifically designed for modern data science such as readxl, tidyverse (tidyr, dplyr, ggplot2), sf just to mention a few of them, to perform the import and extract the data.
-    -   to clean and derive appropriate variables for meeting the analysis need.
+    -   Correct import of tabular and geospatial data from multiple sources.
+    -   Appropriate data cleaning, transformation, and derivation of new variables.
+    -   Correct use of coordinate reference systems and spatial joins.
+    -   Use of tidy, efficient R code and clear explanations of purpose.
 
 ::: callout-warning
 All data are like vast grassland full of land mines. Your job is to clear those mines and not to step on them.
 :::
 
--   **Geospatial Analysis (30 marks):** In this exercise, you are expected to use the appropriate global and local measures of spatial autocorrelation, and emerging hot spot analysis methods in class to perform the analysis. You will be assessed on your ability:
+-   **Geospatial Analysis (30 marks):** You will be assessed on your ability to apply spatial statistical methods rigorously, including:
 
-    -   to describe the methods used correctly, and
-    -   to provide accurate interpretation of the analysis results.
+    -   Appropriate choice and correct application of spatial statistics (e.g., Local Moran’s I, Getis-Ord Gi\*, EHSA).
+    -   Accurate interpretation of outputs, with evidence-based reasoning.
+    -   Demonstrating awareness of assumptions, spatial scales, and limitations of chosen methods.
+    -   Clear articulation of how results address the stated objectives.
 
--   **Geovisualisation and geocommunication (20 marks):** In this section, you will be assessed on your ability to communicate the results in business friendly visual representations. This course is geospatial centric, hence, it is important for you to demonstrate your competency in using appropriate geovisualisation techniques to reveal and communicate the findings of your analysis.
+-   **Geovisualisation and geocommunication (20 marks):** You will be assessed on your ability to communicate results through effective geovisualisation, including:
 
--   **Reproducibility (15 marks):** This is an important learning outcome of this exercise. You will be assessed on your ability to provide a comprehensive documentation of the analysis procedures in the form of code chunks of Quarto. It is important to note that it is not enough by merely providing the code chunk without any explanation on the purpose and R function(s) used.
+    -   Use of clear, accurate, and professional map designs (appropriate symbology, color scales, legends, labels).
+    -   Selection of visual forms that best reveal spatial patterns and support decision-making.
+    -   Concise and insightful written commentary (≤200 words per visual) that explains findings in plain, non-technical language.
+    -   Effective integration of visuals into a coherent narrative.
 
--   **Bonus (15 marks):** Demonstrate your ability to employ methods beyond what you had learned in class to gain insights from the data.
+-   **Reproducibility (15 marks):** You will be assessed on your ability to ensure that your analysis is fully reproducible, including:
+
+    -   Use of Quarto with code chunks that run end-to-end without modification.
+    -   Clear explanation of purpose for each step (not just code, but why it is done).
+    -   Logical organisation of workflow, with modular structure and meaningful sectioning.
+    -   Proper documentation of R packages, data sources, and dependencies to allow replication by others.
+
+-   **Bonus (15 marks):** Optional extension tasks reward advanced technical work and reproducible outputs. Students may attempt any combination of the tasks listed below; points add up to a maximum of 15 marks. To be eligible for bonus, the core submission must pass the minimum standard for reproducibility (see Reproducibility criterion). All bonus work must be submitted with the main deliverable (no separate late submissions for bonus).
+
+Tasks & points:
+
+-   Advanced method or validation — 5 marks.
+-   Interactive delivery (Shiny/Quarto) — 5 marks.
+-   Extra data fusion / validation — 5 marks.
+
+## Grading Rubric
+
++----------------------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| Criterion                              | Weight     | Good and above (\>= 80 marks)                                                                                                                                 | Satisfactory (≈70–79 marks)                                                                                          | Needs Improvement (≤70%)                                                                                            |
++========================================+============+===============================================================================================================================================================+======================================================================================================================+=====================================================================================================================+
+| **Geospatial Data Wrangling**          | 20         | Data imported, cleaned, and transformed flawlessly; CRS and joins handled correctly; derived variables accurate; workflow efficient and well-documented.      | Data mostly correct but with minor issues (occasional CRS mismatch, redundant steps, unclear documentation).         | Major errors (misaligned joins, wrong CRS, missing variables); workflow unclear or non-reproducible.                |
++----------------------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| **Geospatial Analysis**                | 30         | Spatial methods (LMSA, EHSA) correctly chosen, implemented, and justified; results accurately interpreted; assumptions/limitations acknowledged.              | Methods applied with minor errors or incomplete justification; interpretations generally correct but lack depth.     | Methods misapplied or inappropriate; results incorrectly interpreted; assumptions/limitations ignored.              |
++----------------------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| **Geovisualisation & Communication**   | 20         | Maps/visuals clear, professional, and effective (symbology, legends, colors appropriate); commentary concise, insightful, and business-friendly (≤200 words). | Maps mostly correct but lacking polish (unclear legends, distracting design); commentary descriptive not analytical. | Maps poorly designed or misleading; missing legends/labels; commentary absent, too brief, or irrelevant.            |
++----------------------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| **Reproducibility**                    | 15         | Quarto runs end-to-end without modification; code modular and organized; explanations clear; packages, data, dependencies documented; workflow replicable.    | Quarto runs with minor edits/warnings; explanations uneven; workflow somewhat fragmented; limited documentation.     | Document does not run or produces errors; code without explanations; workflow disorganized; reproducibility absent. |
++----------------------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| **Bonus: Advanced Work (per subtask)** | 15         | • *Advanced Method/Validation* – correct, well-explained.                                                                                                     | • Method applied but shallow.                                                                                        | • Not attempted or incorrect.                                                                                       |
+|                                        |            |                                                                                                                                                               |                                                                                                                      |                                                                                                                     |
+|                                        |            | • *Interactive Delivery* – working Shiny/Quarto with README.                                                                                                  | • Interactive works but incomplete instructions.                                                                     | • Little/no added insight.                                                                                          |
+|                                        |            |                                                                                                                                                               |                                                                                                                      |                                                                                                                     |
+|                                        |            | • *Extra Data Fusion* – adds relevant dataset with interpretation.                                                                                            | • Extra data added but weak interpretation.                                                                          |                                                                                                                     |
++----------------------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
 
 ## Submission Instructions
 
@@ -87,15 +167,16 @@ All data are like vast grassland full of land mines. Your job is to clear those 
 
 ## Due Date
 
-13th October 2024 (Sunday), 11.59pm (midnight).
+23th October 2025 (Thursday), 11.59pm (midnight).
 
 ## Learning from senior
 
 You are advised to review these sample submissions prepared by your seniors.
 
--   [CHUA YAN TING](https://isss624-amelia.netlify.app/exercises/take-home_ex1/take-home_ex1): Have done well in all five grading criteria especially the geocommunication criterion.
--   [LIN SHUYAN](https://lins-92-isss624.netlify.app/take-home_ex01/take-home_ex01) Geospatial data wrangling is very comprehensively done especially identifying water points located outside Nigeria administrative boundary due to location precision issue.
--   [LOH SI YING](https://lohsiying.netlify.app/take_home_ex/ex1/take-home-ex1.html) Have done well in all five grading criteria especially the followings: (i) the geospatial wrangling are very comprehensively done including to exclude LGAs without water points from the analysis, (ii) managed to compute the p-values, (iii) Start each analysis by explaining the purpose of the analysis. Managed to relate the analysis results to the location context.
+-   [Christover Manafe](https://isss626-camanafe.netlify.app/take_home_ex/take_home_ex02/take_home_ex02)
+-   [Teng Kok Wai](https://isss626-gaa.netlify.app/take-home_ex/take-home_ex02/take-home_ex02)
+-   [Nguyen Bao Thu Phuong]()
+
 
 ## Learning from IS415
 
@@ -108,14 +189,9 @@ Please submit your questions or queries related to this take-home exercise on Pi
 
 ## Peer Learning
 
-- [Christover Manafe](https://isss626-camanafe.netlify.app/take_home_ex/take_home_ex02/take_home_ex02)
-- [Stephen Tay](https://geospatialanalytics-stephentay.netlify.app/take-home_ex/take-home_ex02/take-home_ex02)
 
 ## Reference
 
--   [IMPACT OF COVID-19 ON THAILAND’S TOURISM SECTOR](https://www.adb.org/sites/default/files/linked-documents/54177-001-sd-12.pdf)
--   [Covid: Thailand tourism up but still below pre-pandemic level](https://www.bbc.com/news/business-64369279)
--   [Tourism in Thailand](https://en.wikipedia.org/wiki/Tourism_in_Thailand)
 
 ### Research articles
 
@@ -126,3 +202,6 @@ Please submit your questions or queries related to this take-home exercise on Pi
 -   V Putrenko, N Pashynska, and S Nazarenko (2018) "Data Mining of Network Events With Space-Time Cube Application". In: R Westerholt, F-B Mocnik, and A Zipf (eds.), *Proceedings of the 1st Workshop on Platial Analysis* (PLATIAL’18), pp. 75–82. SMU e-journal.
 -   Jamie Anne Boschan and Caterina G. Roman (2024) "[Hot Spots of Gun Violence in the Era of Focused Deterrence: A Space-Time Analysis of Shootings in South Philadelphia](https://www.mdpi.com/2076-0760/13/2/119)", Social Sciences, Vol. 13.
 -   Minkyung Kim and Sangdon Lee (2023) "[Identification of Emerging Roadkill Hotspots on Korean Expressways Using Space–Time Cubes](https://www.mdpi.com/1660-4601/20/6/4896)", *Int. J. Environ. Res. Public Health*, 20(6).
+-   TAN, Yong Ying and KAM, Tin Seong (2019) "[Exploring and visualizing household electricity consumption patterns in Singapore: A geospatial analytics approach](https://ink.library.smu.edu.sg/cgi/viewcontent.cgi?article=5379&context=sis_research)", *Information in Contemporary Society: 14th International Conference, iConference 2019*, Washington, DC, March 31-April 3: Proceedings, (pp.
+785-796) Springer. https://doi.org/10.1007/978-3-030-15742-5_74
+-   MACK, Zhi Wei Vincent and KAM, Tin Seong (2018) "[Is there space for violence?: A data-driven approach to the exploration of spatial-temporal dimensions of conflict](https://ink.library.smu.edu.sg/cgi/viewcontent.cgi?article=5334&context=sis_research)", *Proceedings of the 2nd ACM SIGSPATIAL Workshop on Geospatial Humanities*, Seattle, WA, USA, 2018 November 06, (pp. 1-10) Seattle, WA, USA. ACM Digital Library. https://doi.org/10.1145/3282933.3282935 (Published)

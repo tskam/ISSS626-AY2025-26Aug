@@ -26,7 +26,7 @@ The specific tasks of this hands-on exercise are as follow:
 
 1.  Download ACRA (Accounting and Corporate Regulatory Authority) Information on Corporate Entities datasets from data.gov.sg.
 
-2.  Select at least three business types by referring to [2-digit or 3-digit Singapore Standard Industrial Classification (SSIS) 2020](https://classification.codes/classifications/industry/ssic-singapore).  Prepare and tidy the data by applying appropriate data wrangling method.
+2.  Select at least three business types by referring to [2-digit or 3-digit Singapore Standard Industrial Classification (SSIS) 2020](https://classification.codes/classifications/industry/ssic-singapore). Prepare and tidy the data by applying appropriate data wrangling method.
 
 3.  Extract the selected business entities registered between 1st January 2024 to 30th June 2025.
 

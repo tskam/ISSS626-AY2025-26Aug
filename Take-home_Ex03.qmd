@@ -1,0 +1,164 @@
+---
+title: "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods"
+date: "October 24, 2025"
+date-modified: "last-modified"
+format: html
+toc: true
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  freeze: auto
+editor: visual
+---
+
+::: callout-important
+This handout provides the context, the task, the expectation and the grading criteria of Take-home Exercise 3. Students must review and understand them before getting started with the take-home exercise.
+:::
+
+## Setting the Scene
+
+Housing is an essential component of household wealth worldwide. Purchasing a home has always represented a major investment for most individuals. The price of housing is influenced by a wide range of factors. Some are macro-level, such as the overall state of the economy or the inflation rate, while others are property-specific. These can be further categorized into structural and locational factors.
+
+Structural factors refer to the characteristics of the property itself, such as size, fittings, and tenure. Locational factors, on the other hand, relate to the neighbourhood context of the property, including proximity to childcare centres, public transport, and shopping facilities.
+
+Traditionally, housing resale price models have been estimated using the Ordinary Least Squares (OLS) method. However, this approach does not account for spatial autocorrelation and spatial heterogeneity, which are commonly present in geographic datasets such as housing transactions. When spatial autocorrelation exists, OLS estimation of housing resale price models may produce biased, inconsistent, or inefficient results (Anselin, 1998). To address these limitations, **Geographically Weighted Models (GWMs)** have been introduced to more accurately calibrate both explanatory and predictive models for housing resale prices.
+
+## Objective
+
+The objective of this take-home exercise is to develop a spatially informed model to determine factors affecting or to predict HDB resale prices in Singapore, making use of appropriate geospatial analytics methods.
+
+## The Task
+
+You are required to undertake one of the following analytical tasks:
+
+**Option 1 – Explanatory Modelling**
+
+Calibrate an explanatory model to identify and evaluate the factors influencing HDB resale prices during the period 1 January 2025 to 30 September 2025.
+
+**Option 2 – Predictive Modelling**
+
+Calibrate a predictive model to predict HDB resale prices for the period July to September 2025, using HDB resale transaction data from July 2024 to June 2025.
+
+## The Data
+
+For the purpose of this take-home exercise, **HDB Resale Flat Prices** provided by [**Data.gov.sg**]() should be used as the core data set. The study should focus on either three-room, four-room or five-room flat.
+
+Below is a list of recommended predictors to consider. However, students are free to include other appropriate independent variables.
+
+-   Structural factors
+    -   Area of the unit
+    -   Floor level
+    -   Remaining lease
+    -   Age of the unit
+    -   Main Upgrading Program (MUP) completed (optional)
+-   Location factors
+    -   Proxomity to CBD
+    -   Proximity to eldercare
+    -   Proximity to foodcourt/hawker centres
+    -   Proximity to MRT
+    -   Proximity to park
+    -   Proximity to good primary school
+    -   Proximity to shopping mall
+    -   Proximity to supermarket
+    -   Numbers of kindergartens within 350m
+    -   Numbers of childcare centres within 350m
+    -   Numbers of bus stop within 350m
+    -   Numbers of primary school within 1km
+
+## Grading Criteria
+
+This exercise will be graded by using the following criteria:
+
+-   **Geospatial Data Wrangling (20 marks):** This is an important aspect of geospatial analytics. You will be assessed on your ability to use appropriate functions of tidyverse and sf packages:
+
+    -   to import, tidy and transform **HDB Resale Flat Prices** from aspatial to geographically referenced data,
+    -   to derive appropriate location variables by using the newly created geographically referenced **HDB Resale Flat Prices** data and other open source geographical data, and
+    -   to build an integrated geographically referenced analytical sandbox for the modelling.
+
+::: callout-warning
+All data are like vast grassland full of land mines. Your job is to clear those mines and not to step on them.
+:::
+
+-   **Geospatial Analysis (30 marks):** You will be assessed on your ability to apply geographically weighted models rigorously, including:
+
+    -   Appropriate choice and correct application of geographically weighted models.
+    -   Accurate interpretation of outputs, with evidence-based reasoning.
+    -   Demonstrating awareness of assumptions, spatial scales, and limitations of chosen methods.
+    -   Clear articulation of how results address the stated objectives.
+
+-   **Geovisualisation and geocommunication (20 marks):** You will be assessed on your ability to communicate results through effective geovisualisation, including:
+
+    -   Use of clear, accurate, and professional map designs (appropriate symbology, color scales, legends, labels).
+    -   Selection of visual forms that best reveal spatial patterns and support decision-making.
+    -   Concise and insightful written commentary (≤200 words per visual) that explains findings in plain, non-technical language.
+    -   Effective integration of visuals into a coherent narrative.
+
+-   **Reproducibility (15 marks):** You will be assessed on your ability to ensure that your analysis is fully reproducible, including:
+
+    -   Use of Quarto with code chunks that run end-to-end without modification.
+    -   Clear explanation of purpose for each step (not just code, but why it is done).
+    -   Logical organisation of workflow, with modular structure and meaningful sectioning.
+    -   Proper documentation of R packages, data sources, and dependencies to allow replication by others.
+
+-   **Bonus (15 marks):** Optional extension tasks reward advanced technical work and reproducible outputs. Students may attempt any combination of the tasks listed below; points add up to a maximum of 15 marks. To be eligible for bonus, the core submission must pass the minimum standard for reproducibility (see Reproducibility criterion). All bonus work must be submitted with the main deliverable (no separate late submissions for bonus).
+
+Tasks & points:
+
+-   Advanced method or validation — 5 marks.
+-   Interactive delivery (Shiny/Quarto) — 5 marks.
+-   Extra data fusion / validation — 5 marks.
+
+## Grading Rubric
+
++----------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| Criterion                              | Weight    | Good and above (\>= 80 marks)                                                                                                                                 | Satisfactory (≈70–79 marks)                                                                                          | Needs Improvement (≤70%)                                                                                            |
++========================================+===========+===============================================================================================================================================================+======================================================================================================================+=====================================================================================================================+
+| **Geospatial Data Wrangling**          | 20        | Data imported, cleaned, and transformed flawlessly; CRS and joins handled correctly; derived variables accurate; workflow efficient and well-documented.      | Data mostly correct but with minor issues (occasional CRS mismatch, redundant steps, unclear documentation).         | Major errors (misaligned joins, wrong CRS, missing variables); workflow unclear or non-reproducible.                |
++----------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| **Geospatial Analysis**                | 30        | Geographically Weighted methods correctly chosen, implemented, and justified; results accurately interpreted; assumptions/limitations acknowledged.           | Methods applied with minor errors or incomplete justification; interpretations generally correct but lack depth.     | Methods misapplied or inappropriate; results incorrectly interpreted; assumptions/limitations ignored.              |
++----------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| **Geovisualisation & Communication**   | 20        | Maps/visuals clear, professional, and effective (symbology, legends, colors appropriate); commentary concise, insightful, and business-friendly (≤200 words). | Maps mostly correct but lacking polish (unclear legends, distracting design); commentary descriptive not analytical. | Maps poorly designed or misleading; missing legends/labels; commentary absent, too brief, or irrelevant.            |
++----------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| **Reproducibility**                    | 15        | Quarto runs end-to-end without modification; code modular and organized; explanations clear; packages, data, dependencies documented; workflow replicable.    | Quarto runs with minor edits/warnings; explanations uneven; workflow somewhat fragmented; limited documentation.     | Document does not run or produces errors; code without explanations; workflow disorganized; reproducibility absent. |
++----------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+| **Bonus: Advanced Work (per subtask)** | 15        | • *Advanced Method/Validation* – correct, well-explained.                                                                                                     | • Method applied but shallow.                                                                                        | • Not attempted or incorrect.                                                                                       |
+|                                        |           |                                                                                                                                                               |                                                                                                                      |                                                                                                                     |
+|                                        |           | • *Interactive Delivery* – working Shiny/Quarto with README.                                                                                                  | • Interactive works but incomplete instructions.                                                                     | • Little/no added insight.                                                                                          |
+|                                        |           |                                                                                                                                                               |                                                                                                                      |                                                                                                                     |
+|                                        |           | • *Extra Data Fusion* – adds relevant dataset with interpretation.                                                                                            | • Extra data added but weak interpretation.                                                                          |                                                                                                                     |
++----------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------+
+
+## Submission Instructions
+
+-   The write-up of the take-home exercise must be in **Quarto html document** format. You are required to publish the write-up on [**Netlify**](https://www.netlify.com/).
+-   Zip the take-home exercise folder and upload it onto eLearn. If the size of the zip file is beyond the capacity of eLearn, you can upload it on SMU OneDrive and provide the download link on eLearn..
+
+## Due Date
+
+16th November 2025 (Sunday), 11.59pm (midnight).
+
+## Learning from senior
+
+You are advised to review these sample submissions prepared by your seniors.
+
+## Q & A
+
+Please submit your questions or queries related to this take-home exercise on Piazza.
+
+## Peer Learning
+
+## R Packages
+
+-   [SpatialML](https://cran.r-project.org/web/packages/SpatialML/index.html)
+-   [SpatialRF](https://blasbenito.github.io/spatialRF/index.html)
+
+## References
+
+Wang, Shuli et. al. (2024) [**"Geographically weighted machine learning for modeling spatial heterogeneity in traffic crash frequency and determinants in US"**, *Accident analysis and prevention*](https://www.sciencedirect.com/science/article/pii/S0001457524000733), Vol.199, p.107528-107528.
+
+Khan, S.N.; Li, D.; Maimaitijiang, M. (2023) ["**A Geographically Weighted Random Forest Approach to Predict Corn Yield in the US Corn Belt**](https://www.mdpi.com/2072-4292/14/12/2843)". *Remote Sensing*. 2022, 14, 2843. https://doi.org/10.3390/rs14122843
+
+Lotfata, Aynaz & Georganos, Stefanos (2023) **"Spatial machine learning for predicting physical inactivity prevalence from socioecological determinants in Chicago, Illinois, USA"**, *Journal of geographical systems*, pp.1-21. SMU Library e-journal.
+
+Wu, Dongyu ; Zhang, Yingheng ; Xiang, Qiaojun (2024) **"Geographically weighted random forests for macro-level crash frequency prediction"**, *Accident analysis and prevention*, Vol.194, p.107370-107370, Article 107370.

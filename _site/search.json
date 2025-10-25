@@ -3148,5 +3148,110 @@
     "title": "In-class Exercise 6: Take-Home Exercise 2 Kick Starter",
     "section": "Analytical Hexagon",
     "text": "Analytical Hexagon\n\nWhy Analytical Grids?Why hexagon?\n\n\nIn geospatial analysis, regularly shaped grids are used for many reasons such as normalizing geography for mapping or to mitigate the issues of using irregularly shaped polygons created arbitrarily (such as county boundaries or block groups that have been created from a political process). Regularly shaped grids can only be comprised of equilateral triangles, squares, or hexagons, as these three polygon shapes are the only three that can tessellate (repeating the same shape over and over again, edge to edge, to cover an area without gaps or overlaps) to create an evenly spaced grid.\n\n\n\n\n\n\n\nHexagons reduce sampling bias due to edge effects of the grid shape, this is related to the low perimeter-to-area ratio of the shape of the hexagon. A circle has the lowest ratio but cannot tessellate to form a continuous grid. Hexagons are the most circular-shaped polygon that can tessellate to form an evenly spaced grid."
+  },
+  {
+    "objectID": "Take-home_Ex03.html",
+    "href": "Take-home_Ex03.html",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "",
+    "text": "Important\n\n\n\nThis handout provides the context, the task, the expectation and the grading criteria of Take-home Exercise 3. Students must review and understand them before getting started with the take-home exercise."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#setting-the-scene",
+    "href": "Take-home_Ex03.html#setting-the-scene",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "Setting the Scene",
+    "text": "Setting the Scene\nHousing is an essential component of household wealth worldwide. Purchasing a home has always represented a major investment for most individuals. The price of housing is influenced by a wide range of factors. Some are macro-level, such as the overall state of the economy or the inflation rate, while others are property-specific. These can be further categorized into structural and locational factors.\nStructural factors refer to the characteristics of the property itself, such as size, fittings, and tenure. Locational factors, on the other hand, relate to the neighbourhood context of the property, including proximity to childcare centres, public transport, and shopping facilities.\nTraditionally, housing resale price models have been estimated using the Ordinary Least Squares (OLS) method. However, this approach does not account for spatial autocorrelation and spatial heterogeneity, which are commonly present in geographic datasets such as housing transactions. When spatial autocorrelation exists, OLS estimation of housing resale price models may produce biased, inconsistent, or inefficient results (Anselin, 1998). To address these limitations, Geographically Weighted Models (GWMs) have been introduced to more accurately calibrate both explanatory and predictive models for housing resale prices."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#the-task",
+    "href": "Take-home_Ex03.html#the-task",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "The Task",
+    "text": "The Task\nYou are required to undertake one of the following analytical tasks:\nOption 1 – Explanatory Modelling\nCalibrate an explanatory model to identify and evaluate the factors influencing HDB resale prices during the period 1 January 2025 to 30 September 2025.\nOption 2 – Predictive Modelling\nCalibrate a predictive model to predict HDB resale prices for the period July to September 2025, using HDB resale transaction data from July 2024 to June 2025."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#the-data",
+    "href": "Take-home_Ex03.html#the-data",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "The Data",
+    "text": "The Data\nFor the purpose of this take-home exercise, HDB Resale Flat Prices provided by Data.gov.sg should be used as the core data set. The study should focus on either three-room, four-room or five-room flat.\nBelow is a list of recommended predictors to consider. However, students are free to include other appropriate independent variables.\n\nStructural factors\n\nArea of the unit\nFloor level\nRemaining lease\nAge of the unit\nMain Upgrading Program (MUP) completed (optional)\n\nLocation factors\n\nProxomity to CBD\nProximity to eldercare\nProximity to foodcourt/hawker centres\nProximity to MRT\nProximity to park\nProximity to good primary school\nProximity to shopping mall\nProximity to supermarket\nNumbers of kindergartens within 350m\nNumbers of childcare centres within 350m\nNumbers of bus stop within 350m\nNumbers of primary school within 1km"
+  },
+  {
+    "objectID": "Take-home_Ex03.html#grading-criteria",
+    "href": "Take-home_Ex03.html#grading-criteria",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "Grading Criteria",
+    "text": "Grading Criteria\nThis exercise will be graded by using the following criteria:\n\nGeospatial Data Wrangling (20 marks): This is an important aspect of geospatial analytics. You will be assessed on your ability to use appropriate functions of tidyverse and sf packages:\n\nto import, tidy and transform HDB Resale Flat Prices from aspatial to geographically referenced data,\nto derive appropriate location variables by using the newly created geographically referenced HDB Resale Flat Prices data and other open source geographical data, and\nto build an integrated geographically referenced analytical sandbox for the modelling.\n\n\n\n\n\n\n\n\nWarning\n\n\n\nAll data are like vast grassland full of land mines. Your job is to clear those mines and not to step on them.\n\n\n\nGeospatial Analysis (30 marks): You will be assessed on your ability to apply geographically weighted models rigorously, including:\n\nAppropriate choice and correct application of geographically weighted models.\nAccurate interpretation of outputs, with evidence-based reasoning.\nDemonstrating awareness of assumptions, spatial scales, and limitations of chosen methods.\nClear articulation of how results address the stated objectives.\n\nGeovisualisation and geocommunication (20 marks): You will be assessed on your ability to communicate results through effective geovisualisation, including:\n\nUse of clear, accurate, and professional map designs (appropriate symbology, color scales, legends, labels).\nSelection of visual forms that best reveal spatial patterns and support decision-making.\nConcise and insightful written commentary (≤200 words per visual) that explains findings in plain, non-technical language.\nEffective integration of visuals into a coherent narrative.\n\nReproducibility (15 marks): You will be assessed on your ability to ensure that your analysis is fully reproducible, including:\n\nUse of Quarto with code chunks that run end-to-end without modification.\nClear explanation of purpose for each step (not just code, but why it is done).\nLogical organisation of workflow, with modular structure and meaningful sectioning.\nProper documentation of R packages, data sources, and dependencies to allow replication by others.\n\nBonus (15 marks): Optional extension tasks reward advanced technical work and reproducible outputs. Students may attempt any combination of the tasks listed below; points add up to a maximum of 15 marks. To be eligible for bonus, the core submission must pass the minimum standard for reproducibility (see Reproducibility criterion). All bonus work must be submitted with the main deliverable (no separate late submissions for bonus).\n\nTasks & points:\n\nAdvanced method or validation — 5 marks.\nInteractive delivery (Shiny/Quarto) — 5 marks.\nExtra data fusion / validation — 5 marks."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#submission-instructions",
+    "href": "Take-home_Ex03.html#submission-instructions",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "Submission Instructions",
+    "text": "Submission Instructions\n\nThe write-up of the take-home exercise must be in Quarto html document format. You are required to publish the write-up on Netlify.\nZip the take-home exercise folder and upload it onto eLearn. If the size of the zip file is beyond the capacity of eLearn, you can upload it on SMU OneDrive and provide the download link on eLearn.."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#due-date",
+    "href": "Take-home_Ex03.html#due-date",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "Due Date",
+    "text": "Due Date\n16th November 2025 (Sunday), 11.59pm (midnight)."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#learning-from-senior",
+    "href": "Take-home_Ex03.html#learning-from-senior",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "Learning from senior",
+    "text": "Learning from senior\nYou are advised to review these sample submissions prepared by your seniors."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#q-a",
+    "href": "Take-home_Ex03.html#q-a",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "Q & A",
+    "text": "Q & A\nPlease submit your questions or queries related to this take-home exercise on Piazza."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#peer-learning",
+    "href": "Take-home_Ex03.html#peer-learning",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "Peer Learning",
+    "text": "Peer Learning"
+  },
+  {
+    "objectID": "Take-home_Ex03.html#reference",
+    "href": "Take-home_Ex03.html#reference",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "Reference",
+    "text": "Reference\n\nSpatialML\nSpatialRF\n\n\nResearch articles\nWang, Shuli et. al. (2024) “Geographically weighted machine learning for modeling spatial heterogeneity in traffic crash frequency and determinants in US”, Accident analysis and prevention, Vol.199, p.107528-107528, Article 107528. SMU Library e-journal.\nLotfata, Aynaz & Georganos, Stefanos (2023) “Spatial machine learning for predicting physical inactivity prevalence from socioecological determinants in Chicago, Illinois, USA”, Journal of geographical systems, pp.1-21\nWu, Dongyu ; Zhang, Yingheng ; Xiang, Qiaojun (2024) “Geographically weighted random forests for macro-level crash frequency prediction”, Accident analysis and prevention, Vol.194, p.107370-107370, Article 107370."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#grading-rubric",
+    "href": "Take-home_Ex03.html#grading-rubric",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\n\n\n\n\n\n\n\nCriterion\nWeight\nGood and above (&gt;= 80 marks)\nSatisfactory (≈70–79 marks)\nNeeds Improvement (≤70%)\n\n\n\n\nGeospatial Data Wrangling\n20\nData imported, cleaned, and transformed flawlessly; CRS and joins handled correctly; derived variables accurate; workflow efficient and well-documented.\nData mostly correct but with minor issues (occasional CRS mismatch, redundant steps, unclear documentation).\nMajor errors (misaligned joins, wrong CRS, missing variables); workflow unclear or non-reproducible.\n\n\nGeospatial Analysis\n30\nGeographically Weighted methods correctly chosen, implemented, and justified; results accurately interpreted; assumptions/limitations acknowledged.\nMethods applied with minor errors or incomplete justification; interpretations generally correct but lack depth.\nMethods misapplied or inappropriate; results incorrectly interpreted; assumptions/limitations ignored.\n\n\nGeovisualisation & Communication\n20\nMaps/visuals clear, professional, and effective (symbology, legends, colors appropriate); commentary concise, insightful, and business-friendly (≤200 words).\nMaps mostly correct but lacking polish (unclear legends, distracting design); commentary descriptive not analytical.\nMaps poorly designed or misleading; missing legends/labels; commentary absent, too brief, or irrelevant.\n\n\nReproducibility\n15\nQuarto runs end-to-end without modification; code modular and organized; explanations clear; packages, data, dependencies documented; workflow replicable.\nQuarto runs with minor edits/warnings; explanations uneven; workflow somewhat fragmented; limited documentation.\nDocument does not run or produces errors; code without explanations; workflow disorganized; reproducibility absent.\n\n\nBonus: Advanced Work (per subtask)\n15\n• Advanced Method/Validation – correct, well-explained.\n• Interactive Delivery – working Shiny/Quarto with README.\n• Extra Data Fusion – adds relevant dataset with interpretation.\n• Method applied but shallow.\n• Interactive works but incomplete instructions.\n• Extra data added but weak interpretation.\n• Not attempted or incorrect.\n• Little/no added insight."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#objective",
+    "href": "Take-home_Ex03.html#objective",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "Objective",
+    "text": "Objective\nThe objective of this take-home exercise is to develop a spatially informed model to determine factors affecting or to predict HDB resale prices in Singapore, making use of appropriate geospatial analytics methods."
+  },
+  {
+    "objectID": "Take-home_Ex03.html#r-packages",
+    "href": "Take-home_Ex03.html#r-packages",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "R Packages",
+    "text": "R Packages\n\nSpatialML\nSpatialRF"
+  },
+  {
+    "objectID": "Take-home_Ex03.html#references",
+    "href": "Take-home_Ex03.html#references",
+    "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
+    "section": "References",
+    "text": "References\nWang, Shuli et. al. (2024) “Geographically weighted machine learning for modeling spatial heterogeneity in traffic crash frequency and determinants in US”, Accident analysis and prevention, Vol.199, p.107528-107528.\nKhan, S.N.; Li, D.; Maimaitijiang, M. (2023) “A Geographically Weighted Random Forest Approach to Predict Corn Yield in the US Corn Belt“. Remote Sensing. 2022, 14, 2843. https://doi.org/10.3390/rs14122843\nLotfata, Aynaz & Georganos, Stefanos (2023) “Spatial machine learning for predicting physical inactivity prevalence from socioecological determinants in Chicago, Illinois, USA”, Journal of geographical systems, pp.1-21. SMU Library e-journal.\nWu, Dongyu ; Zhang, Yingheng ; Xiang, Qiaojun (2024) “Geographically weighted random forests for macro-level crash frequency prediction”, Accident analysis and prevention, Vol.194, p.107370-107370, Article 107370."
   }
 ]

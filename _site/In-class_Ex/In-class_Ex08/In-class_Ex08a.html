@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Dr.&nbsp;Kam Tin Seong Assoc. Professor of Information Systems(Practice)">
-<meta name="dcterms.date" content="2025-09-28">
+<meta name="dcterms.date" content="2025-10-01">
 
-<title>In-class Exercise 6: Spatially Constrained Clustering: REDCAP methods – ISSS626</title>
+<title>In-class Exercise 8: Data Preparation for Take-home Exercise 3 – ISSS626</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -164,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">In-class Exercise 5</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex06/In-class_Ex06-SCCA.html">
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex06/In-class_Ex06-KickStarter.html">
  <span class="dropdown-text">In-class Exercise 6</span></a>
   </li>  
         <li>
@@ -199,12 +198,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">Take-home Exercise 2</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Take-home_Ex03a.html">
- <span class="dropdown-text">Take-home Exercise 3a</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../../Take-home_Ex03b.html">
- <span class="dropdown-text">Take-home Exercise 3b</span></a>
+    <a class="dropdown-item" href="../../Take-home_Ex03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
   </li>  
     </ul>
   </li>
@@ -245,41 +240,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="In-class_Ex06-REDCAP.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link active" data-scroll-target="#learning-outcomes">Learning outcomes</a></li>
+  <li><a href="#installing-and-loading-r-packages" id="toc-installing-and-loading-r-packages" class="nav-link" data-scroll-target="#installing-and-loading-r-packages">Installing and Loading R packages</a></li>
+  <li><a href="#geocoding-hdb-resale-data" id="toc-geocoding-hdb-resale-data" class="nav-link" data-scroll-target="#geocoding-hdb-resale-data">Geocoding HDB resale data</a>
+  <ul class="collapse">
+  <li><a href="#selecting-data-of-interest" id="toc-selecting-data-of-interest" class="nav-link" data-scroll-target="#selecting-data-of-interest">Selecting data of interest</a></li>
+  </ul></li>
+  <li><a href="#proximity-analysis" id="toc-proximity-analysis" class="nav-link" data-scroll-target="#proximity-analysis">Proximity Analysis</a>
+  <ul class="collapse">
+  <li><a href="#converting-to-an-sf-object" id="toc-converting-to-an-sf-object" class="nav-link" data-scroll-target="#converting-to-an-sf-object">Converting to an sf object</a></li>
+  <li><a href="#locate-download-and-import-preschool-location-data" id="toc-locate-download-and-import-preschool-location-data" class="nav-link" data-scroll-target="#locate-download-and-import-preschool-location-data">Locate, download and import Preschool Location data</a></li>
+  <li><a href="#counting-number-of-preschools" id="toc-counting-number-of-preschools" class="nav-link" data-scroll-target="#counting-number-of-preschools">Counting number of preschools</a></li>
+  <li><a href="#computing-shortest-distance" id="toc-computing-shortest-distance" class="nav-link" data-scroll-target="#computing-shortest-distance">Computing shortest distance</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">In-class Exercise 6: Spatially Constrained Clustering: REDCAP methods</h1>
+<h1 class="title">In-class Exercise 8: Data Preparation for Take-home Exercise 3</h1>
 </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Dr.&nbsp;Kam Tin Seong<br>Assoc. Professor of Information Systems(Practice) </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            School of Computing and Information Systems,<br>Singapore Management University
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
+    
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 28, 2025</p>
+      <p class="date">October 1, 2025</p>
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 26, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -288,114 +294,241 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="learning-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="learning-outcomes">Learning outcomes</h2>
+<p>By the end of this in-class exercise, students will master the skill of:</p>
+<ul>
+<li>prepare and geocode HDB resale price data for geospatial modelling; and</li>
+<li>perform proximity analysis to count the number of geographic entities located within a defined distance from each HDB property.</li>
+</ul>
+</section>
+<section id="installing-and-loading-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="installing-and-loading-r-packages">Installing and Loading R packages</h2>
+<p>For this in-class exercise, one new package called <strong>jsonlite</strong> will be installed and loaded onto R environment. It will be used to parse json file into R as data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, rgeoda, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(httr, tidyverse, sf, tmap, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               jsonlite, progress)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="geocoding-hdb-resale-data" class="level2">
+<h2 class="anchored" data-anchor-id="geocoding-hdb-resale-data">Geocoding HDB resale data</h2>
+<p>In this section, you will learn how to geocode HDB resale data by using SLA Onemap Geocode API. First on all, students must download <em>Resale flat prices based on registration date from Jan-2017 onwards</em> from <a href="data.gov.sg">Singapore’s open data portal</a>.</p>
+<section id="selecting-data-of-interest" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-data-of-interest">Selecting data of interest</h3>
+<p>This data set comprises of HDB resale transactions from Jan 2017 onwards. For the purpose of this in-class exercise, the code chunk below will be used to extract a sub-set of transaction records on 4-Room flat transacted on the month September 2025.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>The code chunk below assume that the downloaded HDB resale data are reside in data/rawdata folder of In-class_Ex08.<br>
+</li>
+<li>The data has been renamed to HDBresale in order to keep the file name short.</li>
+</ul>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>shan_ict <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/rds/shan_ict.rds"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>shan_sf <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/rds/shan_sf.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>HDBresale <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/rawdata/HDBresale.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(flat_type <span class="sc">==</span> <span class="st">"4 ROOM"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">&gt;=</span> <span class="st">"2025-09"</span> <span class="sc">&amp;</span> month <span class="sc">&lt;</span> <span class="st">"2025-10"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let us prepare a geocoding function by using the code chunk below. It aims to perform the following tasks:</p>
+<ul>
+<li>Combining the block and street name into an address. The addresses will be used to geocode instead of postal code that you learned in In-class Exercise 3b,</li>
+<li>Passing the address as the <strong>searchVal</strong> in our query,</li>
+<li>Sending the query to <strong>OneMapSG search</strong>. Note: Since we don’t need all the address details, we can set getAddrDetails as ‘N’,</li>
+<li>Converting response (JSON object) to text,</li>
+<li>Saving response in text form as a dataframe, and</li>
+<li>Retain the latitude and longitude for our output.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>geocode <span class="ot">&lt;-</span> <span class="cf">function</span>(block, streetname) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  base_url <span class="ot">&lt;-</span> <span class="st">"https://onemap.gov.sg/api/common/elastic/search"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  address <span class="ot">&lt;-</span> <span class="fu">paste</span>(block, streetname, <span class="at">sep =</span> <span class="st">" "</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  query <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"searchVal"</span> <span class="ot">=</span> address, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">"returnGeom"</span> <span class="ot">=</span> <span class="st">"Y"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">"getAddrDetails"</span> <span class="ot">=</span> <span class="st">"N"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">"pageNum"</span> <span class="ot">=</span> <span class="st">"1"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">GET</span>(base_url, <span class="at">query =</span> query)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  restext<span class="ot">&lt;-</span><span class="fu">content</span>(res, <span class="at">as=</span><span class="st">"text"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(restext)  <span class="sc">%&gt;%</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    as.data.frame <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(results.LATITUDE, results.LONGITUDE)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, the code chunk below will be used to to execute the geocoding function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>HDBresale<span class="sc">$</span>LATITUDE <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>HDBresale<span class="sc">$</span>LONGITUDE <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(HDBresale)){</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  temp_output <span class="ot">&lt;-</span> <span class="fu">geocode</span>(HDBresale[i, <span class="dv">4</span>], HDBresale[i, <span class="dv">5</span>])</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  HDBresale<span class="sc">$</span>LATITUDE[i] <span class="ot">&lt;-</span> temp_output<span class="sc">$</span>results.LATITUDE</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  HDBresale<span class="sc">$</span>LONGITUDE[i] <span class="ot">&lt;-</span> temp_output<span class="sc">$</span>results.LONGITUDE</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Ignore the warning message as shown below.</li>
+</ul>
+<p><img src="images/img1.jpg" class="img-fluid"> - When the geocoding process ended, check the content of HDBresale tibble data frame to ensure that the latitude and longitude values of each records are filled. If neceddary, delete records failed to geocode.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="proximity-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="proximity-analysis">Proximity Analysis</h2>
+<p>In this section, you will learn how to count the number of geographic entities located within a defined distance from each HDB property.</p>
+<p>For the purpose of this exercise, we are interested to count the number of preschools located with 350m of each resale HDB unit.</p>
+<section id="converting-to-an-sf-object" class="level3">
+<h3 class="anchored" data-anchor-id="converting-to-an-sf-object">Converting to an sf object</h3>
+<p>Before performing proximity analysis, it is important to ensure that:</p>
+<ul>
+<li>both input data sets must be in sf objects, and</li>
+<li>they must be in similar projected coordinates systems.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the code chunk below,</p>
+<ul>
+<li><code>st_as_sf()</code> is used to convert HDBresale tibble data.frame to sf object by using values from LONGITUDE and LATITUDE columns to form the geometry features.</li>
+<li><code>st_transform()</code> is then used to transform the sf object into svy21 projected coordinates system.</li>
+<li>the output sf object is called <em>HDBresale_sf</em>. It is in <strong>sf data.frame</strong> format.</li>
+</ul>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>queen_w <span class="ot">&lt;-</span> <span class="fu">queen_weights</span>(shan_sf)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(queen_w)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>HDBresale_sf <span class="ot">&lt;-</span> HDBresale <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"LONGITUDE"</span>, <span class="st">"LATITUDE"</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">crs=</span><span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="locate-download-and-import-preschool-location-data" class="level3">
+<h3 class="anchored" data-anchor-id="locate-download-and-import-preschool-location-data">Locate, download and import Preschool Location data</h3>
+<p>Next, we will locate and download <em>Pre-Schools Location</em> data from Singapore’s open data portal. There are both geojson and kml version. In this exercise, the kml version will be used.</p>
+<p>Then, code chunk below will be used to import the preschool location data into R environment by using <code>st_read()</code> of <strong>readr</strong> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(shan_ict) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>preschool <span class="ot">=</span> <span class="fu">st_read</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/rawdata/PreSchoolsLocation.kml"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span> <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `PRESCHOOLS_LOCATION' from data source 
+  `C:\tskam\ISSS626-AY2025-26Aug\In-class_Ex\In-class_Ex08\data\rawdata\PreSchoolsLocation.kml' 
+  using driver `KML'
+Simple feature collection with 2290 features and 2 fields
+Geometry type: POINT
+Dimension:     XYZ
+Bounding box:  xmin: 103.6878 ymin: 1.247759 xmax: 103.9897 ymax: 1.462134
+z_range:       zmin: 0 zmax: 0
+Geodetic CRS:  WGS 84</code></pre>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>schc_clusters <span class="ot">&lt;-</span> <span class="fu">schc</span>(<span class="dv">6</span>, queen_w, shan_ict, <span class="st">"complete"</span>,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">cpu_threads =</span> <span class="dv">1</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>schc_clusters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>shan_clusters <span class="ot">&lt;-</span> <span class="fu">skater</span>(<span class="dv">6</span>, queen_w, shan_ict,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">cpu_threads =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>st-transform()</code> of <strong>sf</strong> package is used to transform the preschool sf dataframe from wgs84 geographic coodinates system to svy21 projected coordinates system (i.e.&nbsp;EPSG: 3414)</p>
+</div>
+</div>
+</section>
+<section id="counting-number-of-preschools" class="level3">
+<h3 class="anchored" data-anchor-id="counting-number-of-preschools">Counting number of preschools</h3>
+<p>Lastly, code chunk below will be used to count the number of pre-schools located within 350m of each HDB property.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>redcap_clusters <span class="ot">&lt;-</span> <span class="fu">redcap</span>(<span class="dv">6</span>, queen_w, shan_ict,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"firstorder-singlelinkage"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>redcap_clusters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>within_350m <span class="ot">&lt;-</span> <span class="fu">st_is_within_distance</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  HDBresale_sf, preschool, <span class="at">dist =</span> <span class="dv">350</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>HDBresale_sf <span class="ot">&lt;-</span> HDBresale_sf <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">WITHIN_350M_PRISCHOOL =</span> <span class="fu">map_int</span>(within_350m, length))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>st_is_within_distance()</code> of <strong>sf</strong> package is used to determines whether two spatial objects (HDB property and preschool) are within 350m distance of each other. It returns a logical matrix (or a sparse list of indices if sparse = TRUE) indicating for each geometry in HDB property which geometries in preschool are within 350m distance.</li>
+<li><code>mutate()</code> of dplyr is used to create a new field called <em>WITHIN_350M_PRISCHOOL</em>.</li>
+<li><code>map_int()</code> of <strong>purr</strong> package is used to the number of preschools found in the newly created <em>WITHIN_350M_PRISCHOOL</em> field.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="computing-shortest-distance" class="level3">
+<h3 class="anchored" data-anchor-id="computing-shortest-distance">Computing shortest distance</h3>
+<p>Instead of counting number of preschools located within 350m of each HDB resale property, code chunk below is used to compute the distance between the nearest preschool from each HDB resale property.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>HDBresale_sf <span class="ot">&lt;-</span> HDBresale_sf <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">PROX_PRESCHOOL =</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_distance</span>(geometry,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                  preschool[<span class="fu">st_nearest_feature</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                    geometry, preschool), ], </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">by_element =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The proximity values computed are in metres because svy21 projected coordinates system is in metres.</p>
+</div>
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
-
-
-<script>
-
-  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
-  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
-  // slide changes (different for each slide format).
-
-  (function () {
-
-    // dispatch for htmlwidgets
-
-    function fireSlideEnter() {
-
-      const event = window.document.createEvent("Event");
-
-      event.initEvent("slideenter", true, true);
-
-      window.document.dispatchEvent(event);
-
-    }
-
-
-
-    function fireSlideChanged(previousSlide, currentSlide) {
-
-      fireSlideEnter();
-
-
-
-      // dispatch for shiny
-
-      if (window.jQuery) {
-
-        if (previousSlide) {
-
-          window.jQuery(previousSlide).trigger("hidden");
-
-        }
-
-        if (currentSlide) {
-
-          window.jQuery(currentSlide).trigger("shown");
-
-        }
-
-      }
-
-    }
-
-
-
-    // hookup for slidy
-
-    if (window.w3c_slidy) {
-
-      window.w3c_slidy.add_observer(function (slide_num) {
-
-        // slide_num starts at position 1
-
-        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
-      });
-
-    }
-
-
-
-  })();
-
-</script>
-
-
-
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -1,518 +1,185 @@
 ---
-title: "In-class Exercise 8: Supplement to Hands-on Exercise 8"
-author: "Dr. Kam Tin Seong<br/>Assoc. Professor of Information Systems(Practice)"
-institute: "School of Computing and Information Systems,<br/>Singapore Management University"
-date: "`r Sys.Date()`"
-format: 
-  revealjs:
-    width: 1600
-    height: 900
-    show-notes: false
-    slide-number: true
-    show-slide-number: all
-date-format: "DD MMM YYYY"
+title: "In-class Exercise 8: Data Preparation for Take-home Exercise 3"
+date: "October 1, 2025"
+date-modified: "last-modified"
+format: html
 editor: visual
 execute: 
-  eval: false
+  eval: true
   echo: true
   warning: false
   freeze: true
 ---
 
-## Getting Started
+## Learning outcomes
 
-### Installing and Loading R packages
+By the end of this in-class exercise, students will master the skill of:
 
-::: {style="font-size: 1.50em"}
-```{r}
-pacman::p_load(sf, spdep, GWmodel, SpatialML, 
-               tmap, rsample, Metrics, tidyverse,
-               knitr, kableExtra)
-```
-:::
+- prepare and geocode HDB resale price data for geospatial modelling; and
+- perform proximity analysis to count the number of geographic entities located within a defined distance from each HDB property.
 
-## Preparing Data
+## Installing and Loading R packages
 
-:::::::: panel-tabset
-### Data import
-
-::: {style="font-size: 1.50em"}
-```{r}
-mdata <- read_rds("data/rds/mdata.rds")
-```
-:::
-
-### Data Sampling
-
-Calibrating predictive models are computational intensive, especially random forest method is used. For quick prototyping, a 10% sample will be selected at random from the data by using the code chunk below.
-
-::: {style="font-size: 1.50em"}
-```{r}
-set.seed(1234)
-HDB_sample <- mdata %>%
-  sample_n(1500)
-```
-:::
-
-### Checking of overlapping point
-
-::: callout-warning
-When using GWmodel to calibrate explanatory or predictive models, it is very important to ensure that there are no overlapping point features
-:::
-
-The code chunk below is used to check if there are overlapping point features.
-
-::: {style="font-size: 1.50em"}
-```{r}
-overlapping_points <- HDB_sample %>%
-  mutate(overlap = lengths(st_equals(., .)) > 1)
-```
-:::
-
-### Spatial jitter
-
-In the code code chunk below, [`st_jitter()`](https://r-spatial.github.io/sf/reference/st_jitter.html) of **sf** package is used to move the point features by 5m to avoid overlapping point features.
-
-::: {style="font-size: 1.50em"}
-```{r}
-HDB_sample <- HDB_sample %>%
-  st_jitter(amount = 5)
-```
-:::
-::::::::
-
-## Data Sampling
-
-The entire data are split into training and test data sets with 65% and 35% respectively by using *initial_split()* of **rsample** package. rsample is one of the package of tigymodels.
-
-::: {style="font-size: 1.50em"}
-```{r}
-set.seed(1234)
-resale_split <- initial_split(HDB_sample, 
-                              prop = 6.67/10,)
-train_data <- training(resale_split)
-test_data <- testing(resale_split)
-```
-:::
-
-------------------------------------------------------------------------
-
-### Multicollinearity check
-
-:::: panel-tabset
-#### The code
-
-In order to avoid multicollineariy. In the code chunk below, [`ggcorrmat()`](https://indrajeetpatil.github.io/ggstatsplot/articles/web_only/ggcorrmat.html) of **ggstatsplot** is used to plot a correlation matrix to check if there are pairs of highly correlated independent variables.
-
-::: {style="font-size: 1.50em"}
-```{r}
-#| eval: false
-mdata_nogeo <- mdata %>%
-  st_drop_geometry()
-ggstatsplot::ggcorrmat(mdata_nogeo[, 2:17])
-```
-:::
-
-#### The plot
+For this in-class exercise, one new package called **jsonlite** will be installed and loaded onto R environment.  It will be used to parse json file into R as data frame.  
 
 ```{r}
-#| echo: false
-#| fig-width: 12
-#| fig-height: 8
-mdata_nogeo <- HDB_sample %>%
-  st_drop_geometry()
-ggstatsplot::ggcorrmat(mdata_nogeo[, 2:17])
-```
-::::
-
-## Building a non-spatial multiple linear regression
-
-```{r}
-#| eval: false
-#| echo: false
-train_data <- read_rds("data/model/train_data.rds")
-test_data <- read_rds("data/model/test_data.rds")
+pacman::p_load(httr, tidyverse, sf, tmap, 
+               jsonlite, progress)
 ```
 
-:::: panel-tabset
-### The report
+## Geocoding HDB resale data
 
-```{r}
-#| echo: false
-price_mlr <- lm(resale_price ~ floor_area_sqm +
-                  storey_order + remaining_lease_mths +
-                  PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER +
-                  PROX_MRT + PROX_PARK + PROX_MALL + 
-                  PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +
-                  WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +
-                  WITHIN_1KM_PRISCH,
-                data=train_data)
-olsrr::ols_regress(price_mlr)
-```
+In this section, you will learn how to geocode HDB resale data by using SLA Onemap Geocode API.  First on all, students must download *Resale flat prices based on registration date from Jan-2017 onwards* from [Singapore's
+open data portal](data.gov.sg).
 
-### The code chunk
+### Selecting data of interest
 
-::: {style="font-size: 1.50em"}
-```{r}
-#| eval: false
-price_mlr <- lm(resale_price ~ floor_area_sqm +
-                  storey_order + remaining_lease_mths +
-                  PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER +
-                  PROX_MRT + PROX_PARK + PROX_MALL + 
-                  PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +
-                  WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +
-                  WITHIN_1KM_PRISCH,
-                data=train_data)
-olsrr::ols_regress(price_mlr)
-```
-:::
-::::
+This data set comprises of HDB resale transactions from Jan 2017 onwards.  For the purpose of this in-class exercise, the code chunk below will be used to extract a sub-set of transaction records on 4-Room flat transacted on the month September 2025.  
 
-------------------------------------------------------------------------
-
-### Multicollinearity check with VIF
-
-::::: panel-tabset
-#### VIF
-
-::: {style="font-size: 1.50em"}
-```{r}
-vif <- performance::check_collinearity(price_mlr)
-kable(vif, 
-      caption = "Variance Inflation Factor (VIF) Results") %>%
-  kable_styling(font_size = 18) 
-```
-:::
-
-#### Plotting VIF
-
-::: {style="font-size: 1.50em"}
-```{r}
-plot(vif) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-:::
-:::::
-
-## Predictive Modelling with gwr
-
-### Computing adaptive bandwidth
-
-::::: panel-tabset
-#### The code
-
-::: {style="font-size: 1.50em"}
-```{r}
-#| output: false
-bw_adaptive <- bw.gwr(resale_price ~ floor_area_sqm +
-                  storey_order + remaining_lease_mths +
-                  PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER +
-                  PROX_MRT + PROX_PARK + PROX_MALL + 
-                  PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +
-                  WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +
-                  WITHIN_1KM_PRISCH,
-                  data=train_data,
-                  approach="CV",
-                  kernel="gaussian",
-                  adaptive=TRUE,
-                  longlat=FALSE)
-```
-:::
-
-#### The output
-
-::: {style="font-size: 1.50em"}
-```{r}
-bw_adaptive
-```
-:::
-:::::
-
-```{r}
-#| eval: false
-#| echo: false
-write_rds(bw_adaptive, "data/model/bw_adaptive.rds")
-```
-
-```{r}
-#| eval: false
-#| echo: false
-bw_adaptive <- read_rds("data/model/bw_adaptive.rds")
-```
-
-------------------------------------------------------------------------
-
-### Model calibration
-
-:::: panel-tabset
-#### The code
-
-::: {style="font-size: 1.50em"}
-```{r}
-#| output: false
-gwr_adaptive <- gwr.basic(formula = resale_price ~
-                            floor_area_sqm + storey_order +
-                            remaining_lease_mths + PROX_CBD + 
-                            PROX_ELDERLYCARE + PROX_HAWKER +
-                            PROX_MRT + PROX_PARK + PROX_MALL + 
-                            PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +
-                            WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +
-                            WITHIN_1KM_PRISCH,
-                          data=train_data,
-                          bw=bw_adaptive, 
-                          kernel = 'gaussian', 
-                          adaptive=TRUE,
-                          longlat = FALSE)
-```
-:::
-
-#### The output
-
-```{r}
-#| echo: false
-gwr_adaptive
-```
-
-```{r}
-#| echo: false
-write_rds(gwr_adaptive, "data/model/gwr_adaptive.rds")
-```
-
-```{r}
-#| echo: false
-gwr_adaptive <- read_rds("data/model/gwr_adaptive.rds")
-```
-::::
-
-## Predictive Modelling with MLR
-
-### Predicting with test data
-
-::::: panel-tabset
-### Test data bw
-
-::: {style="font-size: 1.50em"}
-```{r}
-#| eval: false
-gwr_bw_test_adaptive <- bw.gwr(resale_price ~ floor_area_sqm +
-                  storey_order + remaining_lease_mths +
-                  PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER +
-                  PROX_MRT + PROX_PARK + PROX_MALL + 
-                  PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +
-                  WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +
-                  WITHIN_1KM_PRISCH,
-                  data=test_data,
-                  approach="CV",
-                  kernel="gaussian",
-                  adaptive=TRUE,
-                  longlat=FALSE)
-```
+::: callout-note
+- The code chunk below assume that the downloaded HDB resale data are reside in data/rawdata folder of In-class_Ex08.  
+- The data has been renamed to HDBresale in order to keep the file name short.
 :::
 
 ```{r}
-#| echo: false
-#| eval: false
-write_rds(gwr_bw_test_adaptive,
-          "data/model/gwr_bw_test.rds")
+HDBresale <- read_csv(
+  "data/rawdata/HDBresale.csv") %>%
+  filter(flat_type == "4 ROOM") %>%
+  filter(month >= "2025-09" & month < "2025-10")
 ```
+
+Let us prepare a geocoding function by using the code chunk below.  It aims to perform the following tasks:
+
+- Combining the block and street name into an address. The addresses will be used to geocode instead of postal code that you learned in In-class Exercise 3b,
+- Passing the address as the **searchVal** in our query,
+- Sending the query to **OneMapSG search**. Note: Since we don’t need all the address details, we can set getAddrDetails as ‘N’,
+- Converting response (JSON object) to text,
+- Saving response in text form as a dataframe, and 
+- Retain the latitude and longitude for our output.
 
 ```{r}
-#| eval: false
-#| echo: false
-gwr_bw_test_adaptive <- read_rds(
-  "data/model/gwr_bw_test.rds")
+geocode <- function(block, streetname) {
+  base_url <- "https://onemap.gov.sg/api/common/elastic/search"
+  address <- paste(block, streetname, sep = " ")
+  query <- list("searchVal" = address, 
+                "returnGeom" = "Y",
+                "getAddrDetails" = "N",
+                "pageNum" = "1")
+  
+  res <- GET(base_url, query = query)
+  restext<-content(res, as="text")
+  
+  output <- fromJSON(restext)  %>% 
+    as.data.frame %>%
+    select(results.LATITUDE, results.LONGITUDE)
+
+  return(output)
+}
 ```
 
-### Predicting
+Next, the code chunk below will be used to to execute the geocoding function:
 
-::: {style="font-size: 1.50em"}
 ```{r}
-gwr_pred <- gwr.predict(formula = resale_price ~
-                          floor_area_sqm + storey_order +
-                          remaining_lease_mths + PROX_CBD + 
-                          PROX_ELDERLYCARE + PROX_HAWKER + 
-                          PROX_MRT + PROX_PARK + PROX_MALL + 
-                          PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +
-                          WITHIN_350M_CHILDCARE + WITHIN_350M_BUS + 
-                          WITHIN_1KM_PRISCH, 
-                        data=train_data, 
-                        predictdata = test_data, 
-                        bw=bw_adaptive, 
-                        kernel = 'gaussian', 
-                        adaptive=TRUE, 
-                        longlat = FALSE)
+HDBresale$LATITUDE <- 0
+HDBresale$LONGITUDE <- 0
 
+for (i in 1:nrow(HDBresale)){
+  temp_output <- geocode(HDBresale[i, 4], HDBresale[i, 5])
+  
+  HDBresale$LATITUDE[i] <- temp_output$results.LATITUDE
+  HDBresale$LONGITUDE[i] <- temp_output$results.LONGITUDE
+}
 ```
-:::
-:::::
 
-## Predictive Modelling: RF method
+::: callout-note
+- Ignore the warning message as shown below.
 
-::::::: panel-tabset
-### Data preparation
-
-Firstly, code chunk below is used to extract the coordinates of training and test data sets
-
-::: {style="font-size: 1.50em"}
-```{r}
-coords <- st_coordinates(HDB_sample)
-coords_train <- st_coordinates(train_data)
-coords_test <- st_coordinates(test_data)
-```
-:::
-
-Next, code chunk below is used to drop the geometry column of both training and test data sets.
-
-::: {style="font-size: 1.50em"}
-```{r}
-train_data_nogeom <- train_data %>%
-  st_drop_geometry()
-```
+![](images/img1.jpg)
+- When the geocoding process ended, check the content of HDBresale tibble data frame to ensure that the latitude and longitude values of each records are filled.  If neceddary, delete records failed to geocode.
 :::
 
-### Calibrating RF model
+## Proximity Analysis 
 
-::: {style="font-size: 1.50em"}
-```{r}
-#| output: false
-set.seed(1234)
-rf <- ranger(resale_price ~ floor_area_sqm + storey_order + 
-               remaining_lease_mths + PROX_CBD + PROX_ELDERLYCARE + 
-               PROX_HAWKER + PROX_MRT + PROX_PARK + PROX_MALL + 
-               PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +
-               WITHIN_350M_CHILDCARE + WITHIN_350M_BUS + 
-               WITHIN_1KM_PRISCH,
-             data=train_data_nogeom)
+In this section, you will learn how to count the number of geographic entities located within a defined distance from each HDB property.
 
-```
-:::
+For the purpose of this exercise, we are interested to count the number of preschools located with 350m of each resale HDB unit.
 
-### Model output
+### Converting to an sf object
 
-::: {style="font-size: 1.50em"}
-```{r}
-rf
-```
-:::
-:::::::
+Before performing proximity analysis, it is important to ensure that:
 
-## Predictive Modelling: SpatialML method
+- both input data sets must be in sf objects, and
+- they must be in similar projected coordinates systems.  
 
-:::: panel-tabset
-### Determining bandwidth
+::: callout-note
+In the code chunk below, 
 
-```{r}
-#| output: false
-set.seed(1234)
-gwRF_bw <- grf.bw(formula = resale_price ~ floor_area_sqm + 
-                       storey_order + remaining_lease_mths + 
-                       PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER + 
-                       PROX_MRT + PROX_PARK + PROX_MALL + 
-                       PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +
-                       WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +
-                       WITHIN_1KM_PRISCH,
-                     dataset=train_data_nogeom, 
-                     kernel="adaptive",
-                     coords=coords_train)
-```
-
-### Calibrating with grf
-
-::: {style="font-size: 1.50em"}
-```{r}
-#| output: false
-set.seed(1234)
-gwRF_adaptive <- grf(formula = resale_price ~ floor_area_sqm + 
-                       storey_order + remaining_lease_mths + 
-                       PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER + 
-                       PROX_MRT + PROX_PARK + PROX_MALL + 
-                       PROX_SUPERMARKET + WITHIN_350M_KINDERGARTEN +
-                       WITHIN_350M_CHILDCARE + WITHIN_350M_BUS +
-                       WITHIN_1KM_PRISCH,
-                     dframe=train_data_nogeom, 
-                     bw=55,
-                     kernel="adaptive",
-                     coords=coords_train)
-```
+- `st_as_sf()` is used to convert HDBresale tibble data.frame to sf object by using values from LONGITUDE and LATITUDE columns to form the geometry features.
+- `st_transform()` is then used to transform the sf object into svy21 projected coordinates system.
+- the output sf object is called *HDBresale_sf*.  It is in **sf data.frame** format.
 :::
 
 ```{r}
-#| echo: false
-#| eval: false
-gwRF_adaptive <- read_rds("data/model/gwRF_adaptive.rds")
+HDBresale_sf <- HDBresale %>%
+  st_as_sf(
+    coords = c("LONGITUDE", "LATITUDE"),
+    crs=4326) %>%
+  st_transform(crs = 3414)
 ```
-::::
 
-## Predicting by using the test data
+### Locate, download and import Preschool Location data
 
-::::::: panel-tabset
-### Preparing the test data
+Next, we will locate and download *Pre-Schools Location* data from Singapore's open data portal.  There are both geojson and kml version.  In this exercise, the kml version will be used.
 
-::: {style="font-size: 1.50em"}
+Then, code chunk below will be used to import the preschool location data into R environment by using `st_read()` of **readr** package.
+
 ```{r}
-test_data_nogeom <- cbind(
-  test_data, coords_test) %>%
-  st_drop_geometry()
+preschool = st_read(
+  "data/rawdata/PreSchoolsLocation.kml") %>%
+  st_transform(crs= 3414)
 ```
+
+::: callout-note
+`st-transform()` of **sf** package is used to transform the preschool sf dataframe from wgs84 geographic coodinates system to svy21 projected coordinates system (i.e. EPSG: 3414)
 :::
 
-### Predicting with the test data
+### Counting number of preschools
 
-In the code chunk below, `predict.grf()` of **spatialML** for predicting re-sale prices in the **test data** set (i.e. *test_data_nogeom*)
+Lastly, code chunk below will be used to count the number of pre-schools located within 350m of each HDB property.
 
-::: {style="font-size: 1.50em"}
 ```{r}
-gwRF_pred <- predict.grf(gwRF_adaptive, 
-                           test_data_nogeom, 
-                           x.var.name="X",
-                           y.var.name="Y", 
-                           local.w=1,
-                           global.w=0)
+within_350m <- st_is_within_distance(
+  HDBresale_sf, preschool, dist = 350)
+
+HDBresale_sf <- HDBresale_sf %>%
+  mutate(WITHIN_350M_PRISCHOOL = map_int(within_350m, length))
 ```
+
+::: callout-note
+- `st_is_within_distance()` of **sf** package is used to determines whether two spatial objects (HDB property and preschool) are within 350m distance of each other.  It returns a logical matrix (or a sparse list of indices if sparse = TRUE) indicating for each geometry in HDB property which geometries in preschool are within 350m distance.
+- `mutate()` of dplyr is used to create a new field called *WITHIN_350M_PRISCHOOL*.
+- `map_int()` of **purr** package is used to the number of preschools found in the newly created *WITHIN_350M_PRISCHOOL* field.
 :::
 
-### Creating DF
+### Computing shortest distance
 
-Next, the code chunk below is used to convert the output from `predict.grf()` into a data.frame.
+Instead of counting number of preschools located within 350m of each HDB resale property, code chunk below is used to compute the distance between the nearest preschool from each HDB resale property.
 
-::: {style="font-size: 1.50em"}
 ```{r}
-GRF_pred_df <- as.data.frame(gwRF_pred)
+HDBresale_sf <- HDBresale_sf %>%
+  mutate(
+    PROX_PRESCHOOL = as.numeric(
+      st_distance(geometry,
+                  preschool[st_nearest_feature(
+                    geometry, preschool), ], 
+                  by_element = TRUE)
+      )
+    )
 ```
+
+::: callout-note
+The proximity values computed are in metres because svy21 projected coordinates system is in metres.
 :::
 
-Then, `cbind()` is used to append fields in GRF_pred_df data.frame onto test_data.
 
-::: {style="font-size: 1.50em"}
-```{r}
-test_data_pred <- cbind(test_data, 
-                        GRF_pred_df)
-```
-:::
-:::::::
 
-## Visualising the predicted values
-
-:::: panel-tabset
-### The plot
-
-```{r}
-#| echo: false
-ggplot(data = test_data_pred,
-       aes(x = gwRF_pred,
-           y = resale_price)) +
-  geom_point()
-```
-
-### The code chunk
-
-::: {style="font-size: 1.50em"}
-```{r}
-#| eval: false
-ggplot(data = test_data_pred,
-       aes(x = GRF_pred,
-           y = resale_price)) +
-  geom_point()
-```
-:::
-::::

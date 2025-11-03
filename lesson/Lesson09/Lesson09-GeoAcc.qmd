@@ -19,8 +19,10 @@ editor: visual
 -   Basic Concepts of Geography of Accessibility
 -   Accessibility Models
     -   Stewart Potential model
-    -   Reilly model
-    -   Huff model
+    -   Hansen Potential model
+    -   Two Step Floating Catchment Area (2SFCA)
+    -   Kernel Density Two-step Floating Catchment Area (KD2SFCA)
+    -   Spatial Accessibility Measure (SAM)
 
 ## What is Geography of Accessibility?
 

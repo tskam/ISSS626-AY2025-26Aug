@@ -360,6 +360,21 @@ There are many applications for spatial econometrics . Here are a few examples :
 
 ![](img/image5-5.jpg)
 
+## Huff Model
+
+- Huff model is a spatial analysis tool that estimates the probability of a consumer visiting a specific store by considering the store's attractiveness and the distance to it, relative to competing stores. 
+- It uses a formula where the likelihood of patronage is proportional to the store's attractiveness (e.g., size) and inversely proportional to the distance from the consumer, which decays at a rate determined by a distance exponent. 
+- Essentially, it helps businesses predict sales potential and determine market areas by calculating a site's attractiveness compared to its competitors.
+
+---
+
+###
+
+The formular
+
+![](img/image11.jpg)
+
+
 ```{r}
 #| echo: false
 #| eval: false

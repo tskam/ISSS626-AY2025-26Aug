@@ -2599,44 +2599,44 @@
   {
     "objectID": "outline/Lesson10_outline.html",
     "href": "outline/Lesson10_outline.html",
-    "title": "Lesson 10: Spatial Interaction Models",
+    "title": "Lesson 10: Modelling Spatial Interaction: Huff and MCI Models",
     "section": "",
-    "text": "In this lesson, you will learn the basic concepts and methods of Spatial Interaction Models."
+    "text": "In this lesson, you will learn the basic concepts Spatial Interaction and Huff and MCI Models for market area analysis."
   },
   {
     "objectID": "outline/Lesson10_outline.html#content",
     "href": "outline/Lesson10_outline.html#content",
-    "title": "Lesson 10: Spatial Interaction Models",
+    "title": "Lesson 10: Modelling Spatial Interaction: Huff and MCI Models",
     "section": "Content",
-    "text": "Content\n\nBasic Concepts of Spatial Interaction Models\n\nA Family of Gravity Models\n\nUnconstrained\nOrigin constrained\nDestination constrained\nDoubly constrained\n\nStatistical Approach\nInterpreting and Visualising Modelling Results\n\nSpatial Econometric Interaction Models\n\nThe general formula\n\nWhat is Econometrics?\nWhat is Spatial Econometrics?\n\nSpatial Econometric Interaction Model Specifications"
+    "text": "Content\n\nBasic Concepts of Spatial Interaction\nIntroducing Huff model\n\nBasic concepts and method\nCalibrating Huff model\nInterpreting Huff model results\n\nIntroducing Multiplicative Competitive Interaction Model (MCI)\n\nBasic concepts and method\nCalibrating MCI model\nInterpreting MCI model results"
   },
   {
     "objectID": "outline/Lesson10_outline.html#lesson-slides-and-hands-on-notes",
     "href": "outline/Lesson10_outline.html#lesson-slides-and-hands-on-notes",
-    "title": "Lesson 10: Spatial Interaction Models",
+    "title": "Lesson 10: Modelling Spatial Interaction: Huff and MCI Models",
     "section": "Lesson Slides and Hands-on Notes",
-    "text": "Lesson Slides and Hands-on Notes\n\nLesson 10 slides in html format.\nHands-on Exercise 10a: Processing and Visualising Flow Data.\nHands-on Exercise 10b: Calibrating Spatial Interaction Models with R."
+    "text": "Lesson Slides and Hands-on Notes\n\nLesson 10 slides in html format."
   },
   {
     "objectID": "outline/Lesson10_outline.html#self-reading-before-meet-up",
     "href": "outline/Lesson10_outline.html#self-reading-before-meet-up",
-    "title": "Lesson 10: Spatial Interaction Models",
+    "title": "Lesson 10: Modelling Spatial Interaction: Huff and MCI Models",
     "section": "Self-reading Before Meet-up",
-    "text": "Self-reading Before Meet-up\nRead before lesson:\n\nKingsley E. Haynes and A. Stewart Fotheringham (2020) Gravity and Spatial Interaction Models, Web Book of Regional Science. Chapter 1 and Sub-section 2.2.\nFarmer, C. and Oshan, T. (2017). “Spatial interaction”. The Geographic Information Science & Technology Body of Knowledge (4th Quarter 2017 Edition), John P. Wilson (ed.). DOI: 10.22224/gistbok/2017.4.5 (link is external)\nFlowerdew R, Aitkin M (1982) “A method of fitting the gravity model based on the Poisson distribution”. Journal of Regional Science, 22: 191–202.\n” Chapter 6. Spatial econometrics - common models”, Handbook of Spatial Analysis.\nJames P. LeSage and R. Kelley Pace (2008) “Spatial Econometric Modeling of Origin-Destination Flows”. Journal of Regional Science, Vol. 48, No. 5, pp. 941-967."
+    "text": "Self-reading Before Meet-up\nRead before lesson:\n\nA.18 – Spatial Interactions and the Gravity Model\nA.15 – Market Area Analysis\nHuff, D. (1963)A Probabilistic Analysis of Shopping Center Trade Areas\nMasao Nakanishi, Lee G. Cooper, (1982) Technical Note—Simplified Estimation Procedures for MCI Models. Marketing Science 1(3):314-322. http://dx.doi.org/10.1287/mksc.1.3.314"
   },
   {
     "objectID": "outline/Lesson10_outline.html#reference",
     "href": "outline/Lesson10_outline.html#reference",
-    "title": "Lesson 10: Spatial Interaction Models",
+    "title": "Lesson 10: Modelling Spatial Interaction: Huff and MCI Models",
     "section": "Reference",
-    "text": "Reference\n\nPavel KLAPKA, et. al. (2013) “The Footfall of Shopping Centre in Olomouc (CZECH REPUBLIC): An Application of The Gravity Model”, Moravian Geographical Reports, Vol 21, pp. 12-26.\n\nYang Yue et. al. (2012) “Exploratory calibration of a spatial interaction model using taxi GPS trajectories”, Computers, Environment and Urban Systems, 36 (2012) 140–153.\nMorito Tsutsumi and Kazuki Tamesue (2012) “Intraregional flow problem in spatial econometric model for origin-destination flows”, Environment and Planning B: Planning and Design, Vol. 39, pp. 1006-1015. Access via SMU e-journal."
+    "text": "Reference\n\nKingsley E. Haynes and A. Stewart Fotheringham (2020) Gravity and Spatial Interaction Models, Web Book of Regional Science. Chapter 1 and Sub-section 2.2.\nFarmer, C. and Oshan, T. (2017). “Spatial interaction”. The Geographic Information Science & Technology Body of Knowledge (4th Quarter 2017 Edition), John P. Wilson (ed.). DOI: 10.22224/gistbok/2017.4.5 (link is external)\nFlowerdew R, Aitkin M (1982) “A method of fitting the gravity model based on the Poisson distribution”. Journal of Regional Science, 22: 191–202.\n” Chapter 6. Spatial econometrics - common models”, Handbook of Spatial Analysis.\nJames P. LeSage and R. Kelley Pace (2008) “Spatial Econometric Modeling of Origin-Destination Flows”. Journal of Regional Science, Vol. 48, No. 5, pp. 941-967.\nPavel KLAPKA, et. al. (2013) “The Footfall of Shopping Centre in Olomouc (CZECH REPUBLIC): An Application of The Gravity Model”, Moravian Geographical Reports, Vol 21, pp. 12-26.\n\nYang Yue et. al. (2012) “Exploratory calibration of a spatial interaction model using taxi GPS trajectories”, Computers, Environment and Urban Systems, 36 (2012) 140–153.\nMorito Tsutsumi and Kazuki Tamesue (2012) “Intraregional flow problem in spatial econometric model for origin-destination flows”, Environment and Planning B: Planning and Design, Vol. 39, pp. 1006-1015. Access via SMU e-journal."
   },
   {
     "objectID": "outline/Lesson10_outline.html#all-about-r",
     "href": "outline/Lesson10_outline.html#all-about-r",
-    "title": "Lesson 10: Spatial Interaction Models",
+    "title": "Lesson 10: Modelling Spatial Interaction: Huff and MCI Models",
     "section": "All About R:",
-    "text": "All About R:\n\nPaul Roback and Julie Legler (2020) Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R, CRC Press. On line version (January 26, 2021). Chapter 4\nNegative Binomial Regression and Poisson Regression from UCLA Institute for Digital Research & Education.\nspflow\nHome-to-work commuting flows within the municipalities around Paris"
+    "text": "All About R:\n\nMCI: Multiplicative Competitive Interaction (MCI) Model\nWieland, T., (2017) Market Area Analysis for Retail and Service Locations with MCI, The R Journal, Vol. 9, No. 1, pp. 298-323.\nREAT: Regional Economic Analysis Toolbox"
   },
   {
     "objectID": "Quarto.html",
@@ -3337,5 +3337,12 @@
     "title": "In-class Exercise 8: Data Preparation for Take-home Exercise 3",
     "section": "Proximity Analysis",
     "text": "Proximity Analysis\nIn this section, you will learn how to count the number of geographic entities located within a defined distance from each HDB property.\nFor the purpose of this exercise, we are interested to count the number of preschools located with 350m of each resale HDB unit.\n\nConverting to an sf object\nBefore performing proximity analysis, it is important to ensure that:\n\nboth input data sets must be in sf objects, and\nthey must be in similar projected coordinates systems.\n\n\n\n\n\n\n\nNote\n\n\n\nIn the code chunk below,\n\nst_as_sf() is used to convert HDBresale tibble data.frame to sf object by using values from LONGITUDE and LATITUDE columns to form the geometry features.\nst_transform() is then used to transform the sf object into svy21 projected coordinates system.\nthe output sf object is called HDBresale_sf. It is in sf data.frame format.\n\n\n\n\nHDBresale_sf &lt;- HDBresale %&gt;%\n  st_as_sf(\n    coords = c(\"LONGITUDE\", \"LATITUDE\"),\n    crs=4326) %&gt;%\n  st_transform(crs = 3414)\n\n\n\nLocate, download and import Preschool Location data\nNext, we will locate and download Pre-Schools Location data from Singapore’s open data portal. There are both geojson and kml version. In this exercise, the kml version will be used.\nThen, code chunk below will be used to import the preschool location data into R environment by using st_read() of readr package.\n\npreschool = st_read(\n  \"data/rawdata/PreSchoolsLocation.kml\") %&gt;%\n  st_transform(crs= 3414)\n\nReading layer `PRESCHOOLS_LOCATION' from data source \n  `C:\\tskam\\ISSS626-AY2025-26Aug\\In-class_Ex\\In-class_Ex08\\data\\rawdata\\PreSchoolsLocation.kml' \n  using driver `KML'\nSimple feature collection with 2290 features and 2 fields\nGeometry type: POINT\nDimension:     XYZ\nBounding box:  xmin: 103.6878 ymin: 1.247759 xmax: 103.9897 ymax: 1.462134\nz_range:       zmin: 0 zmax: 0\nGeodetic CRS:  WGS 84\n\n\n\n\n\n\n\n\nNote\n\n\n\nst-transform() of sf package is used to transform the preschool sf dataframe from wgs84 geographic coodinates system to svy21 projected coordinates system (i.e. EPSG: 3414)\n\n\n\n\nCounting number of preschools\nLastly, code chunk below will be used to count the number of pre-schools located within 350m of each HDB property.\n\nwithin_350m &lt;- st_is_within_distance(\n  HDBresale_sf, preschool, dist = 350)\n\nHDBresale_sf &lt;- HDBresale_sf %&gt;%\n  mutate(WITHIN_350M_PRISCHOOL = map_int(within_350m, length))\n\n\n\n\n\n\n\nNote\n\n\n\n\nst_is_within_distance() of sf package is used to determines whether two spatial objects (HDB property and preschool) are within 350m distance of each other. It returns a logical matrix (or a sparse list of indices if sparse = TRUE) indicating for each geometry in HDB property which geometries in preschool are within 350m distance.\nmutate() of dplyr is used to create a new field called WITHIN_350M_PRISCHOOL.\nmap_int() of purr package is used to the number of preschools found in the newly created WITHIN_350M_PRISCHOOL field.\n\n\n\n\n\nComputing shortest distance\nInstead of counting number of preschools located within 350m of each HDB resale property, code chunk below is used to compute the distance between the nearest preschool from each HDB resale property.\n\nHDBresale_sf &lt;- HDBresale_sf %&gt;%\n  mutate(\n    PROX_PRESCHOOL = as.numeric(\n      st_distance(geometry,\n                  preschool[st_nearest_feature(\n                    geometry, preschool), ], \n                  by_element = TRUE)\n      )\n    )\n\n\n\n\n\n\n\nNote\n\n\n\nThe proximity values computed are in metres because svy21 projected coordinates system is in metres."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-SIM.html#huff-model",
+    "href": "lesson/Lesson10/Lesson10-SIM.html#huff-model",
+    "title": "Lesson 10: Spatial Interaction Models",
+    "section": "Huff Model",
+    "text": "Huff Model\n\nHuff model is a spatial analysis tool that estimates the probability of a consumer visiting a specific store by considering the store’s attractiveness and the distance to it, relative to competing stores.\nIt uses a formula where the likelihood of patronage is proportional to the store’s attractiveness (e.g., size) and inversely proportional to the distance from the consumer, which decays at a rate determined by a distance exponent.\nEssentially, it helps businesses predict sales potential and determine market areas by calculating a site’s attractiveness compared to its competitors."
   }
 ]

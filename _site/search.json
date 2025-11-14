@@ -2334,15 +2334,15 @@
     "objectID": "lesson/Lesson10/Lesson10-SIM.html#content",
     "href": "lesson/Lesson10/Lesson10-SIM.html#content",
     "title": "Lesson 10: Spatial Interaction Models",
-    "section": "Content",
-    "text": "Content\n\nCharacteristics of Spatial Interaction Data\nSpatial Interaction Models\n\nUnconstrained\nOrigin constrined\nDestination constrained\nDoubly constrained\n\nWhat is Spatial Econometrics?\nWhat is Spatial Econometric Interaction Models?\nIntroducing spflow package\nSpatial Econometric Modelling of O-D Flows: spflow application"
+    "section": "",
+    "text": "Characteristics of Spatial Interaction Data\nSpatial Interaction Models\n\nUnconstrained\nOrigin constrined\nDestination constrained\nDoubly constrained\n\nWhat is Spatial Econometrics?\nWhat is Spatial Econometric Interaction Models?\nIntroducing spflow package\nSpatial Econometric Modelling of O-D Flows: spflow application"
   },
   {
     "objectID": "lesson/Lesson10/Lesson10-SIM.html#what-spatial-interaction-models-are",
     "href": "lesson/Lesson10/Lesson10-SIM.html#what-spatial-interaction-models-are",
     "title": "Lesson 10: Spatial Interaction Models",
     "section": "What Spatial Interaction Models are?",
-    "text": "What Spatial Interaction Models are?\n\n\nSpatial interaction or “gravity models” estimate the flow of people, material, or information between locations in geographical space.\n\n\n\n\n\n\n\n\nNote\n\n\nSpatial interaction models seek to explain existing spatial flows. As such it is possible to measure flows and predict the consequences of changes in the conditions generating them. When such attributes are known, it is possible to better allocate transport resources such as conveyances, infrastructure, and terminals."
+    "text": "What Spatial Interaction Models are?\n\n\nSpatial interaction or “gravity models” estimate the flow of people, material, or information between locations in geographical space.\n\n\n\n\n\n\n\n\nNote\n\n\n\nSpatial interaction models seek to explain existing spatial flows. As such it is possible to measure flows and predict the consequences of changes in the conditions generating them. When such attributes are known, it is possible to better allocate transport resources such as conveyances, infrastructure, and terminals.\n\n\n\n\n\n\nConditions for Spatial Flows\n\nThree interdependent conditions are necessary for a spatial interaction to occur:\n\n\n\n\nComplementarity. There must be a supply and a demand between the interacting locations. A residential zone is complementary to an employment zone because the first is supplying workers while the second is supplying jobs. The same can be said concerning the complementarity between a store and its customers and between an industry and its suppliers (movements of freight). An economic system is based on a large array of complementary activities.\nIntervening opportunity (lack of). Refers to a location that may offer a better alternative as a point of origin or as a point of destination. For instance, in order to have an interaction of a customer to a store, there must not be a closer store that offers a similar array of goods. Otherwise, the customer will likely patronize the closer store and the initial interaction will not take place.\nTransferability. Mobility must be supported by transport infrastructures, implying that the origin and the destination must be linked. Costs to overcome distance must not be higher than the benefits of the related interaction, even if there are complementarity and no alternative opportunity.\n\n\n\n\n\nRepresentation of a Movement as a Spatial Interaction\n\n\nRepresenting mobility as a spatial interaction involves several considerations:\n\nLocations: A movement is occurring between a location of origin and a location of destination. i generally denotes an origin while j is a destination.\nCentroid: An abstraction of the attributes of a zone at a point.\nFlows: Flows are generally expressed by a valued vector Tij representing an interaction between locations i and j.\nVectors: A vector Tij links two centroids and has a value assigned to it (50) which can represents movements.\n\n\n\n\n\n\n\nLocations. A movement is occurring between a location of origin and a location of destination. i generally denotes an origin while j is a destination. The representation of origins and destinations commonly involves centroids.\nCentroid. An abstraction of the attributes of a zone at a point. This is of particular relevance when the attributes generating mobility are zonal (e.g. ZIP codes, cities, states, etc.) while the graphic representation requires specific origins and destinations. For instance, showing flows between ZIP codes would implicitly require the generation of one centroid for each ZIP code.\nFlows. Flows are generally expressed by a valued vector Tij representing an interaction between locations i and j.\nVectors. On the above figure, two areas, zone i and zone j, are represented as two centroids, i and j. A vector Tij links two centroids and has a value assigned to it (50) which can represents movements such as tons of freight, numbers of passengers per day, or number of phone calls."
   },
   {
     "objectID": "lesson/Lesson10/Lesson10-SIM.html#constructing-an-od-matrix",
@@ -2363,14 +2363,14 @@
     "href": "lesson/Lesson10/Lesson10-SIM.html#gravity-models",
     "title": "Lesson 10: Spatial Interaction Models",
     "section": "Gravity Models",
-    "text": "Gravity Models\n\n\n\nThe general formula (also known as unconstrained):\n\n\nTij is the transition/trip or flow, 𝑇, between origin 𝑖 (always the rows in a matrix) and destination 𝑗 (always the columns in a matrix). If you are not overly familiar with matrix notation, the 𝑖 and 𝑗 are just generic indexes to allow us to refer to any cell in the matrix.\n𝑉 is a vector (a 1 dimensional matrix – or, if you like, a single line of numbers) of origin attributes which relate to the emissivity of all origins in the dataset, 𝑖 – this could be any of the origin-related variables.\n\n\n\n𝑊 is a vector of destination attributes relating to the attractiveness of all destinations in the dataset, 𝑗 – similarly, this could be any of the destination related variables.\n𝑑 is a matrix of costs (frequently distances – hence, d) relating to the flows between 𝑖 and 𝑗.\n𝑘, 𝜇, 𝛼 and 𝛽 are all model parameters to be estimated. 𝛽 is assumed to be negative, as with an increase in cost/distance we would expect interaction to decrease."
+    "text": "Gravity Models\n\n\n\nThe general formula (also known as unconstrained):\n\n\nTij is the transition/trip or flow, 𝑇, between origin 𝑖 (always the rows in a matrix) and destination 𝑗 (always the columns in a matrix). If you are not overly familiar with matrix notation, the 𝑖 and 𝑗 are just generic indexes to allow us to refer to any cell in the matrix.\n𝑉 is a vector (a 1 dimensional matrix – or, if you like, a single line of numbers) of origin attributes which relate to the emissivity of all origins in the dataset, 𝑖 – this could be any of the origin-related variables.\n\n\n\n𝑊 is a vector of destination attributes relating to the attractiveness of all destinations in the dataset, 𝑗 – similarly, this could be any of the destination related variables.\n𝑑 is a matrix of costs (frequently distances – hence, d) relating to the flows between 𝑖 and 𝑗.\n𝑘, 𝜇, 𝛼 and 𝛽 are all model parameters to be estimated. 𝛽 is assumed to be negative, as with an increase in cost/distance we would expect interaction to decrease.\n\n\n\n\n\n\nUnconstrained (Totally constrained) case\n\n\nThe O-D Matrix\n\nand distance matrix:\n\n\n\nThe estimated O-D matrix:\n\nand the calculation T11\n\n\n\n\n\n\nThe Origin (Production) Constrained Model\n\n\nIn the Origin Constrained Model,\n\n𝑂𝑖 does not have a parameter as it is a known constraint.\n𝐴𝑖 is known as a balancing factor and is a vector of values which relate to each origin 𝑖 which do the equivalent job as 𝑘 in the unconstrained/total constrained model but ensure that flow estimates from each origin sum to the know totals 𝑂𝑖 rather than just the overall total.\n\n\n\n\n\n\n\n\nOringin (Production) constrained case\n\n\nThe O-D Matrix\n\nand distance matrix:\n\n\n\nThe estimated O-D matrix:\n\nA1 is calculated as shown below:\n\nHence, T11 is calculated as shown below:\n\n\n\n\n\n\nThe Destination (Attraction) Constrained Model\n\n\n\n\n\n\n\n\nDestination (Attraction) constrained case\n\n\nThe O-D Matrix\n\nand distance matrix:\n\n\n\nThe estimated O-D matrix:\n\nB1 is calculated as shown below:\n\nHence, T11 is calculated as shown below:\n\n\n\n\n\n\nThe Doubly Constrained Model\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nNote that the calculation of 𝐴𝑖 relies on knowing 𝐵𝑗 and the calculation of 𝐵𝑗 relies on knowing 𝐴𝑖 – something of a conundrum to which the solution is elegantly described by Senior (1979), who sketches out a very useful algorithm for iteratively arriving at values for 𝐴𝑖 and 𝐵𝑗 by setting each to equal 1 initially and then continuing to calculate each in turn until the difference between successive iterations of the 𝐴𝑖 and 𝐵𝑗 values is small enough not to matter.\n\n\n\n\n\n\n\nDoubly constrained case\n\n\nThe O-D Matrix\n\nand distance matrix:\n\n\n\nThe estimated O-D matrix:\n\nHence, T11 is calculated as shown below:\n\nNotice that A1 and B1 are computed by using computer."
   },
   {
     "objectID": "lesson/Lesson10/Lesson10-SIM.html#spatial-econometric-interaction-models",
     "href": "lesson/Lesson10/Lesson10-SIM.html#spatial-econometric-interaction-models",
     "title": "Lesson 10: Spatial Interaction Models",
     "section": "Spatial Econometric Interaction Models",
-    "text": "Spatial Econometric Interaction Models\nLimitation of Spatial Interaction Models\n\nThe gravity model assumes independence among observations, and this assumption seems heroic for many fundamentally spatial problems."
+    "text": "Spatial Econometric Interaction Models\n\nLimitation of Spatial Interaction Models\n\nThe gravity model assumes independence among observations, and this assumption seems heroic for many fundamentally spatial problems.\n\n\n\n\n\nLimitation of Spatial Interaction Models\nThere are two technical limitations of SIM:\n\nMaximum-likelihood estimates require that the dependent variable vector follow a normal distribution or that it can be suitably transformed to achieve normality.\nMaximum-likelihood method is not appropriate when there are a large number of zero flows exist."
   },
   {
     "objectID": "lesson/Lesson10/Lesson10-SIM.html#spatial-econometric-model-for-origin-destination-flows",
@@ -3343,6 +3343,132 @@
     "href": "lesson/Lesson10/Lesson10-SIM.html#huff-model",
     "title": "Lesson 10: Spatial Interaction Models",
     "section": "Huff Model",
-    "text": "Huff Model\n\nHuff model is a spatial analysis tool that estimates the probability of a consumer visiting a specific store by considering the store’s attractiveness and the distance to it, relative to competing stores.\nIt uses a formula where the likelihood of patronage is proportional to the store’s attractiveness (e.g., size) and inversely proportional to the distance from the consumer, which decays at a rate determined by a distance exponent.\nEssentially, it helps businesses predict sales potential and determine market areas by calculating a site’s attractiveness compared to its competitors."
+    "text": "Huff Model\n\nHuff model is a spatial analysis tool that estimates the probability of a consumer visiting a specific store by considering the store’s attractiveness and the distance to it, relative to competing stores.\nIt uses a formula where the likelihood of patronage is proportional to the store’s attractiveness (e.g., size) and inversely proportional to the distance from the consumer, which decays at a rate determined by a distance exponent.\nEssentially, it helps businesses predict sales potential and determine market areas by calculating a site’s attractiveness compared to its competitors.\n\n\n\nHuff Model"
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#content",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#content",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Content",
+    "text": "Content\n\nCharacteristics of Spatial Interaction Data\nThe Huff Model\nThe Multiplicative Competitive Interaction (MCI) Model"
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#what-spatial-interaction-models-are",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#what-spatial-interaction-models-are",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "What Spatial Interaction Models are?",
+    "text": "What Spatial Interaction Models are?\n\n\nSpatial interaction or “gravity models” estimate the flow of people, material, or information between locations in geographical space.\n\n\n\n\n\n\n\n\nNote\n\n\nSpatial interaction models seek to explain existing spatial flows. As such it is possible to measure flows and predict the consequences of changes in the conditions generating them. When such attributes are known, it is possible to better allocate transport resources such as conveyances, infrastructure, and terminals."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#constructing-an-od-matrix",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#constructing-an-od-matrix",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Constructing an O/D Matrix",
+    "text": "Constructing an O/D Matrix\n\nThe construction of an origin / destination matrix requires directional flow information between a series of locations.\nFigure below represents movements (O/D pairs) between five locations (A, B, C, D and E). From this graph, an O/D matrix can be built where each O/D pair becomes a cell. A value of 0 is assigned for each O/D pair that does not have an observed flow."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#three-basic-types-of-interaction-models",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#three-basic-types-of-interaction-models",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Three Basic Types of Interaction Models",
+    "text": "Three Basic Types of Interaction Models\n\nThe general formulation of the spatial interaction model is stated as Tij, which is the interaction between location i (origin) and location j (destination). Vi are the attributes of the location of origin i, Wj are the attributes of the location of destination j, and Sij are the attributes of separation between the location of origin i and the location of destination j.\nFrom this general formulation, three basic types of interaction models can be derived:"
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#gravity-models",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#gravity-models",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Gravity Models",
+    "text": "Gravity Models\n\n\n\nThe general formula (also known as unconstrained):\n\n\nTij is the transition/trip or flow, 𝑇, between origin 𝑖 (always the rows in a matrix) and destination 𝑗 (always the columns in a matrix). If you are not overly familiar with matrix notation, the 𝑖 and 𝑗 are just generic indexes to allow us to refer to any cell in the matrix.\n𝑉 is a vector (a 1 dimensional matrix – or, if you like, a single line of numbers) of origin attributes which relate to the emissivity of all origins in the dataset, 𝑖 – this could be any of the origin-related variables.\n\n\n\n𝑊 is a vector of destination attributes relating to the attractiveness of all destinations in the dataset, 𝑗 – similarly, this could be any of the destination related variables.\n𝑑 is a matrix of costs (frequently distances – hence, d) relating to the flows between 𝑖 and 𝑗.\n𝑘, 𝜇, 𝛼 and 𝛽 are all model parameters to be estimated. 𝛽 is assumed to be negative, as with an increase in cost/distance we would expect interaction to decrease."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#spatial-econometric-interaction-models",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#spatial-econometric-interaction-models",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Spatial Econometric Interaction Models",
+    "text": "Spatial Econometric Interaction Models\nLimitation of Spatial Interaction Models\n\nThe gravity model assumes independence among observations, and this assumption seems heroic for many fundamentally spatial problems."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#spatial-econometric-model-for-origin-destination-flows",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#spatial-econometric-model-for-origin-destination-flows",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Spatial Econometric Model for Origin-Destination Flows",
+    "text": "Spatial Econometric Model for Origin-Destination Flows"
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#spatial-econometric-interaction-model",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#spatial-econometric-interaction-model",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Spatial Econometric Interaction Model",
+    "text": "Spatial Econometric Interaction Model\nThe general formula of Spatial Econometric Interaction Model is defined as follow:\n\nwhere by 𝐖𝓭, 𝐖𝒐 and 𝐖𝓌 are spatial weights of destination, origin and origin-destination."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#what-is-econometrics",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#what-is-econometrics",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "What is Econometrics",
+    "text": "What is Econometrics\n\nEconometrics is an application of statistical methods to economic data in order to give empirical content to economic relationships. More precisely, it is “the quantitative analysis of actual economic phenomena based on the concurrent development of theory and observation, related by appropriate methods of inference.\nA basic tool for econometrics is the multiple linear regression model.\nEconometric theory uses statistical theory and mathematical statistics to evaluate and develop econometric methods.\nEconometricians try to find estimators that have desirable statistical properties including unbiasedness, efficiency, and consistency.\nApplied econometrics uses theoretical econometrics and real-world data for assessing economic theories, developing econometric models, analysing economic history, and forecasting."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#what-is-spatial-econometrics",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#what-is-spatial-econometrics",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "What is Spatial Econometrics?",
+    "text": "What is Spatial Econometrics?\n\nA branch of economics that deals with the study of economic phenomena that exhibit spatial dependence.\nThis branch of economics has its roots in classical economics, which focused on the study of how economic activity was related to the location of factors of production.\nClassical economists developed theories of how businesses locate themselves in relation to their markets and to each other. These theories formed the basis for the development of modern spatial economics."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#what-is-spatial-econometrics-1",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#what-is-spatial-econometrics-1",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "What is Spatial Econometrics?",
+    "text": "What is Spatial Econometrics?\n\nIn a broader sense it is inclusive of the models and theoretical instruments of spatial statistics and spatial data analysis to analyze various economic effects such as externalities, interactions, spatial concentration and many others.\nDiscrete spatial data can take the form of points, lines and polygons. Point data refer to the position of the single economic agent observed at an individual level. Lines in space take the form of interactions between two spatial locations such as flows of goods, individuals and information. Finally data observed within polygons can take the form of predefined irregular portions of space, usually administrative partitions such as countries, regions or counties within one country."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#what-are-the-examples-of-applications-using-spatial-econometrics",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#what-are-the-examples-of-applications-using-spatial-econometrics",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "What Are The Examples of Applications Using Spatial Econometrics ?",
+    "text": "What Are The Examples of Applications Using Spatial Econometrics ?\nThere are many applications for spatial econometrics . Here are a few examples :\n\nEvaluating the impact of a new road or railway on property values.\nEstimating the effect of environmental regulations on firm location decisions.\nAnalyzing the determinants of crime rates across neighborhoods\nStudying the relationship between house prices and income levels in different regions.\nInvestigating the spread of infectious diseases through a population.\nModeling the relationship between land values and location-specific services.\nAnalyzing the relationship between proximity to facilities and job opportunities ."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#spatial-model-specification-for-origin-destination-flows",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#spatial-model-specification-for-origin-destination-flows",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Spatial Model Specification for Origin-Destination Flows",
+    "text": "Spatial Model Specification for Origin-Destination Flows"
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#spatial-model-specification-for-origin-destination-flows-1",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#spatial-model-specification-for-origin-destination-flows-1",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Spatial Model Specification for Origin-Destination Flows",
+    "text": "Spatial Model Specification for Origin-Destination Flows"
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#spatial-model-specification-for-origin-destination-flows-2",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#spatial-model-specification-for-origin-destination-flows-2",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Spatial Model Specification for Origin-Destination Flows",
+    "text": "Spatial Model Specification for Origin-Destination Flows"
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#huff-model",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#huff-model",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "Huff Model",
+    "text": "Huff Model\n\nHuff model is a retail trade area analysis tool commonly used by analysts and practitioners that estimates the probability of a consumer visiting a specific store by considering the store’s attractiveness and the distance to it, relative to competing stores.\nIt uses a formula where the likelihood of patronage is proportional to the store’s attractiveness (e.g., size) and inversely proportional to the distance from the consumer, which decays at a rate determined by a distance exponent.\nEssentially, it helps businesses predict sales potential and determine market areas by calculating a site’s attractiveness compared to its competitors."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-Huff.html#the-multiplicative-competitive-interaction-mci-model",
+    "href": "lesson/Lesson10/Lesson10-Huff.html#the-multiplicative-competitive-interaction-mci-model",
+    "title": "Lesson 10 Modelling Spatial Interaction: Huff and MCI Models",
+    "section": "The Multiplicative Competitive Interaction (MCI) Model",
+    "text": "The Multiplicative Competitive Interaction (MCI) Model\nThe fundamental theorem behind market share models is the following simple relationship between the competitors’ characteristics and their market shares (Cooper and Nakanishi, 2010):\n\\[\nMS_j =A_j/ \\sum_{j=1}^{n} Aj,\n\\]\nwhere \\(MS_j\\) is the market share of competitor \\(j\\) and \\(A_j\\) is the attraction of \\(j\\). This leads to two characteristics of market shares which are summarized as logical-consistency requirements for market shares: \\(0 &lt; MS_j &lt; 1\\), and \\(\\sum_{j=1}^{n} MS_j = 1\\), respectively (Cooper and Nakanishi, 2010)."
+  },
+  {
+    "objectID": "lesson/Lesson10/Lesson10-SIM.html",
+    "href": "lesson/Lesson10/Lesson10-SIM.html",
+    "title": "Lesson 10: Spatial Interaction Models",
+    "section": "",
+    "text": "Characteristics of Spatial Interaction Data\nSpatial Interaction Models\n\nUnconstrained\nOrigin constrined\nDestination constrained\nDoubly constrained\n\nWhat is Spatial Econometrics?\nWhat is Spatial Econometric Interaction Models?\nIntroducing spflow package\nSpatial Econometric Modelling of O-D Flows: spflow application"
   }
 ]

@@ -132,6 +132,13 @@ These probabilites can be interpreted as market shares of location $j$ in origin
 :::
 ::::
 
+---
+
+### Huff Model: Visual explanation
+
+![](img/image8.jpg)
+
+
 ------------------------------------------------------------------------
 
 ### Market Share Analysis:
